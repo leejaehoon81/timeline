@@ -14,7 +14,7 @@ $('#submit').click(function () {
 		success: function(result) {
 			console.log(result)
 			if (result.data == 'yes') {
-				alert('로그인 성공입니다.');
+				
 				/* $('#cancelBtn').click(); */
 				console.log(result.userdata.name);
 				$('#userEmail').text(result.userdata.name);
