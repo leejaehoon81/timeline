@@ -25,8 +25,10 @@ $('#submit').click(function () {
 				$('#modal_trigger').css({ "display": "none" });
 				$('#modal_logout').css({ "display": "" });
 				$('#lean_overlay').css({'display': 'none'});
-				console.log($('#lean-overlay'));
 				 $('#modal').css({'display': 'none'});
+				 //alert('aaaa');
+				 //$('#lean_overlay').css({'display': ''});
+				// $('#modal').css({'display': ''});
 				
 				 
 			} else {
