@@ -28,6 +28,9 @@
     values (#{email},#{password})
   </insert> 
   
+  <select id="userInfo" parameterType="string" resultMap="UserMap">
+    SELECT * FROM member_info where email=#{email}
+  </select>
   <!-- <delete id="delete" parameterType="int">
     DELETE FROM member WHERE mno=#{value}
   </delete> -->

@@ -82,5 +82,11 @@ public class UserServiceImpl implements UserService {
     
   }
 
+  @Override
+  public User userInfo(String email) {
+    User user = userDao.userInfo(email);
+    return user;
+  }
+
 }
 

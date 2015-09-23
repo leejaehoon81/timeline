@@ -7,6 +7,7 @@ public interface UserService {
 //  int delete(int no);
 //  int update(Member member);
   int insert(User user);
+  User userInfo(String email);
 //  User get(int no);
 //  User getUser(String email, String password);
 //  int countAll();

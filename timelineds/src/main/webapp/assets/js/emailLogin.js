@@ -1,3 +1,5 @@
+$('#modal_logout').css({ "display": "none" });
+$('#modal_join').css({ "display": "none" });
 $('#submit').click(function () {
 	console.log("submit btn click..!!");
 
@@ -14,12 +16,19 @@ $('#submit').click(function () {
 		success: function(result) {
 			console.log(result)
 			if (result.data == 'yes') {
-				
-				/* $('#cancelBtn').click(); */
 				console.log(result.userdata.name);
 				$('#userEmail').text(result.userdata.name);
 				//location.href='demo1.html';
-
+//				document.location.reload();
+				/* $('#cancelBtn').click(); */
+				//close_modal(modal); 
+				$('#modal_trigger').css({ "display": "none" });
+				$('#modal_logout').css({ "display": "" });
+				$('#lean_overlay').css({'display': 'none'});
+				console.log($('#lean-overlay'));
+				 $('#modal').css({'display': 'none'});
+				
+				 
 			} else {
 				alert('로그인 실패입니다.');
 

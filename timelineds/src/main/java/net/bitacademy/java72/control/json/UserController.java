@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,15 +53,11 @@ public class UserController {
     
     Map<String,Object> result = 
         new HashMap<String,Object>();
+   
     if (count > 0) {
       result.put("data", "success");
-      
-      String folderName =user.getEmail();
-      String fileName="1.txt";
-      String beforeFilePath= sc.getRealPath("/files")+"/1.txt";
-      String afterFilePath=sc.getRealPath("/userFolder")+"/";
-      String thumbFilePath = sc.getRealPath("/userFolder")+"/";
-      moveFile(folderName, fileName, beforeFilePath, afterFilePath, thumbFilePath);
+     
+      createFile(user);
     
     } else {
       result.put("data", "failure");
@@ -67,8 +66,11 @@ public class UserController {
     return result;
   }
   
-  public void moveFile(String folderName, String fileName, String beforeFilePath, String afterFilePath, String thumbFilePath) {
-
+  public void createFile(User user) {
+    user = userService.userInfo(user.getEmail());
+    
+    int folderName =user.getMno();
+    String afterFilePath=sc.getRealPath("/userFolder")+"/";
     String path = afterFilePath+folderName;
     String path1=path+"_thumb";
     
@@ -91,38 +93,27 @@ public class UserController {
     }
 
 }
-/*  
-  @RequestMapping("/list")
-  public Object list(
-      @RequestParam(required=false, defaultValue="1") 
-      int pageNo,
-      @RequestParam(required=false, defaultValue="3")
-      int pageSize) {
-    
-    Map<String,Object> result = 
-        new HashMap<String,Object>();
-    
-    result.put("pageNo", pageNo);
-
-    int totalCount = userService.countAll();
-    int lastPageNo = totalCount / pageSize;
-    if ((totalCount % pageSize)  > 0) {
-      lastPageNo++;
-    }
-    
-    if (pageNo < lastPageNo) { // 다음 페이지가 있다면
-      result.put("isNextPage", true);
-    } else {
-      result.put("isNextPage", false);
-    }
-    
-    result.put("pageSize", pageSize);
-    result.put("data", 
-        userService.list(pageNo, pageSize));
-    
-    return result;
-  }
   
+public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { 
+    
+    
+    HttpSession session  =  request.getSession();
+    
+    String member_id = (String)session.getAttribute("email_id");
+    
+    System.out.println("현재 로그인하려는 member_id = "+member_id);
+    if ( member_id == null) {   //session check
+      response.sendRedirect("loginpage.do");
+      return false;
+    }
+
+    else{
+      return true;
+    }
+    
+  }
+
+ /* 
   @RequestMapping("/update")
   public Object update(Member member) throws Exception {
     int count = userService.update(member);

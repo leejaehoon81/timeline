@@ -14,6 +14,7 @@ public interface UserDao {
 //  int countAll();
 //  int countEmail(String email);
   User checkUser(Map<String,String> map);
+  User userInfo(String email);
 }
 
 
