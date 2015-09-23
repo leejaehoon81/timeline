@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="chronicle.dao.DialogPhotoDao">
+<mapper namespace="net.bitacademy.java72.dao.DialogPhotoDao">
 
   <resultMap type="DialogPhoto" id="DialogPhotoMap">
     <id     column="PIC_NO"      property="photoNo" />

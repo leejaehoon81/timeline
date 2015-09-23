@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="chronicle.dao.ChronicleMainDao">
+<mapper namespace="net.bitacademy.java72.dao.ChronicleMainDao">
 
   <resultMap type="ChronicleMain" id="ChronicleMainMap">
     <id     column="CM_NO"        property="mainNo" />
