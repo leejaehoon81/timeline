@@ -26,7 +26,7 @@ public class AuthController {
       String saveEmail,
       HttpServletResponse response,
       HttpSession session) throws Exception {
-
+// test git
     Map<String,Object> result = 
         new HashMap<String,Object>();
     
