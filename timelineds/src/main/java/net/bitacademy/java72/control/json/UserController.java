@@ -70,38 +70,24 @@ public class UserController {
   public void moveFile(String folderName, String fileName, String beforeFilePath, String afterFilePath, String thumbFilePath) {
 
     String path = afterFilePath+folderName;
-    String filePath = path+"/"+fileName;
     String path1=path+"_thumb";
-    String filePath1 = path1+"/"+fileName;
     
     File dir = new File(path);
     File dir1 = new File(path1);
+    try{
     if (!dir.exists()) { //폴더 없으면 폴더 생성
         dir.mkdirs();
+        File.createTempFile("123", ".txt", dir);
+        System.out.println("===>"+dir);
     }
-
+    
     if(!dir1.exists()){
       dir1.mkdirs();
+      File.createTempFile("123", ".txt", dir1);
+      System.out.println("===>"+dir1);
     }
-    try{
-
-        File file =new File(beforeFilePath);
-        boolean b = file.renameTo(new File(filePath));
-
-        if(b){
-          System.out.println("Success=====>"+filePath);
-        }else{
-          System.out.println("Fail=====>"+filePath);
-        }
-        b = file.renameTo(new File(filePath1));
-        if(b){
-          System.out.println("Success=====>"+filePath1);
-        }else{
-          System.out.println("Fail=====>"+filePath1);
-        }
     }catch(Exception e){
-        e.printStackTrace();
-       
+      e.printStackTrace();
     }
 
 }
