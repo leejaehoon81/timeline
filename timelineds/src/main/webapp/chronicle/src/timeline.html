@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="css/magnific-popup.css" /> -->
+    <!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+</head>
+<body>
+
+    <div id="timeline"></div>
+
+    <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-ui-min.js"></script>
+    <script type="text/javascript" src="js/libs/moment.min.js"></script>
+    <script type="text/javascript" src="js/libs/easyXDM.min.js"></script>
+    <script type="text/javascript" src="js/libs/iscroll.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.address-1.5.min.js"></script>
+    <!-- <script type="text/javascript" src="js/libs/jquery.magnific-popup.min.js"></script> -->
+    <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+
+    <!-- To test locally, set up a virtual directory to /build or move this into the /src directory -->
+    <script type="text/javascript"src="build/wellcomeTimeline.js"></script>
+
+    <!--
+
+    comment wellcomeTimeline.min.js and uncomment the following scripts to debug.
+    -->
+    <!--
+    <script type="text/javascript" src="js/julianDateConverter.js"></script>
+    <script type="text/javascript" src="js/jquery.plugins.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/baseProvider.js"></script>
+    <script type="text/javascript" src="js/wellcomeTimelineProvider.js"></script>
+    <script type="text/javascript" src="js/baseTimeline.js"></script>
+    <script type="text/javascript" src="js/wellcomeTimeline.js"></script>
+    <script type="text/javascript" src="js/timeline.js"></script>
+    <script type="text/javascript" src="js/shell.js"></script>
+    <script type="text/javascript" src="js/headerPanelView.js"></script>
+    <script type="text/javascript" src="js/mainPanelView.js"></script>
+    <script type="text/javascript" src="js/footerPanelView.js"></script>
+    <script type="text/javascript" src="js/baseDialogueView.js"></script>
+    <script type="text/javascript" src="js/genericDialogueView.js"></script>
+    <script type="text/javascript" src="js/embedView.js"></script>
+    <script type="text/javascript" src="js/detailsView.js"></script>
+    -->
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            // set initial height of container
+            $('#timeline').css({
+                height: $(window).height()
+            });
+
+            var isHomeDomain = getParameterByName('isHomeDomain') || false;
+            var isOnlyInstance = getParameterByName('isOnlyInstance') || false;
+            var embedScriptUri = getParameterByName('embedScriptUri');
+            var dataUri = getParameterByName('dataUri');
+            var eventId = getParameterByName('eventId');
+            var createTimeline = function () {
+
+                $('#timeline').wellcomeTimeline(
+                {
+                    configUri: 'js/config.js',
+                    dataUri: dataUri,
+                    eventId: eventId,
+                    embedScriptUri: embedScriptUri,
+                    isHomeDomain: isHomeDomain,
+                    isOnlyInstance: isOnlyInstance,
+                    provider: new WellcomeTimelineProvider()
+                });
+            };
+
+            createTimeline();
+        });
+        
+    </script>
+    <!-- <script type="text/javascript">
+    $(document).ready(function() {
+      $('.image-popup-no-margins').magnificPopup({
+        type : 'image',
+        closeOnContentClick : true,
+        closeBtnInside : false,
+        fixedContentPos : true,
+        mainClass : 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+        image : {
+          verticalFit : true
+        },
+        zoom : {
+          enabled : true,
+          duration : 300
+        // don't foget to change the duration also in CSS
+        }
+      });
+
+    });
+  </script> -->
+
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<form action="member_register.jsp" method="post" name="frm">
+		<table style="border: 1px dashed #aaaaaa; width: 460px;" cellpadding="0" cellspacing="0">
+			<h3>
+         <br>★ 회원 가입에 필요한 입력 항목입니다.★ <br>
+         <br>
+        </h3>
+			<tr height="45">
+				<td align="center">이름</td>
+				<td>
+					<input type="text" name="member_name" size="20" maxlength="5">
+				</td>
+			</tr>
+
+			<tr height="45">
+				<td align="center">성별</td>
+				<td>
+					<input type="checkbox" name="chk_info" value="HTML">남
+					<input type="checkbox" name="chk_info" value="HTML">여
+			</tr>
+
+			<tr height="45">
+				<td width="90" align="center">이메일</td>
+				<td>
+					<input type="text" name="member_email" size="16" maxlength="12"> </td>
+			</tr>
+
+			<tr height="45">
+				<td align="center">비밀번호</td>
+				<td>
+					<input type="password" name="member_password" size="16" maxlength="12">
+			</tr>
+			
+			<tr height="45">
+				<td align="center">내사진</td>
+				<td>
+					<input type="file" name="member_photo" size="16" maxlength="12">
+			</tr>
+
+		
+			
+			<script language="javascript">
+				<!-- 
+				var today = new Date();
+				console.log(today)
+				
+				var toyear = parseInt(today.getYear())+1900;
+				console.log(toyear)
+				
+				var start = toyear
+				console.log(start)
+				
+				var end = toyear - 1000;
+				console.log(end)
+				
+
+				document.write("<font size=2><select name=birth1>");
+				document.write("<option value='' selected>");
+				for (i = start; i >= end; i--) document.write("<option>" + i);
+				document.write("</select>년  ");
+
+				
+				document.write("<select name=birth2>");
+				document.write("<option value='' selected>");
+				for (i = 1; i <= 12; i++) document.write("<option>" + i);
+				document.write("</select>월  ");
+
+				document.write("<select name=birth3>");
+				document.write("<option value='' selected>");
+				for (i = 1; i <= 31; i++) document.write("<option>" + i);
+				document.write("</select>일  </font>");
+				
+				document.write("<select name=birth4>");
+				document.write("<option value='' selected>");
+				for (i = 0; i <= 23; i++) document.write("<option>" + i);
+				document.write("</select>시  </font>");
+				
+				document.write("<select name=birth5>");
+				document.write("<option value='' selected>");
+				for (i = 0; i <= 59; i++) document.write("<option>" + i);
+				document.write("</select>분  </font>");
+				//-->
+			</script>
+
+
+			<tr align="center" style="background-color: #ccc;">
+				<td colspan="3" height="30">
+					<input type="button" value="등록" onClick="memberChk()">
+					<input type="reset" value="취소">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+<script>
+	/* 회원가입폼 - 데이터 유무 체크*/
+	function memberChk() {
+		var check = document.frm;
+
+		if (check.member_email.value == "") {
+			alert("이메일을 입력하세요");
+			check.member_id.focus();
+			return false;
+		}
+
+		if (check.member_password.value == "") {
+			alert("비밀번호를 입력하세요");
+			check.member_password.focus();
+			return false;
+		}
+
+
+		/*if (check.member_password.value != frm.member_password_check.value) {
+			alert("비밀번호가 다릅니다.");
+			check.member_password.value = "";
+			check.member_password_check.value = "";
+			check.member_password.focus();
+			return false;
+		}*/
+
+		if (check.member_name.value == "") {
+			alert("이름을 입력해 주세요");
+			check.member_name.focus();
+			return false;
+		}
+
+		if (check.member_regident1.value == "" || check.member_regident2.value == "") {
+			alert("주민등록번호를 입력하세요");
+			return false;
+		}
+
+		/* 폼체크를 모두 통과하면 폼을 submit 한다. */
+		check.submit();
+	}
+</script>
+
+</html>

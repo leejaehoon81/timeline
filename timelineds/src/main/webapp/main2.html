@@ -1,0 +1,117 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Faded Text Effect</title>
+<link href="assets/css/main2.css" type="text/css" rel="stylesheet" media="screen,projection">
+<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="home" class="container">
+    <div class="header">
+      <h1>Make your MemoryFactory</h1>
+    </div>
+
+
+    <div id="wrapper">
+      <!-- Main -->
+      <section id="main">
+
+        <!--로그인폼 시작-->
+        <div id="formContainer" class="">
+          <form id="login" method="post" action="./">
+            <div id="loginform">
+              <div id="email">
+                <input type="text" name="loginEmail" id="loginEmail" placeholder="Email">
+              </div>
+              <div id="password">
+                <input type="password" name="loginPass" id="loginPass" placeholder="Password">
+              </div>
+            
+            
+            <!--<input type="submit" name="submit" value="Login" />-->
+            <!------이메일 로그인 버튼------> 
+            	<div id="submit"><a href="#">LOGIN</a></div>
+            	
+            	
+            	
+            <!------페이스북 로그인 버튼------>
+            	<!--<input type="button" name="facebook" value="facebook" id="facebook">-->
+            	<div id="facebookloginform">
+            	<div id="facebooklogin" class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+            	</div>
+              <!--<div id='loginBtn'>
+        				<fb:login-button data-size="large" scope="public_profile,email" onlogin="checkLoginState();">
+        				</fb:login-button>
+        			</div>-->
+            <div class="flipToRecover">
+              <a href="#" class="flipLink" id="main_a">비밀번호 찾기</a>/ <a href="#" id="register_form" >회원가입하기</a>
+            </div>
+            </div>	
+
+         		
+         		
+         		<!-- Register Form -->
+				<div class="user_register">
+				
+					<form>
+					<label>Email / Username</label>
+					<input type="text" />
+					<br />
+
+					<label>Password</label>
+					<input type="password" />
+					<br />
+
+					<div class="checkbox">
+						<input id="remember" type="checkbox" />
+						<label for="remember">Remember me on this computer</label>
+					</div>
+
+					<div class="action_btns">
+						<div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>
+					</div>
+				</form>
+				
+			</div>
+          </form>
+
+          <form id="recover" method="post" action="./">
+            <a href="#" id="flipToRecover1" class="flipLink">돌아가기</a> 
+            <div id="email">
+            <input type="text" name="recoverEmail" id="recoverEmail" placeholder="email">
+						</div>
+            <input type="submit" name="submit" value="Recover">
+          </form>
+        </div>
+        
+        
+        
+        <!--로그인폼 끝-->
+        <footer> </footer>
+      </section>
+   	<footer id="footer">
+          <ul class="copyright">
+            <li>&copy; Jane Doe</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+        </footer>
+  
+
+    </div>
+
+  </div>
+
+  <!--flipsatart------------------------------------->
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="assets/js/flip.js"></script>
+  <script src="assets/js/facebooklogin.js"></script>
+  <!--flipend------------------------------------->
+  <!-- Javascript -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="assets/js/init.js"></script>
+	<script src="assets/js/hide.js"></script>
+
+</body></html>

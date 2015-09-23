@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>InputForm</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+#in {
+	border: 3px solid black;
+	padding: 15px 10px;
+	width: 420px;
+}
+
+#phototool {
+	border: 2px solid black;
+	padding: 10px;
+	width: 392px;
+}
+#plus, #minus {
+  background: white;
+}
+</style>
+</head>
+<body>
+	<div id='in'>
+		<input type="text" size="15px" id="datepicker"
+			style="border-style: solid; padding: 5px;"><br>
+		<br> <input type="text" id="title" size="48px"
+			style="border-style: solid; padding: 5px;" placeholder="제목을 입력해주세요."><br>
+		<br>
+		<textarea rows="7" cols="50" style="border: 2px solid; padding: 5px;"
+			placeholder="내용을 입력해주세요."></textarea>
+		<br>
+		<br>
+<button id="plus" onclick="javascript:addInputBox();"><img src="../../files/plus.PNG"></button>
+<button id="minus" onclick="javascript:subtractInputBox();"><img src="../../files/minus.PNG"></button>
+<form name="gForm" action="upload.do" enctype="multipart/form-data" method="post" >
+  <input type="hidden" name="count" >
+<table  cellpadding=0 cellspacing=0 id="" border="1">
+<tr>
+<table cellpadding=0 cellspacing=0 id="dynamic_table" border="1">
+<input id="fileUpload" type="file" multiple />
+<div id="image-holder"></div>
+</table>
+</tr>
+</table>
+</form>
+		<br>
+		<input type="button" value="게시" class="btn btn-warning" onclick="javascript:submitbutton();">
+	</div>
+</body>
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+    	changeMonth: true,
+    	dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+      dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+      monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+      showOn: "both", 
+      buttonImage: "../../files/calendar.PNG", 
+      buttonImageOnly: true 
+    });
+  });
+</script>
+<script language="javascript">
+ var count = 1;
+ var addCount;
+ 
+//행추가
+function addInputBox() {
+ for(var i=1; i<=count; i++) {
+  if(!document.getElementsByName("test"+i)[0]) {
+   addCount = i;
+   break;
+  }
+  else addCount = count;
+ }
+
+ var addStr = "<tr><td width=40><input type=checkbox name=checkList value="+addCount+" size=40 ></td><td width=140><input type=file name=test multiple"+addCount+" size=40></td></tr>";
+ var table = document.getElementById("dynamic_table");
+ var newRow = table.insertRow();
+ var newCell = newRow.insertCell();
+ newCell.innerHTML = addStr;
+ count++;
+}
+ 
+//행삭제
+function subtractInputBox() {
+ var table = document.getElementById("dynamic_table");
+ //var max = document.gForm.checkList.length;
+ //alert(max);
+ var rows = dynamic_table.rows.length;
+ var chk = 0;
+ if(rows > 1){
+  for (var i=0; i<document.gForm.checkList.length; i++) {
+   if (document.gForm.checkList[i].checked == true) {
+    table.deleteRow(i);
+    i--;
+    count--;
+    chk++;
+   }
+  }
+  if(chk <= 0){
+   alert("삭제할 행을 체크해 주세요.");
+  }
+   }else{
+    alert("더이상 삭제할 수 없습니다.");
+   }
+}
+ 
+function submitbutton() {
+ var gform = document.gForm;
+ gform.count.value = eval(count);
+ //alert(count);
+ gForm.submit();
+ return;
+}
+</script>
+<script>
+$("#fileUpload").on('change', function () {
+
+     //Get count of selected files
+     var countFiles = $(this)[0].files.length;
+
+     var imgPath = $(this)[0].value;
+     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+     var image_holder = $("#image-holder");
+     image_holder.empty();
+
+     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+         if (typeof (FileReader) != "undefined") {
+
+             //loop for each file selected for uploaded.
+             for (var i = 0; i < countFiles; i++) {
+
+                 var reader = new FileReader();
+                 reader.onload = function (e) {
+                     $("<img />", {
+                         "src": e.target.result,
+                             "class": "thumb-image"
+                     }).appendTo(image_holder);
+                 }
+
+                 image_holder.show();
+                 reader.readAsDataURL($(this)[0].files[i]);
+             }
+
+         } else {
+             alert("This browser does not support FileReader.");
+         }
+     } else {
+         alert("Pls select only images");
+     }
+ });
+</script>
+</html>

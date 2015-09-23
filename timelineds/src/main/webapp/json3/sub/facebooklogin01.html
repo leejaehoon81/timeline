@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+</head>
+<body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '928364283894474',
+          xfbml      : true,
+          version    : 'v2.4'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+   // Only works after `FB.init` is called
+      function myFacebookLogin() {
+        FB.login(function(){
+          // Note: The call will only work if you accept the permission request
+        	FB.api(
+        		  '/me',
+        		  'GET',
+        		  {"fields":"id,name,photos{created_time,album,images,name,picture,place,updated_time,width,comments{like_count,message,message_tags,object,parent,user_likes,comments}},context"},
+        		  function(response) {
+        		      // Insert your code here
+        		  }
+        		);
+        	
+      }
+   };
+    </script>
+<!-- <button onclick="myFacebookLogin()">Login with Facebook</button> -->
+<a href='' onclick="myFacebookLogin()"></a>
+</body>
+</html>

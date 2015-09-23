@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="chronicle.dao.DialogPhotoDao">
+
+  <resultMap type="DialogPhoto" id="DialogPhotoMap">
+    <id     column="PIC_NO"      property="photoNo" />
+    <result column="CM_NO"       property="mainNo" />
+    <result column="THUMB_PATH"  property="ThumbnailPath" />
+    <result column="DIALOG_PATH" property="FeatureImagePath" />
+    <result column="DETAIL_PATH" property="DetailPath" />
+    <result column="PROMO"       property="PromoImagePath" />
+    <result column="CREDIT"      property="ImageCredit" />
+    <result column="USED"        property="UsedBy" />
+  </resultMap>
+  
+  <select id="list" resultMap="DialogPhotoMap">
+    SELECT * FROM dialog_photo
+  </select>
+  
+  <insert id="insert" parameterType="DialogPhoto">
+    INSERT INTO dialog_photo(THUMB_PATH, DIALOG_PATH, DETAIL_PATH,
+                             PROMO, CREDIT, USED)
+    values(#{ThumbnailPath},#{FeatureImagePath},#{detailPath},
+           #{PromoImagePath},#{ImageCredit},#{UsedBy})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM dialog_photo WHERE PIC_NO=#{photoNo}
+  </delete>
+
+  <update id="update" parameterType="DialogPhoto">
+    UPDATE dialog_photo SET 
+      THUMB_PATH=#{ThumbnailPath}, DIALOG_PATH=#{FeatureImagePath}, 
+      DETAIL_PATH=#{detailPath}, PROMO=#{PromoImagePath}, 
+      CREDIT=#{ImageCredit}, USED=#{UsedBy}
+    WHERE PIC_NO=#{photoNo}      
+  </update>
+  
+  <select id="get" parameterType="int" resultMap="DialogPhotoMap">
+    SELECT * FROM dialog_photo WHERE CM_NO=#{mainNo}
+  </select>
+  
+  <select id="countAll" resultType="int">
+    SELECT count(*) FROM dialog_photo
+  </select>
+  
+</mapper>

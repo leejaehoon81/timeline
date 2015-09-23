@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="chronicle.dao.ChronicleMainDao">
+
+  <resultMap type="ChronicleMain" id="ChronicleMainMap">
+    <id     column="CM_NO"        property="mainNo" />
+    <result column="M_KEY"        property="memberKeyNo" />
+    <result column="CM_TITLE"     property="Title" />
+    <result column="CM_INTRO"     property="Body" />
+    <result column="CM_INTRO_PIC" property="FeatureImagePath" />
+    <result column="CM_SHARE"     property="share" />
+    <result column="CM_CAPTION"   property="InitialCaption" />
+    <result column="CM_ISOPEN"    property="IsOpenEnded" />
+    <result column="CM_EARLIEST"  property="EarliestJulianDay" />
+    <result column="CM_LASTJD"    property="LastJulianDay" />
+    <result column="CM_SDP"       property="StartDateDisplay" />
+    <result column="CM_EDP"       property="EndDateDisplay" />
+  </resultMap>
+  
+  <select id="list" resultMap="ChronicleMainMap">
+    SELECT * FROM chro_main
+  </select>
+  
+  <insert id="insert" parameterType="ChronicleMain">
+    INSERT INTO chro_main(CM_TITLE, CM_INTRO, CM_INTRO_PIC, CM_SHARE, 
+    CM_CAPTION, CM_ISOPEN, CM_EARLIEST, CM_LASTJD, CM_SDP, CM_EDP)
+    values(#{Title},#{Body},#{FeatureImagePath},#{isPublic},
+           #{InitialCaption},#{IsOpenEnded},#{EarliestJulianDay},
+           #{LastJulianDay},#{StartDateDisplay},#{EndDateDisplay})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM chro_main WHERE CM_NO=#{mainNo}
+  </delete>
+
+  <update id="update" parameterType="ChronicleMain">
+    UPDATE chro_main SET 
+      C_TITLE=#{Title}, C_CONTENT=#{Body}, C_PRIORITY=#{Priority},
+      C_START=#{JulianDayStart}, C_END=#{JulianDayEnd}, 
+      C_SDP=#{StartDisplay}, C_SDPY=#{StartDisplayYear}, 
+      C_EDP=#{EndDisplay}, C_EDPY=#{EndDisplayYear}, YEAR=#{Year}
+    WHERE C_INDEX=#{EventId}      
+  </update>
+  
+  <select id="get" parameterType="int" resultMap="ChronicleMainMap">
+    SELECT * FROM chro_main WHERE CM_NO=#{mainNo}
+  </select>
+  
+  <select id="countAll" resultType="int">
+    SELECT count(*) FROM chro_main
+  </select>
+  
+</mapper>

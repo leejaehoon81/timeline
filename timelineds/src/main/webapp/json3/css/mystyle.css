@@ -1,0 +1,73 @@
+body {
+        background:no-repeat center center;
+      height: 100%;
+      background-color: #ffffff;
+      background-image: url("images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+      background-image: url("images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+      background-image: url("images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+      background-image: url("images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+      background-repeat: repeat,         no-repeat,         no-repeat;
+      background-size: 100px 100px, cover,            cover;
+      background-position: top left,      center center,      bottom center;
+      background-attachment: fixed,         fixed,            fixed;
+   }
+#out-line {
+		padding: 20px;
+		background-color: white;
+		text-align:center;
+}
+#create-box {
+    float:left;
+    width: 50%;
+		background: #ff6666;
+		
+}
+#search-btn{
+		text-align: center;
+		padding: 20px;		
+}
+#help-box {
+    float:left;
+    width: 50%;
+		background-color: #66cc99;
+}
+
+#top-bar {
+    text-align: center;
+		margin: auto;
+		display:inline-block;
+}
+#top-bar div {
+    padding: 20px;
+		border-radius: 10px;
+		width: 250px;
+		margin: 20px;
+		color: white;
+		font-weight: bolder;
+		font-size: 20px;
+}
+.user {
+		float: left;
+		display: inline-block;
+		background-color: #085394;
+		color: white;
+		padding: 10px;
+		margin-left: 8%;
+		margin-right: 8%;
+		margin-top: 30px;
+		margin-bottom: 30px;
+}
+
+.userlist {
+		clear: left;
+		text-align: center;
+}
+
+#userlist-all-box {
+		border: 1px solid black;
+		
+}
+
+#top-bar div {
+		height: 30px;
+}

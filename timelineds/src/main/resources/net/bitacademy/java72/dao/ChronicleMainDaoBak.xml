@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="chronicle.dao.ChronicleMainDao">
+
+  <resultMap type="ChronicleMain" id="ChronicleMainMap">
+    <id     column="CM_NO"        property="chronicleMainNo" />
+    <result column="C_NO"         property="chronicleNo" />
+    <result column="M_KEY"        property="memberKeyNo" />
+    <result column="CM_TITLE"     property="Title" />   <!-- cm_title이랑 c_title이랑 프로퍼티명 같음 -->
+    <result column="CM_INTRO"     property="Body" />
+    <result column="CM_INTRO_PIC" property="FeatureImagePath" />
+    <result column="CM_SHARE"     property="isPublic" />
+    <result column="CM_CAPTION"   property="InitialCaption" />
+    <result column="CM_ISOPEN"    property="IsOpenEnded" />
+    <result column="CM_EARLIEST"  property="EarliestJulianDay" />
+    <result column="CM_LASTJD"    property="LastJulianDay" />
+    <result column="CM_SDP"       property="StartDateDisplay" />
+    <result column="CM_EDP"       property="EndDateDisplay" />
+    <result column="C_INDEX"      property="EventId" />
+    <result column="C_TITLE"      property="Title" />
+    <result column="C_CONTENT"    property="Body" />
+    <result column="C_PRIORITY"   property="Priority"   />
+    <result column="C_START"      property="JulianDayStart" />
+    <result column="C_END"        property="JulianDayEnd" />
+    <result column="C_SDP"        property="StartDisplay" />
+    <result column="C_SDPY"       property="StartDisplayYear" />
+    <result column="C_EDP"        property="EndDisplay" />
+    <result column="C_EDPY"       property="EndDisplayYear" />
+    <result column="C_LINK"       property="LinkText" />
+    <result column="C_TARGET"     property="LinkTarget" />
+    <result column="Year"         property="Year" />
+    <result column="THUMB_PATH"   property="ThumbnailPath" />
+    <result column="DIALOG_PATH"  property="FeatureImagePath" />
+    <result column="DETAIL_PATH"  property="detailImagePath" />
+    <result column="PROMO"        property="PromoImagePath" />
+    <result column="CREDIT"       property="ImageCredit" />
+    <result column="USED"         property="UsedBy" />
+  </resultMap>
+  
+  <!-- main -->
+  <select id="mainList" resultMap="ChronicleMainMap">
+    SELECT t2.*, t3.* from chro_main t1 
+    join  chronicle t2 on t1.cm_no=t2.cm_no and t1.cm_no=#{cm_no}
+    left outer join dialog_photo t3 on t2.c_no = t3.c_no;
+  </select>
+  
+  <delete id="mainDelete" parameterType="int">
+    DELETE FROM chro_main WHERE CM_NO=#{chronicleNo}
+  </delete>
+  
+  <update id="mainUpdate" parameterType="ChronicleMain">
+    UPDATE chro_main SET 
+      C_TITLE=#{Title}, C_CONTENT=#{Body}, C_PRIORITY=#{Priority},
+      C_START=#{JulianDayStart}, C_END=#{JulianDayEnd}, 
+      C_SDP=#{StartDisplay}, C_SDPY=#{StartDisplayYear}, 
+      C_EDP=#{EndDisplay}, C_EDPY=#{EndDisplayYear}, YEAR=#{Year}
+    WHERE C_INDEX=#{EventId}      
+  </update>
+  
+  <select id="mainGet" parameterType="int" resultMap="ChronicleMainMap">
+    SELECT * FROM chro_main WHERE CM_NO=#{chronicleNo}
+  </select>
+  
+  <insert id="mainInsert" parameterType="ChronicleMain">
+    INSERT INTO chro_main(CM_TITLE, CM_INTRO, CM_INTRO_PIC, CM_SHARE, 
+    CM_CAPTION, CM_ISOPEN, CM_EARLIEST, CM_LASTJD, CM_SDP, CM_EDP)
+    values(#{Title},#{Body},#{FeatureImagePath},#{isPublic},
+           #{InitialCaption},#{IsOpenEnded},#{EarliestJulianDay},
+           #{LastJulianDay},#{StartDateDisplay},#{EndDateDisplay})
+  </insert>
+  
+  <select id="mainCountAll" resultType="int">
+    SELECT count(*) FROM chro_main
+  </select>
+  
+  <!-- chronicle -->
+  <insert id="chronicleInsert" parameterType="ChronicleMain">
+    INSERT INTO chronicle(C_TITLE, C_CONTENT, C_PRIORITY, C_START, C_END, 
+                          C_SDP, C_SDPY, C_EDP, C_EDPY, C_LINK, C_TARGET, YEAR)
+    values(#{Title},#{Body},#{Priority},#{JulianDayStart},
+           #{JulianDayEnd},#{StartDisplay},#{StartDisplayYear},#{EndDisplay},
+           #{EndDisplayYear},#{LinkText},#{LinkTarget},#{Year})
+  </insert>
+  
+  <delete id="chronicleDelete" parameterType="int">
+    DELETE FROM chronicle WHERE C_INDEX=#{EventId}
+  </delete>
+  
+  <update id="chronicleUpdate" parameterType="ChronicleMain">
+    UPDATE chronicle SET 
+      C_TITLE=#{Title}, C_CONTENT=#{Body}, C_PRIORITY=#{Priority},
+      C_START=#{JulianDayStart}, C_END=#{JulianDayEnd}, 
+      C_SDP=#{StartDisplay}, C_SDPY=#{StartDisplayYear}, 
+      C_EDP=#{EndDisplay}, C_EDPY=#{EndDisplayYear},
+      C_LINK=#{LinkText}, C_TARGET=#{LinkTarget}, YEAR=#{Year}
+    WHERE C_INDEX=#{EventId}      
+  </update>
+  
+  <select id="chronicleGet" parameterType="int" resultMap="ChronicleMainMap">
+    SELECT * FROM chronicle WHERE C_INDEX=#{EventId}
+  </select>
+  
+  <select id="chronicleCountAll" resultType="int">
+    SELECT count(*) FROM chronicle
+  </select>
+  
+  <!-- dialog_photo -->
+  <insert id="dialogInsert" parameterType="ChronicleMain">
+    INSERT INTO dialog_photo(THUMB_PATH, DIALOG_PATH, DETAIL_PATH,
+                             PROMO, CREDIT, USED)
+    values(#{ThumbnailPath},#{FeatureImagePath},#{detailImagePath},
+           #{PromoImagePath},#{ImageCredit},#{UsedBy})
+  </insert>
+  
+  <delete id="dialogDelete" parameterType="int">
+    DELETE FROM dialog_photo WHERE PIC_NO=#{photoNo}
+  </delete>
+  
+  <update id="dialogUpdate" parameterType="ChronicleMain">
+    UPDATE dialog_photo SET 
+      THUMB_PATH=#{ThumbnailPath}, DIALOG_PATH=#{FeatureImagePath}, 
+      DETAIL_PATH=#{detailImagePath}, PROMO=#{PromoImagePath}, 
+      CREDIT=#{ImageCredit}, USED=#{UsedBy}
+    WHERE PIC_NO=#{photoNo}      
+  </update>
+  
+  <select id="dialogGet" parameterType="int" resultMap="ChronicleMain">
+    SELECT * FROM dialog_photo WHERE CM_NO=#{chronicleMainNo}
+  </select>
+  
+  <select id="dialogCountAll" resultType="int">
+    SELECT count(*) FROM dialog_photo
+  </select>
+  
+  
+</mapper>
