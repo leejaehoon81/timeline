@@ -9,6 +9,11 @@ public class MultipartUtils {
     return System.currentTimeMillis()
         + "_" + (++count) + originName.substring(dotLoc);
   }
+  
+  public static void main(String[] args) {
+     String str =  MultipartUtils.getFilename("test@test.com");
+     System.out.println("..."+ str);
+  }
 }
 
 

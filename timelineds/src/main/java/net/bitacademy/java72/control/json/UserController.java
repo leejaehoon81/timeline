@@ -1,5 +1,6 @@
 package net.bitacademy.java72.control.json;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,12 +52,59 @@ public class UserController {
         new HashMap<String,Object>();
     if (count > 0) {
       result.put("data", "success");
+      
+      String folderName =user.getEmail();
+      String fileName="1.txt";
+      String beforeFilePath= sc.getRealPath("/files")+"/1.txt";
+      String afterFilePath=sc.getRealPath("/userFolder")+"/";
+      String thumbFilePath = sc.getRealPath("/userFolder")+"/";
+      moveFile(folderName, fileName, beforeFilePath, afterFilePath, thumbFilePath);
+    
     } else {
       result.put("data", "failure");
     }
     
     return result;
   }
+  
+  public void moveFile(String folderName, String fileName, String beforeFilePath, String afterFilePath, String thumbFilePath) {
+
+    String path = afterFilePath+folderName;
+    String filePath = path+"/"+fileName;
+    String path1=path+"_thumb";
+    String filePath1 = path1+"/"+fileName;
+    
+    File dir = new File(path);
+    File dir1 = new File(path1);
+    if (!dir.exists()) { //폴더 없으면 폴더 생성
+        dir.mkdirs();
+    }
+
+    if(!dir1.exists()){
+      dir1.mkdirs();
+    }
+    try{
+
+        File file =new File(beforeFilePath);
+        boolean b = file.renameTo(new File(filePath));
+
+        if(b){
+          System.out.println("Success=====>"+filePath);
+        }else{
+          System.out.println("Fail=====>"+filePath);
+        }
+        b = file.renameTo(new File(filePath1));
+        if(b){
+          System.out.println("Success=====>"+filePath1);
+        }else{
+          System.out.println("Fail=====>"+filePath1);
+        }
+    }catch(Exception e){
+        e.printStackTrace();
+       
+    }
+
+}
 /*  
   @RequestMapping("/list")
   public Object list(
