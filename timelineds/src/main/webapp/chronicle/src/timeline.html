@@ -3,12 +3,12 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-    <!-- <link rel="stylesheet" type="text/css" href="css/magnific-popup.css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/lightgallery.css"/>
     <!--[if lte IE 8]>
 	<link rel="stylesheet" type="text/css" href="css/ie.css" />
     <![endif]-->
 </head>
-<body>
+<body id='2'>
 
     <div id="timeline"></div>
 
@@ -18,8 +18,10 @@
     <script type="text/javascript" src="js/libs/easyXDM.min.js"></script>
     <script type="text/javascript" src="js/libs/iscroll.min.js"></script>
     <script type="text/javascript" src="js/libs/jquery.address-1.5.min.js"></script>
-    <!-- <script type="text/javascript" src="js/libs/jquery.magnific-popup.min.js"></script> -->
     <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/libs/lightgallery.js"></script>
+		<script type="text/javascript" src="js/libs/lg-thumbnail.min.js"></script>
+		<script type="text/javascript" src="js/libs/lg-fullscreen.min.js"></script>
 
     <!-- To test locally, set up a virtual directory to /build or move this into the /src directory -->
     <script type="text/javascript"src="build/wellcomeTimeline.js"></script>
@@ -74,32 +76,9 @@
                     provider: new WellcomeTimelineProvider()
                 });
             };
-
             createTimeline();
         });
         
     </script>
-    <!-- <script type="text/javascript">
-    $(document).ready(function() {
-      $('.image-popup-no-margins').magnificPopup({
-        type : 'image',
-        closeOnContentClick : true,
-        closeBtnInside : false,
-        fixedContentPos : true,
-        mainClass : 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-        image : {
-          verticalFit : true
-        },
-        zoom : {
-          enabled : true,
-          duration : 300
-        // don't foget to change the duration also in CSS
-        }
-      });
-
-    });
-  </script> -->
-
-
 </body>
 </html>

@@ -2,7 +2,11 @@
 // convert calendar to Julian date
 // (Julian day number algorithm adopted from Press et al.)
 //-------
+
+// $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
+
 var cnt = 1;
+
 function cal_to_jd( era, y, m, d, h, mn, s )
 {
   var jy, ja, jm;     //scratch
@@ -1370,16 +1374,16 @@ function WellcomeTimelineProvider(options) {
             });
 
             // footer panel
-            self.footerPanelView = self.getView('footer');
+           /* self.footerPanelView = self.getView('footer');
             self.footerPanelView.timeline_footerPanelView(
             {
                 onToggleFullScreen: function () {
                     self._toggleFullScreen();
                 }
-                /*onEmbed: function () {
+                onEmbed: function () {
                     self.embed();
-                }*/
-            });
+                }
+            });*/
 
             // details view 
             self.detailsView = self.getView('details');
@@ -1537,14 +1541,14 @@ function WellcomeTimelineProvider(options) {
             self.containerElem.append(self.mainPanelElem);
             self.views.push(new self.view('main', self.mainPanelElem));
             
-            self.footerPanelElem = $('<div class="footerPanel"></div>');
+            /*self.footerPanelElem = $('<div class="footerPanel"></div>');
             self.containerElem.append(self.footerPanelElem);
-            self.views.push(new self.view('footer', self.footerPanelElem));
+            self.views.push(new self.view('footer', self.footerPanelElem));*/
 
             self.detailsViewElem = $('<div class="overlay detailsView"></div>');
             self.containerElem.append(self.detailsViewElem);
             self.views.push(new self.view('details', self.detailsViewElem));
-
+            
             self.overlayMaskElem = $('<div class="overlayMask"></div>');
             self.containerElem.append(self.overlayMaskElem);
             
@@ -1571,13 +1575,13 @@ function WellcomeTimelineProvider(options) {
             });
         },
 
-        _toggleFullScreen: function () {
+        /*_toggleFullScreen: function () {
             var self = this;
 
             var $win = $(window);
             self.containerElem.width($win.width());
             self.containerElem.height($win.height());
-        },
+        },*/
 
         _resize: function () {
             var self = this;
@@ -1589,14 +1593,14 @@ function WellcomeTimelineProvider(options) {
             self.containerElem.width(width);
             self.containerElem.height(height);
 
-            var mainHeight = height - self.headerPanelElem.outerHeight(true) - self.footerPanelElem.outerHeight(true); // - 8; // 8px top border
+            var mainHeight = height - self.headerPanelElem.outerHeight(true);
 
             self.mainPanelElem.height(mainHeight);
 
             // position details view
             var minTop = self.headerPanelElem.height() + self.mainPanelElem.find('#scroll').height();
             var top;
-            if (height - self.footerPanelElem.height() < minTop + self.detailsViewElem.height()) {
+            if (height < minTop + self.detailsViewElem.height()) {
                 top = (height / 2) - (self.detailsViewElem.height() / 2);
             } else {
                 top = minTop;
@@ -1698,28 +1702,6 @@ function WellcomeTimelineProvider(options) {
             self.middleColElem = $('<div class="middleCol"></div>');
             self.element.append(self.middleColElem);
             
-            self.modalView = $('\
-                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">등 록</button>\
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
-                <div class="modal-dialog">\
-                  <div class="modal-content">\
-                    <div class="modal-header">\
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-                      <h4 class="modal-title" id="myModalLabel">입력수정삭제</h4>\
-                    </div>\
-                    <div class="modal-body">\
-                        <iframe src="insert.html" width="540" height="580" frameborder="0" allowtransparency="true"></iframe>\
-                    </div>\
-                    <div class="modal-footer">\
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
-                      <button type="button" class="btn btn-primary">Save changes</button>\
-                    </div>\
-                  </div>\
-                </div>\
-              </div>\
-                ');
-            self.middleColElem.append(self.modalView);
-
             self.rightColElem = $('<div class="rightCol"></div>');
             self.element.append(self.rightColElem);
 
@@ -1734,7 +1716,7 @@ function WellcomeTimelineProvider(options) {
             self.title = $.wellcome.timeline.options.provider.data.Title;
 
             // add start and end dates to title.
-            self.title += ": <span>" + $.wellcome.timeline.provider.data.StartDateDisplay + " - " + $.wellcome.timeline.provider.data.EndDateDisplay + "</span>";
+            /*self.title += ": <span>" + $.wellcome.timeline.provider.data.StartDateDisplay + " - " + $.wellcome.timeline.provider.data.EndDateDisplay + "</span>";*/
 
             self.titleElem.ellipsisFill(self.title);
 
@@ -1874,8 +1856,8 @@ function WellcomeTimelineProvider(options) {
             self.contentElem = $('<div class="content"></div>');
             self.scrollElem.append(self.contentElem);
 
-            self.backgroundEventsElem = $('<div class="backgroundEvents"></div>');
-            self.contentElem.append(self.backgroundEventsElem);
+            /*self.backgroundEventsElem = $('<div class="backgroundEvents"></div>');
+            self.contentElem.append(self.backgroundEventsElem);*/
 
             self.eventsElem = $('<div class="events"></div>');
             self.contentElem.append(self.eventsElem);
@@ -1892,11 +1874,11 @@ function WellcomeTimelineProvider(options) {
             self.centuryTicksElem = $('<div class="ticks centuries"></div>');
             self.timeElem.append(self.centuryTicksElem);
 
-            self.backgroundEventTemplateElem = $('\
+            /*self.backgroundEventTemplateElem = $('\
                 <div class="event">\
                     <div class="title"></div>\
                     <div class="timeSpan"></div>\
-                </div>');
+                </div>');*/
 
             self.eventTemplateElem = $('\
                 <div class="event">\
@@ -1937,7 +1919,7 @@ function WellcomeTimelineProvider(options) {
             self.decadeTicksElem.hide();
             self.centuryTicksElem.hide();
 
-            self.backgroundEvents = $.wellcome.timeline.provider.data.BackgroundEvents;
+            /*self.backgroundEvents = $.wellcome.timeline.provider.data.BackgroundEvents;*/
             self.events = $.wellcome.timeline.provider.data.Events;
 
             var startDate = $.wellcome.timeline.provider.getTimelineStartDate();
@@ -1978,12 +1960,12 @@ function WellcomeTimelineProvider(options) {
             self.decades = Math.floor(self.years / 10);
             self.centuries = Math.floor(self.years / 100);
 
-            self._createBackgroundEvents();
+            /*self._createBackgroundEvents();*/
             self._createEvents();
             self._createTicks();
         },
 
-        _createBackgroundEvents: function () {
+        /*_createBackgroundEvents: function () {
             var self = this;
 
             var i, l, evnt;
@@ -2014,7 +1996,7 @@ function WellcomeTimelineProvider(options) {
                 var endDayIndex = evnt.endDate.diff(self.startDate, 'days');
                 evnt.endPosition = normalise(endDayIndex, 0, self.days);
             }
-        },
+        },*/
 
         _createEvents: function () {
             var self = this;
@@ -2607,7 +2589,7 @@ function WellcomeTimelineProvider(options) {
         _redraw: function (clip, onlyVisible) {
             var self = this;
 
-            self._drawBackgroundEvents();
+            /*self._drawBackgroundEvents();*/
             self._drawEvents(clip, onlyVisible);
             self._drawTicks();
             self.scroll.refresh();
@@ -2666,7 +2648,7 @@ function WellcomeTimelineProvider(options) {
             }
         },
 
-        _drawBackgroundEvents: function () {
+        /*_drawBackgroundEvents: function () {
             var self = this;
 
             var contentWidth = self._getContentWidth();
@@ -2684,7 +2666,7 @@ function WellcomeTimelineProvider(options) {
 
                 evnt.titleElem.ellipsisFill(evnt.Title);
             }
-        },
+        },*/
 
         _drawEvents: function (clip, onlyVisible) {
             var self = this;
@@ -2953,7 +2935,7 @@ function WellcomeTimelineProvider(options) {
 
 
 
-(function ($) {
+/*(function ($) {
 
     $.widget("wellcome.timeline_footerPanelView", {
 
@@ -2969,26 +2951,23 @@ function WellcomeTimelineProvider(options) {
             self.optionsContainerElem = $('<div class="options"></div>');
             self.element.append(self.optionsContainerElem);
 
-            /*self.embedButtonElem = $('<a class="imageButton embed"></a>');
-            self.optionsContainerElem.append(self.embedButtonElem);*/
+            self.embedButtonElem = $('<a class="imageButton embed"></a>');
+            self.optionsContainerElem.append(self.embedButtonElem);
             
-            self.fullScreenButtonElem = $('<button type="button" class="btn btn-danger">Danger</button>');
-            self.optionsContainerElem.append(self.fullScreenButtonElem);
-
             // init ui.
-            /*self.fullScreenButtonElem.click(function (e) {
+            self.fullScreenButtonElem.click(function (e) {
                 e.preventDefault();
 
                 self._trigger('onToggleFullScreen');
-            });*/
+            });
 
-            /*self.embedButtonElem.click(function (e) {
+            self.embedButtonElem.click(function (e) {
                 e.preventDefault();
 
                 self._trigger('onEmbed');
-            });*/
+            });
 
-            /*if (!$.wellcome.timeline.isEmbedEnabled()) self.embedButtonElem.hide();*/
+            if (!$.wellcome.timeline.isEmbedEnabled()) self.embedButtonElem.hide();
         },
 
         _toggleFullScreen: function (isFullScreen) {
@@ -3015,7 +2994,7 @@ function WellcomeTimelineProvider(options) {
         }
     });
 
-})(jQuery);
+})(jQuery);*/
 
 
 
@@ -3050,7 +3029,7 @@ function WellcomeTimelineProvider(options) {
                 }
             });
 
-            // create ui.
+            // create ui. by yj 0923
             self.topElem = $('<div class="top"></div>');
             self.element.append(self.topElem);
 
@@ -3060,18 +3039,73 @@ function WellcomeTimelineProvider(options) {
             self.modifyElem = $('<button type="button" class="btn btn-info btn-sm">수 정</button>');
             self.topElem.append(self.modifyElem);
             
-            self.insertElem = $('<button type="button" class="btn btn-success btn-sm">입 력</button>');
+            self.insertElem = $('\
+                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">입 력</button>\
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                <div class="modal-dialog">\
+                  <div class="modal-content">\
+                    <div class="modal-body">\
+                        <iframe src="insert.html" width="98%" height="700" frameborder="0" allowtransparency="true"></iframe>\
+                    </div>\
+                  </div>\
+                </div>\
+              </div>\
+                ');
             self.topElem.append(self.insertElem);
-            
             
             /*self.closeButtonElem = $('<div class="close"></div>');
             self.topElem.append(self.closeButtonElem);*/
 
             self.middleElem = $('<div class="middle"></div>');
             self.element.append(self.middleElem);
-
+            
             self.contentElem = $('<div class="content"></div>');
             self.middleElem.append(self.contentElem);
+            
+            
+            
+         // create by YJ 0924
+            $('.btn.btn-info.btn-sm').on('click', function(e){
+              e.preventDefault();
+              if (cnt%2 == 0) {
+                $(top.document).find('.timeline').animate({ height: '900px' }, 'slow');
+                $(top.document).find('iframe').animate({ height: '900px' }, 'slow');
+                $('#timeline').animate({ height: '900px' }, 'slow');
+                $('.overlay.detailsView').animate({ height: '300px' }, 'slow');
+                $('.content:last').animate({ height: '256px' }, 'slow');
+                $('.centerCol').animate({ height: '256px' }, 'slow');
+                $('.wrapper').animate({ height: '256px' }, 'slow');
+              } else {
+                $(top.document).find('.timeline').animate({ height: '1200px' }, 'slow');
+                $(top.document).find('iframe').animate({ height: '1200px' }, 'slow');
+                $('#timeline').animate({ height: '1200px' }, 'slow');
+                $('.overlay.detailsView').animate({ height: '600' }, 'slow');
+                $('.content:last').animate({ height: '570' }, 'slow');
+                $('.centerCol').animate({ height: '570' }, 'slow');
+                $('.wrapper').animate({ height: '570' }, 'slow');
+                
+                self.photoElem = ('<div id="lightgallery">\
+                                    <a href="images/full/001.jpg">\
+                                    <img src="images/thumb/001.jpg" />\
+                                    </a>\
+                                    <a href="images/full/002.jpg">\
+                                    <img src="images/thumb/002.jpg" />\
+                                    </a>\
+                                    </div>\
+                    <script type="text/javascript">\
+                    $(document).ready(function() {\
+                        $("#lightgallery").lightGallery();\
+                    });\
+                  </script>\
+                              ');
+                $('.wrapper').append(self.photoElem);
+              }
+              cnt++;
+            });
+            
+            
+            
+            
             
             /*self.bottomElem = $('<div class="bottom"></div>');
             self.element.append(self.bottomElem);*/
@@ -3095,6 +3129,11 @@ function WellcomeTimelineProvider(options) {
             self.insertElem.click(function (e) {
               e.preventDefault();
             });
+            
+            self.modifyElem.click(function (e) {
+              e.preventDefault();
+            });
+            
         },
 
         /*enableClose: function () {
@@ -3452,7 +3491,6 @@ function WellcomeTimelineProvider(options) {
                 self._disablePrev();
                 self._disableNext();
                 self._prepEvent(direction, self.events[$.wellcome.timeline.currentIndex + 1]);
-                console.log('여기구나');
             });
 
             $.wellcome.timeline.bind($.wellcome.timeline.SCROLL_STEP, function (e, obj) {
@@ -3464,7 +3502,7 @@ function WellcomeTimelineProvider(options) {
                 self.centerColElem.find('.wrapper').not(self.currentDetailsElem).remove();
                 self.nextDetailsElem = null;
             });
-
+            
             // create ui.
             self.leftColElem = $('<div class="leftCol"></div>');
             self.contentElem.append(self.leftColElem);
@@ -3488,7 +3526,7 @@ function WellcomeTimelineProvider(options) {
             
             self.nextBtnElem = $('<div class="next"></div>');
             self.rightColElem.append(self.nextBtnElem);
-
+            
             // init ui.
             self.prevBtnElem.prop('title', $.wellcome.timeline.options.config.DetailsPanelView.Previous);
 
@@ -3617,53 +3655,12 @@ function WellcomeTimelineProvider(options) {
         
         _prepEvent: function (direction, evnt) {
             var self = this;
-            
-            // create by yj 0922
-            /*var indexNo = evnt.EventId;
-            $('.btn.btn-danger.btn-sm').click(function(e) {
-              e.preventDefault();
-              $.chronicle.delete(indexNo);
-            });*/
-            
 
             self.nextDetailsElem = self.detailsTemplate.clone();
 
             var imgContainerElem = self.nextDetailsElem.find('.centerLeftCol');
 
             var imgElem = $('<img />');
-            
-            
-            // create by YJ 0919
-            $(imgElem).on('click', function(e){
-              e.preventDefault();
-              /*$('.overlay.detailsView').remove();*/
-              if (cnt%2 == 0) {
-                $(top.document).find('.timeline').css('height', '900');
-                $(top.document).find('iframe').css('height', '900');
-                $('#timeline').height(900);
-                $('.overlay.detailsView').css('height', '280');
-                $('.content:last').css('height', '256');
-                $('.centerCol').css('height', '256');
-                $('.wrapper').css('height', '256');
-              } else {
-                $(top.document).find('.timeline').css('height', '1200');
-                $(top.document).find('iframe').css('height', '1200');
-                $('#timeline').height(1200);
-                /*$('.footerPanel').remove();*/
-                $('.overlay.detailsView').css('height', '600');
-                $('.content:last').css('height', '570');
-                $('.centerCol').css('height', '570');
-                $('.wrapper').css('height', '570');
-                /*self.photoElem = ('<div class="html-code grid-of-images">\
-                                <a class="image-popup-no-margins" href="images/full/001.jpg">\
-                                <img src="images/thumb/001.jpg" />\
-                                </a>\
-                                </div>\
-                              ');
-                $('.wrapper').append(self.photoElem);*/
-              }
-              cnt++;
-            });
             
             if (evnt.FeatureImagePath) {
                 imgElem.prop('src', evnt.FeatureImagePath);
@@ -3800,28 +3797,6 @@ function WellcomeTimelineProvider(options) {
 
 (function ($) {
   $.chronicle = {
-      insert: function() {
-        $.ajax('insert.do', {
-          method: 'POST',
-          dataType: 'json',
-          data: {
-            mainNo: 1,
-            Title: $('#fTitle').val(),
-            Body: $('#fContent').val(),
-            JulianDayStart: 2453100,
-            priority: 1
-          },
-          success: function(result) {
-            if (result.Events == 'success') {
-              alert('입력성공');
-              window.parent.location.reload();
-            } else {
-              alert('입력실패');
-            }
-          }
-        });
-      },
-      
       delete: function(no) {
         $.getJSON('delete.do?no=' + no, function(result) {
           if (result.Events == 'success') {
@@ -3832,6 +3807,6 @@ function WellcomeTimelineProvider(options) {
           }
         });
       }
-      
   };
 })(jQuery);
+
