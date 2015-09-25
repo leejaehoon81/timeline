@@ -43,5 +43,10 @@ public class ChronicleServiceImpl implements ChronicleService {
   public int countAll() {
     return chronicleDao.countAll();
   }
+
+  @Override
+  public int deleteWithPic(int no) {
+    return chronicleDao.deleteWithPic(no);
+  }
   
 }

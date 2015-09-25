@@ -43,6 +43,10 @@
            #{EndDisplayYear},#{LinkText},#{LinkTarget},#{Year})
   </insert>
   
+  <delete id="deleteWithPic" parameterType="int">
+    DELETE FROM dialog_photo WHERE C_INDEX=#{EventId}
+  </delete>
+  
   <delete id="delete" parameterType="int">
     DELETE FROM chronicle WHERE C_INDEX=#{EventId}
   </delete>

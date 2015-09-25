@@ -29,14 +29,24 @@ public class ChronicleController {
   
   @RequestMapping("/delete")
   public ResponseEntity<String> delete(int no) {
-    int count = chronicleService.delete(no);
-
     Map<String,Object> result = new HashMap<String,Object>();
+    
+    int count = chronicleService.deleteWithPic(no);
+    
     if (count > 0) {
       result.put("Events", "success");
     } else {
       result.put("Events", "failure");
     }
+    
+    count = chronicleService.delete(no);
+
+    if (count > 0) {
+      result.put("Events", "success");
+    } else {
+      result.put("Events", "failure");
+    }
+    
     
     return ResponseFactory.createResponse(result);
   }
