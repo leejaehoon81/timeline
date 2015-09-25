@@ -6,7 +6,7 @@
 // $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
 
 var cnt = 1;
-
+// test
 function cal_to_jd( era, y, m, d, h, mn, s )
 {
   var jy, ja, jm;     //scratch
