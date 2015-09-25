@@ -1,10 +1,15 @@
 //-------
 // convert calendar to Julian date
+
 // (Julian day number algorithm adopted from Press et al.)
 //-------
 
+
+var cnt = 1; // wrapper div 확장에 필요한 변수
+var myIndex = 0; // 현재 event index 알아낼때 쓰는 변수
 // $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
-var cnt = 1;
+
+
 function cal_to_jd( era, y, m, d, h, mn, s )
 {
   var jy, ja, jm;     //scratch
@@ -1301,6 +1306,7 @@ function WellcomeTimelineProvider(options) {
     });
 
 })(jQuery);
+
 (function ($) {
 
     $.widget("wellcome.timeline", $.wellcome.timeline_baseTimeline, {
@@ -3030,6 +3036,65 @@ function WellcomeTimelineProvider(options) {
             // create ui. by yj 0923
             self.topElem = $('<div class="top"></div>');
             self.element.append(self.topElem);
+            
+            self.testElem = $('\
+                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">test</button>\
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                <div class="modal-dialog">\
+                  <div class="modal-content">\
+                    <div class="modal-body">\
+                <div id="formDiv">\
+                <h2>연대기 입력</h2>\
+                <form class="form-horizontal" action="insert.do">\
+                <div class="form-group">\
+                  <label for="fTitle" class="col-sm-2 control-label">제목</label>\
+                  <div class="col-sm-5">\
+                    <input type="text" class="form-control" id="fTitle">\
+                  </div>\
+                </div>\
+                <div class="form-group">\
+                  <label for="fContent" class="col-sm-2 control-label">내용</label>\
+                  <div class="col-sm-5">\
+                    <textarea id="fContent" rows="5" class="form-control"></textarea>\
+                  </div>\
+                </div>\
+                <div class="form-group">\
+                  <label for="fDate" class="col-sm-2 control-label">날짜</label>\
+                  <div class="col-sm-10">\
+                    <input type="text" id="datetimepicker8"/>\
+                  </div>\
+                </div>\
+                <div class="form-group">\
+                  <label class="col-sm-2 control-label">첨부파일</label>\
+                  <div class="col-sm-10">\
+                    <a id="attachFileLink" target="_blank" href="#" class="form-control-static my-view"></a><br>\
+                    <span class="btn btn-success fileinput-button">\
+                      <i class="glyphicon glyphicon-plus"></i>\
+                      <span>파일 찾기</span>\
+                      <input id="fileupload" type="file" name="file" multiple>\
+                      <input id="fAttachFile" type="hidden">\
+                    </span>\
+                    <br><br>\
+                    <div id="progress" class="progress">\
+                        <div class="progress-bar progress-bar-success"></div>\
+                    </div>\
+                    <div id="files" class="files"></div>\
+                  </div>\
+                </div>\
+                <div class="form-group">\
+                  <div class="col-sm-offset-2 col-sm-10">\
+                    <button id="insertBtn" type="button" class="btn btn-default btn-sm my-new">등록</button>\
+                  </div>\
+                </div>\
+                </form>\
+              </div>\
+                    </div>\
+                  </div>\
+                </div>\
+              </div>\
+                ');
+            
+            self.topElem.append(self.testElem);
 
             self.deleteElem = $('<button type="button" class="btn btn-danger btn-sm">삭 제</button>');
             self.topElem.append(self.deleteElem);
@@ -3038,8 +3103,8 @@ function WellcomeTimelineProvider(options) {
             self.topElem.append(self.modifyElem);
             
             self.insertElem = $('\
-                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">입 력</button>\
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#insertModal">입 력</button>\
+                <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
                 <div class="modal-dialog">\
                   <div class="modal-content">\
                     <div class="modal-body">\
@@ -3059,7 +3124,6 @@ function WellcomeTimelineProvider(options) {
             
             self.contentElem = $('<div class="content"></div>');
             self.middleElem.append(self.contentElem);
-            
             
             
          // create by YJ 0924
@@ -3113,9 +3177,6 @@ function WellcomeTimelineProvider(options) {
             });
             
             
-            
-            
-            
             /*self.bottomElem = $('<div class="bottom"></div>');
             self.element.append(self.bottomElem);*/
 
@@ -3131,8 +3192,14 @@ function WellcomeTimelineProvider(options) {
             // create by yj 0923
             self.deleteElem.click(function (e) {
               e.preventDefault();
-              var indexNo = $.wellcome.timeline.getCurrentEvent().EventId;
-              $.chronicle.delete(indexNo);
+              myIndex = $.wellcome.timeline.getCurrentEvent().EventId;
+              $.chronicle.delete(myIndex);
+            });
+            
+            self.testElem.click(function (e) {
+              e.preventDefault();
+              myIndex = $.wellcome.timeline.getCurrentEvent().EventId;
+              $.chronicle.detail(myIndex);
             });
             
             self.insertElem.click(function (e) {
@@ -3806,8 +3873,8 @@ function WellcomeTimelineProvider(options) {
 
 (function ($) {
   $.chronicle = {
-      delete: function(no) {
-        $.getJSON('delete.do?no=' + no, function(result) {
+      delete: function(myIndex) {
+        $.getJSON('delete.do?no=' + myIndex, function(result) {
           if (result.Events == 'success') {
             alert('삭제 성공');
             window.parent.location.reload();
@@ -3815,7 +3882,14 @@ function WellcomeTimelineProvider(options) {
             alert('삭제 실패');
           }
         });
-      }
+      },
+      detail: function(myIndex) {
+        $.getJSON('detail.do?no=' + myIndex, function(result) {
+          var data = result.Events;
+          $('#fTitle').val(data.Title);
+          $('#fContent').val(data.Body);
+        });
+      } 
   };
 })(jQuery);
 
