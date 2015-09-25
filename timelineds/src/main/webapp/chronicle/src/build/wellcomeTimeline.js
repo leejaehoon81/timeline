@@ -3037,8 +3037,11 @@ function WellcomeTimelineProvider(options) {
             self.topElem = $('<div class="top"></div>');
             self.element.append(self.topElem);
             
-            self.testElem = $('\
-                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">test</button>\
+            self.deleteElem = $('<button type="button" class="btn btn-danger btn-sm">삭 제</button>');
+            self.topElem.append(self.deleteElem);
+            
+            self.modifyElem = $('\
+                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">수 정</button>\
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
                 <div class="modal-dialog">\
                   <div class="modal-content">\
@@ -3094,12 +3097,6 @@ function WellcomeTimelineProvider(options) {
               </div>\
                 ');
             
-            self.topElem.append(self.testElem);
-
-            self.deleteElem = $('<button type="button" class="btn btn-danger btn-sm">삭 제</button>');
-            self.topElem.append(self.deleteElem);
-            
-            self.modifyElem = $('<button type="button" class="btn btn-info btn-sm">수 정</button>');
             self.topElem.append(self.modifyElem);
             
             self.insertElem = $('\
@@ -3126,56 +3123,6 @@ function WellcomeTimelineProvider(options) {
             self.middleElem.append(self.contentElem);
             
             
-         // create by YJ 0924
-            $('.btn.btn-info.btn-sm').on('click', function(e){
-              e.preventDefault();
-              console.log(cnt);
-              if (cnt%2 == 0) {
-                $(top.document).find('.timeline').animate({ height: '900px' }, 'slow');
-                $(top.document).find('iframe').animate({ height: '900px' }, 'slow');
-                $('#timeline').animate({ height: '900px' }, 'slow');
-                $('.overlay.detailsView').animate({ height: '300px' }, 'slow');
-                $('.content:last').animate({ height: '256px' }, 'slow');
-                $('.centerCol').animate({ height: '256px' }, 'slow');
-                $('.wrapper').animate({ height: '256px' }, 'slow');
-                $('#aniimated-thumbnials').remove();
-              } else {
-                $(top.document).find('.timeline').animate({ height: '1200px' }, 'slow');
-                $(top.document).find('iframe').animate({ height: '1200px' }, 'slow');
-                $('#timeline').animate({ height: '1200px' }, 'slow');
-                $('.overlay.detailsView').animate({ height: '465' }, 'slow'); // 600
-                $('.content:last').animate({ height: '426' }, 'slow'); // 
-                $('.centerCol').animate({ height: '426' }, 'slow'); //
-                $('.wrapper').animate({ height: '426' }, 'slow'); //
-                
-                self.photoElem = ('<div id="aniimated-thumbnials">\
-                                    <a href="images/full/001.jpg">\
-                                    <img src="images/thumb/001.jpg" />\
-                                    </a>\
-                                    <a href="images/full/002.jpg">\
-                                    <img src="images/thumb/002.jpg" />\
-                                    </a>\
-                                    <a href="images/full/003.jpg">\
-                                    <img src="images/thumb/003.jpg" />\
-                                    </a>\
-                                    <a href="images/full/004.jpg">\
-                                    <img src="images/thumb/004.jpg" />\
-                                    </a>\
-                                    <a href="images/full/005.jpg">\
-                                    <img src="images/thumb/005.jpg" />\
-                                    </a>\
-                                    </div>\
-                    <script type="text/javascript">\
-                    $("#aniimated-thumbnials").lightGallery({\
-                    thumbnail:true\
-                });\
-                    </script>\
-                  ');
-                $('.wrapper').append(self.photoElem);
-              }
-              cnt++;
-            });
-            
             
             /*self.bottomElem = $('<div class="bottom"></div>');
             self.element.append(self.bottomElem);*/
@@ -3196,17 +3143,13 @@ function WellcomeTimelineProvider(options) {
               $.chronicle.delete(myIndex);
             });
             
-            self.testElem.click(function (e) {
+            self.modifyElem.click(function (e) {
               e.preventDefault();
               myIndex = $.wellcome.timeline.getCurrentEvent().EventId;
               $.chronicle.detail(myIndex);
             });
             
             self.insertElem.click(function (e) {
-              e.preventDefault();
-            });
-            
-            self.modifyElem.click(function (e) {
               e.preventDefault();
             });
             
@@ -3737,6 +3680,56 @@ function WellcomeTimelineProvider(options) {
             var imgContainerElem = self.nextDetailsElem.find('.centerLeftCol');
 
             var imgElem = $('<img />');
+            
+         // create by YJ 0924
+            $(imgElem).on('click', function(e){
+              e.preventDefault();
+              console.log(cnt);
+              if (cnt%2 == 0) {
+                $(top.document).find('.timeline').animate({ height: '900px' }, 'slow');
+                $(top.document).find('iframe').animate({ height: '900px' }, 'slow');
+                $('#timeline').animate({ height: '900px' }, 'slow');
+                $('.overlay.detailsView').animate({ height: '300px' }, 'slow');
+                $('.content:last').animate({ height: '256px' }, 'slow');
+                $('.centerCol').animate({ height: '256px' }, 'slow');
+                $('.wrapper').animate({ height: '256px' }, 'slow');
+                $('#aniimated-thumbnials').remove();
+              } else {
+                $(top.document).find('.timeline').animate({ height: '1200px' }, 'slow');
+                $(top.document).find('iframe').animate({ height: '1200px' }, 'slow');
+                $('#timeline').animate({ height: '1200px' }, 'slow');
+                $('.overlay.detailsView').animate({ height: '465' }, 'slow'); // 600
+                $('.content:last').animate({ height: '426' }, 'slow'); // 
+                $('.centerCol').animate({ height: '426' }, 'slow'); //
+                $('.wrapper').animate({ height: '426' }, 'slow'); //
+                
+                self.photoElem = ('<div id="aniimated-thumbnials">\
+                                    <a href="images/full/001.jpg">\
+                                    <img src="images/thumb/001.jpg" />\
+                                    </a>\
+                                    <a href="images/full/002.jpg">\
+                                    <img src="images/thumb/002.jpg" />\
+                                    </a>\
+                                    <a href="images/full/003.jpg">\
+                                    <img src="images/thumb/003.jpg" />\
+                                    </a>\
+                                    <a href="images/full/004.jpg">\
+                                    <img src="images/thumb/004.jpg" />\
+                                    </a>\
+                                    <a href="images/full/005.jpg">\
+                                    <img src="images/thumb/005.jpg" />\
+                                    </a>\
+                                    </div>\
+                    <script type="text/javascript">\
+                    $("#aniimated-thumbnials").lightGallery({\
+                    thumbnail:true\
+                });\
+                    </script>\
+                  ');
+                $('.wrapper').append(self.photoElem);
+              }
+              cnt++;
+            });
             
             if (evnt.FeatureImagePath) {
                 imgElem.prop('src', evnt.FeatureImagePath);
