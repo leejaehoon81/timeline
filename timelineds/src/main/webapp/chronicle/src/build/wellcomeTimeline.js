@@ -3075,29 +3075,39 @@ function WellcomeTimelineProvider(options) {
                 $('.content:last').animate({ height: '256px' }, 'slow');
                 $('.centerCol').animate({ height: '256px' }, 'slow');
                 $('.wrapper').animate({ height: '256px' }, 'slow');
+                $('#aniimated-thumbnials').remove();
               } else {
                 $(top.document).find('.timeline').animate({ height: '1200px' }, 'slow');
                 $(top.document).find('iframe').animate({ height: '1200px' }, 'slow');
                 $('#timeline').animate({ height: '1200px' }, 'slow');
-                $('.overlay.detailsView').animate({ height: '600' }, 'slow');
-                $('.content:last').animate({ height: '570' }, 'slow');
-                $('.centerCol').animate({ height: '570' }, 'slow');
-                $('.wrapper').animate({ height: '570' }, 'slow');
+                $('.overlay.detailsView').animate({ height: '465' }, 'slow'); // 600
+                $('.content:last').animate({ height: '426' }, 'slow'); // 
+                $('.centerCol').animate({ height: '426' }, 'slow'); //
+                $('.wrapper').animate({ height: '426' }, 'slow'); //
                 
-                self.photoElem = ('<div id="lightgallery">\
+                self.photoElem = ('<div id="aniimated-thumbnials">\
                                     <a href="images/full/001.jpg">\
                                     <img src="images/thumb/001.jpg" />\
                                     </a>\
                                     <a href="images/full/002.jpg">\
                                     <img src="images/thumb/002.jpg" />\
                                     </a>\
+                                    <a href="images/full/003.jpg">\
+                                    <img src="images/thumb/003.jpg" />\
+                                    </a>\
+                                    <a href="images/full/004.jpg">\
+                                    <img src="images/thumb/004.jpg" />\
+                                    </a>\
+                                    <a href="images/full/005.jpg">\
+                                    <img src="images/thumb/005.jpg" />\
+                                    </a>\
                                     </div>\
                     <script type="text/javascript">\
-                    $(document).ready(function() {\
-                        $("#lightgallery").lightGallery();\
-                    });\
-                  </script>\
-                              ');
+                    $("#aniimated-thumbnials").lightGallery({\
+                    thumbnail:true\
+                });\
+                    </script>\
+                  ');
                 $('.wrapper').append(self.photoElem);
               }
               cnt++;
