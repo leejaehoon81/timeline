@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -22,31 +21,7 @@ public class UserController {
   @Autowired UserService userService;
   @Autowired ServletContext sc;
   
-/* 
-  @RequestMapping("/delete") 
-  public Object delete(int no) {
-    int count = userService.delete(no);
-    
-    Map<String,Object> result = 
-        new HashMap<String,Object>();
-    if (count > 0) {
-      result.put("data", "success");
-    } else {
-      result.put("data", "failure");
-    }
-    
-    return result;
-  }
-  
-  @RequestMapping("/detail")
-  public Object detail(int no) {
-    Map<String,Object> result = 
-        new HashMap<String,Object>();
-    result.put("data", userService.get(no));
-    
-    return result;
-  }
-*/
+
   @RequestMapping("/insert")
   public Object insert(User user) throws Exception {
     int count = userService.insert(user);
@@ -94,23 +69,24 @@ public class UserController {
 
 }
   
-public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { 
+  @RequestMapping("/loginInfo")
+  public Object loginInfo(
+      HttpSession session) {
     
-    
-    HttpSession session  =  request.getSession();
-    
-    String member_id = (String)session.getAttribute("email_id");
-    
-    System.out.println("현재 로그인하려는 member_id = "+member_id);
-    if ( member_id == null) {   //session check
-      response.sendRedirect("loginpage.do");
-      return false;
-    }
+    Map<String,Object> result = 
+        new HashMap<String,Object>();
 
-    else{
-      return true;
+    User user = 
+        (User)session.getAttribute("user");
+    
+    if (user == null) {
+      result.put("state", "no");
+    } else {
+      result.put("state", "yes");
+      result.put("data", user);
     }
     
+    return result;
   }
 
  /* 
@@ -129,19 +105,38 @@ public boolean preHandle(HttpServletRequest request, HttpServletResponse respons
   }
 */ 
   
-  @RequestMapping("/checkUser")
-  public Object checkUser(String email, String password) {
+@RequestMapping("/logout")
+public Object logout(HttpSession session) {
+  session.invalidate(); 
+  
+  Map<String,Object> result = 
+      new HashMap<String,Object>();
+  result.put("data", "yes");
+  
+  return result;
+}
+
+  @RequestMapping("/login")
+  public Object checkUser(String email, String password, HttpServletResponse response, HttpSession session) {
    
     System.out.println("Email:"+email);
     System.out.println("Password:"+password);
     
     Map<String,Object> result = 
         new HashMap<String,Object>();
-    
-    if (userService.checkUser(email, password) != null) {
+    User user = userService.checkUser(email, password);
+    if (user != null) {
       result.put("data", "yes");
-      result.put("userdata", userService.checkUser(email, password));
+      result.put("userdata", user);
+      session.setAttribute("user", user);
+      System.out.println("session ==>> " + user);
+      String refererUrl=(String)session.getAttribute("refererUrl");
+      System.out.println("refererUrl===>"+refererUrl);
+      if(refererUrl !=null){
+        result.put("refererUrl", refererUrl);
+      }
     } else {
+      session.invalidate();
       result.put("data", "no");
     }
     return result;
