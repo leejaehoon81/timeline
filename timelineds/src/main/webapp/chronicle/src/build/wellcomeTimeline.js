@@ -4,9 +4,7 @@
 //-------
 
 // $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
-
 var cnt = 1;
-// test
 function cal_to_jd( era, y, m, d, h, mn, s )
 {
   var jy, ja, jm;     //scratch
@@ -3067,6 +3065,7 @@ function WellcomeTimelineProvider(options) {
          // create by YJ 0924
             $('.btn.btn-info.btn-sm').on('click', function(e){
               e.preventDefault();
+              console.log(cnt);
               if (cnt%2 == 0) {
                 $(top.document).find('.timeline').animate({ height: '900px' }, 'slow');
                 $(top.document).find('iframe').animate({ height: '900px' }, 'slow');
