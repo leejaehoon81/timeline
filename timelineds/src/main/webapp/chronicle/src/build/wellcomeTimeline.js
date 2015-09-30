@@ -7,8 +7,8 @@
 
 var cnt = 1; // wrapper div 확장에 필요한 변수
 var myIndex = 0; // 현재 event index 알아낼때 쓰는 변수
-// $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
 
+// $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
 
 function cal_to_jd( era, y, m, d, h, mn, s )
 {
@@ -1249,7 +1249,7 @@ function WellcomeTimelineProvider(options) {
 (function ($) {
 
     $.widget("wellcome.wellcomeTimeline", {
-
+      
         options: {
         },
 
@@ -1300,7 +1300,7 @@ function WellcomeTimelineProvider(options) {
         },
 
         _destroy: function () {
-            $.Widget.prototype.destroy.apply(this, arguments);
+            /*$.Widget.prototype.destroy.apply(this, arguments);*/
         }
 
     });

@@ -1,99 +1,91 @@
 <meta charset='UTF-8'>
-<!-- <link rel="stylesheet" type="text/css" href="../js/jquery.datetimepicker.css"/> -->
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" />
 <script type="text/javascript" src="js/libs/jquery.min.js"></script>
 <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/libs/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/libs/bootstrap-datepicker.kr.min.js"></script>
 <style>
 html {
-  overflow: hidden;
+	overflow: hidden;
 }
 </style>
 <div id='formDiv'>
-  <h2>연대기 입력</h2>
-  <form class="form-horizontal" action="insert.do">
-  
-  <div class="form-group">
-    <label for="fTitle" class="col-sm-2 control-label">제목</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="fTitle">
+	<h2>연대기 입력</h2>
+	<form class="form-horizontal" action="insert.do">
+
+		<div class="form-group">
+			<label for="fTitle" class="col-sm-2 control-label">제목</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="fTitle" placeholder="최대 100글자 입니다">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="fContent" class="col-sm-2 control-label">내용</label>
+			<div class="col-sm-10">
+				<textarea id='fContent' rows='5' class="form-control" placeholder="내용을 써주세요"></textarea>
+			</div>
+		</div>
+		
+		<b>날짜를 선택하세요</b>
+		<div class="input-group date">
+      <input type="text" class="form-control" id="myCal">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-th"></i>
+        </span>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="fContent" class="col-sm-2 control-label">내용</label>
-    <div class="col-sm-10">
-      <textarea id='fContent' rows='5' class="form-control"></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="fDate" class="col-sm-2 control-label">날짜</label>
-    <div class="col-sm-10">
-      <input type="text" id="datetimepicker8"/>
-    </div>
-  </div>
-  
-  <div class="form-group">
-    <label class="col-sm-2 control-label">첨부파일</label>
-    <div class="col-sm-10">
-      <a id='attachFileLink' target='_blank' href='#' 
-            class="form-control-static my-view"></a><br>
-      <span class="btn btn-success fileinput-button">
-        <i class="glyphicon glyphicon-plus"></i>
-        <span>파일 찾기</span>
-        <input id="fileupload" 
-               type="file" 
-               name="file" 
-               multiple>
-        <input id='fAttachFile' type='hidden'>  
-      </span>
-      <br><br>
-      <div id="progress" class="progress">
-          <div class="progress-bar progress-bar-success"></div>
-      </div>
-      <div id="files" class="files"></div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button id='insertBtn' type='button' class="btn btn-default btn-sm my-new">등록</button>
-      <button id='updateBtn' type='button' class="btn btn-default btn-sm my-view">변경</button>
-      <button id='deleteBtn' type='button' class="btn btn-default btn-sm my-view">삭제</button>
-      <button id='cancelBtn' type='reset' class="btn btn-default btn-sm">취소</button>
-    </div>
-  </div>
-  </form>
-</div><!-- formDiv -->          
-<!-- <script src="../js/jquery.js"></script>
-<script src="../js/jquery.datetimepicker.js"></script> -->
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">첨부파일</label>
+			<div class="col-sm-10">
+				<a id='attachFileLink' target='_blank' href='#'
+					class="form-control-static my-view"></a><br> <span
+					class="btn btn-success fileinput-button"> <i
+					class="glyphicon glyphicon-plus"></i> <span>파일 찾기</span> <input
+					id="fileupload" type="file" name="file" multiple> <input
+					id='fAttachFile' type='hidden'>
+				</span> <br> <br>
+				<div id="progress" class="progress">
+					<div class="progress-bar progress-bar-success"></div>
+				</div>
+				<div id="files" class="files"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button id='insertBtn' type='button'
+					class="btn btn-default btn-sm my-new">등록</button>
+				<button id='cancelBtn' type='reset' class="btn btn-default btn-sm">취소</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 <script>
-/* $('#datetimepicker8').datetimepicker({
-	  onGenerate:function( ct ){
-	    $(this).find('.xdsoft_date')
-	      .toggleClass('xdsoft_disabled');
-	  },
-	  minDate:'-1970/01/2',
-	  maxDate:'+1970/01/2',
-	  timepicker:false
-	}); */
-/* requirejs(['app/board'], function(chronicle) {
-  
-}); */
 
-(function ($) {
-  $.chronicle = {
-      insert: function() {
+	$('.input-group.date').datepicker({
+	  format: "yyyy/mm/dd",
+	  language: "kr",
+	  autoclose: true,
+	  todayHighlight: true
+	});
+
+  (function($) {
+    $.chronicle = {
+      insert : function() {
         $.ajax('insert.do', {
-          method: 'POST',
-          dataType: 'json',
-          data: {
-            mainNo: 1,
-            Title: $('#fTitle').val(),
-            Body: $('#fContent').val(),
-            JulianDayStart: 2453100,
-            priority: 1
+          method : 'POST',
+          dataType : 'json',
+          data : {
+            mainNo : 1,
+            Title : $('#fTitle').val(),
+            Body : $('#fContent').val(),
+            JulianDayStart : myDate($('#myCal').val()),
+            StartDisplay : $('#myCal').val(),
+            StartDisplayYear : $('#myCal').val(),
+            priority : 1
           },
-          success: function(result) {
+          success : function(result) {
             if (result.Events == 'success') {
               alert('입력성공');
             } else {
@@ -101,41 +93,57 @@ html {
             }
           }
         });
-      },
-      delete: function(no) {
-        $.getJSON('delete.do?no=' + no, function(result) {
-          if (result.Events == 'success') {
-            alert('삭제 성공');
-          } else {
-            alert('삭제 실패');
-          }
-        });
       }
-  };
-})(jQuery);
+    };
+  })(jQuery);
 
-$('#insertBtn').click(function(e) {
-  e.preventDefault();
-  $.chronicle.insert();
-});
-
-/* $('#deleteBtn').click(function(e) {
-  e.preventDefault();
-  $.getJSON('list.do?no=1', function(result) {
-    var data = result.Events;
-    console.log(data);
+  $('#insertBtn').click(function(e) {
+    e.preventDefault();
+    $.chronicle.insert();
   });
-}); */
+  
+  
+  
+  
+  var myDate = function(calendar) {
+    
+    var year = calendar.substring(0,4);
+    var month = calendar.substring(5,7);
+    var day = calendar.substring(8,10);
+    
+    year = Number(year);
+    month = Number(month);
+    day = Number(day);
+    
+    if (month < 3) {
+      year--;
+      month += 12;
+    }
+
+    if (true) {
+      var A = Math.floor(year / 100);
+      var B = Math.floor(A / 4);
+      var C = 2 - A + B;
+    } else 
+      C = 0;
+    
+    var E = Math.floor(365.25 * (year + 4716));
+    var F = Math.floor(30.6001 * (month + 1));
+    
+    var julianday = C + day + E + F - 1524; // 1524.5
+    console.log(julianday);
+    
+    return julianday;
+    
+  }
+  
+  
+</script>
 
 
 
-</script>    
 
 
 
 
 
-
-
-
-          
