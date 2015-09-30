@@ -8,7 +8,6 @@ public class User implements Serializable {
   protected int mno;
   protected String email;
   protected String password;
-  protected String birth;
   protected String name;
   protected String flag;
   protected String mypic;
@@ -36,14 +35,6 @@ public class User implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public String getBirth() {
-    return birth;
-  }
-
-  public void setBirth(String birth) {
-    this.birth = birth;
   }
 
   public String getName() {
