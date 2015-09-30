@@ -5,6 +5,7 @@
 <mapper namespace="net.bitacademy.java72.dao.UserDao">
   <resultMap type="User" id="UserMap">
     <id     column="m_key"      property="mno" />
+    <result column="birthday"    property="birth" />
     <result column="pwd"      property="password" />
     <result column="m_pic"      property="mypic" />
     <result column="fb_id"      property="fbID" />
@@ -26,6 +27,10 @@
     INSERT INTO member_info (email, pwd)
     values (#{email},#{password})
   </insert> 
+   <insert id="facebookInsert" parameterType="User">
+    INSERT INTO member_info (email, fb_ID, name, flag)
+    values (#{email},#{fbID}, #{name}, 0)
+  </insert> 
   
   <select id="userInfo" parameterType="string" resultMap="UserMap">
     SELECT * FROM member_info where email=#{email}
@@ -45,7 +50,7 @@
   </update> -->
   
   <select id="get" parameterType="int" resultMap="UserMap">
-    SELECT m_key, name, email, pwd, sex, year, m_pic
+    SELECT m_key, name, email, pwd, year, m_pic
     FROM member_info
     WHERE m_key=#{value}
   </select>
@@ -68,9 +73,16 @@
    <select id="checkUser" 
       parameterType="map"
       resultMap="UserMap">
-    SELECT m_key, email, pwd, name, m_pic, flag, fb_ID 
+    SELECT m_key, email, pwd,  name, m_pic, flag, fb_ID 
     FROM member_info
     WHERE email=#{email} and pwd=#{password}
+  </select>
+   <select id="checkFacebook" 
+      parameterType="string"
+      resultMap="UserMap">
+    SELECT m_key, email, pwd,  name, flag, fb_ID 
+    FROM member_info
+    WHERE FB_ID=#{fbID}
   </select>
   
   

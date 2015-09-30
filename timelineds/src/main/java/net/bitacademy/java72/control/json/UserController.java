@@ -41,6 +41,40 @@ public class UserController {
     return result;
   }
   
+  @RequestMapping("/facebookInsert")
+  public Object facebookInsert(User user,  HttpServletResponse response, HttpSession session) throws Exception {
+    int count = userService.facebookInsert(user);
+    System.out.println("facebookInsert~~!!!");
+    Map<String,Object> result = 
+        new HashMap<String,Object>();
+    
+    if (count > 0) {
+      result.put("data", "success");
+      
+      createFile(user);
+      
+    } else {
+      result.put("data", "failure");
+    }
+    user = userService.checkFacebook(user.getFbID());
+    
+    if (user != null) {
+      result.put("data", "yes");
+      result.put("userdata", user);
+      session.setAttribute("user", user);
+      System.out.println("session ==>> " + user);
+      String refererUrl=(String)session.getAttribute("refererUrl");
+      System.out.println("refererUrl===>"+refererUrl);
+      if(refererUrl !=null){
+        result.put("refererUrl", refererUrl);
+      }
+    } else {
+      session.invalidate();
+      result.put("data", "no");
+    }
+    return result;
+  }
+  
   public void createFile(User user) {
     user = userService.userInfo(user.getEmail());
     
@@ -88,6 +122,7 @@ public class UserController {
     
     return result;
   }
+  
 
  /* 
   @RequestMapping("/update")
@@ -125,6 +160,31 @@ public Object logout(HttpSession session) {
     Map<String,Object> result = 
         new HashMap<String,Object>();
     User user = userService.checkUser(email, password);
+    if (user != null) {
+      result.put("data", "yes");
+      result.put("userdata", user);
+      session.setAttribute("user", user);
+      System.out.println("session ==>> " + user);
+      String refererUrl=(String)session.getAttribute("refererUrl");
+      System.out.println("refererUrl===>"+refererUrl);
+      if(refererUrl !=null){
+        result.put("refererUrl", refererUrl);
+      }
+    } else {
+      session.invalidate();
+      result.put("data", "no");
+    }
+    return result;
+  }
+  
+  @RequestMapping("/facebooklogin")
+  public Object checkFacebook(String fbID,  HttpServletResponse response, HttpSession session) {
+    System.out.println("checkFaceBook~~!!!");
+    System.out.println("fbID:"+fbID);
+    
+    Map<String,Object> result = 
+        new HashMap<String,Object>();
+    User user = userService.checkFacebook(fbID);
     if (user != null) {
       result.put("data", "yes");
       result.put("userdata", user);

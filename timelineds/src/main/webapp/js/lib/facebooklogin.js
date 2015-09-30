@@ -35,12 +35,52 @@ window.fbAsyncInit = function () {
 		FB.getLoginStatus(function (response) {
 			if (response.status === 'connected') {
 
-				FB.api('/me', function (response) {
+				FB.api('/me?fields=name,email,picture,friends', function (response) {
+					console.log(response);
 					if (response) {
-						var image = document.getElementById('image');
-						image.src = 'http://graph.facebook.com/' + response.id + '/picture';
-						var name = document.getElementById('name');
-						name.innerHTML = response.name
+						$.ajax(contextRoot + '/json/user/facebooklogin.do', {
+							method:'POST',
+							dataType:'json',
+							data: {
+								email:response.email,
+								fbID:response.id,
+								name:response.name
+							},
+							success:function(result){
+							if(result.data == 'yes'){
+								$('#userEmail').text(response.email);
+								$('#userName').text(response.name);
+								$('#mypage').show();
+								$('#modal_trigger').css({ "display": "none" });
+								$('#logOut').show();
+							}else{
+								$.ajax(contextRoot+'/json/user/facebookInsert.do',{
+									method:'POST',
+									dataType:'json',
+									data: {
+										email:response.email,
+										fbID:response.id,
+										name:response.name
+									},
+									success:function(result){
+										if(result.data=='success'){
+											$('#userEmail').text(result.userdata.email);
+											$('#userName').text(result.userdata.name);
+											$('#mypage').show();
+											$('#modal_trigger').css({ "display": "none" });
+											$('#logOut').show();
+										}else{
+											console.log(result);
+										}
+									}
+								});
+							}
+							}
+						});
+//						var image = document.getElementById('image');
+//						image.src = 'http://graph.facebook.com/' + response.id + '/picture';
+//						var name = document.getElementById('name');
+//						name.innerHTML = response.name
 							/*var url = '../../demo1.html';   
 													 	$(location).attr('href',url);*/
 
@@ -49,14 +89,14 @@ window.fbAsyncInit = function () {
 
 				console.log('connected');
 
-				var loginBtn = document.getElementById('name');
-				console.log(name.type);
+				
+			
 				/* loginBtn.css('display', 'none');
 				$('#userInfo').css('display', 'none');
 				$('#logoutBtn').css('display', ''); */
 
-				url = "demo1.html";
-				$(location).attr("href", url);
+//				url = "demo1.html";
+//				$(location).attr("href", url);
 
 			} else if (response.status === 'not_authorized') {
 
@@ -77,7 +117,28 @@ window.fbAsyncInit = function () {
 		});
 
 	});
+	$('#logOut').click(function () {
+		console.log("logout clicked!! ");
 
+		FB.api("/me/permissions", "DELETE", function (response) {
+			console.log("delete");
+			console.log(response); //gives true on app delete success 
+		});
+
+		$.getJSON(contextRoot + '/json/user/logout.do', function(result) {
+			if(result.data=='yes'){
+				$(document).trigger('logout.success');
+				$('#userName').text('');
+				$('#userEmail').text('');
+				$('#userInfo').css({ "display": "none" });
+				$('#modal_my').css({ "display": "none" });
+				$('#logOut').css({ "display": "none" });
+				/*$('#modal_join').css('display', '');*/
+				$('#modal_trigger').css({ "display": "" });
+				$('#mypage').css({ "display": "none" });
+			}
+		});
+	});
 };
 
 // Load the SDK asynchronously

@@ -12,6 +12,8 @@ public interface UserService {
 //  User getUser(String email, String password);
 //  int countAll();
   User checkUser(String email, String password);
+  int facebookInsert(User user);
+  User checkFacebook(String fbID);
 }
 
 

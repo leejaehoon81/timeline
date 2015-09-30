@@ -15,6 +15,8 @@ public interface UserDao {
 //  int countEmail(String email);
   User checkUser(Map<String,String> map);
   User userInfo(String email);
+  int facebookInsert(User user);
+  User checkFacebook(String fbID);
 }
 
 

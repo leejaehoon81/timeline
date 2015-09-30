@@ -88,5 +88,15 @@ public class UserServiceImpl implements UserService {
     return user;
   }
 
+  @Override
+  public int facebookInsert(User user) {
+    return userDao.facebookInsert(user);
+  }
+
+  @Override
+  public User checkFacebook(String fbID) {
+    return userDao.checkFacebook(fbID);
+  }
+
 }
 
