@@ -5,7 +5,6 @@
 <mapper namespace="net.bitacademy.java72.dao.UserDao">
   <resultMap type="User" id="UserMap">
     <id     column="m_key"      property="mno" />
-    <result column="birthday"    property="birth" />
     <result column="pwd"      property="password" />
     <result column="m_pic"      property="mypic" />
     <result column="fb_id"      property="fbID" />

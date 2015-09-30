@@ -13,7 +13,7 @@ define(['jquery',
         'skel',
         'util',
         'main'
-        ], function($,lean) {
+        ], function($) {
 	
 	return {
 		loadLoginInfo: function() {
@@ -130,18 +130,29 @@ define(['jquery',
 
 			 $('#logOut').click(function(){
 				 event.preventDefault();
+				
 				$.getJSON(contextRoot + '/json/user/logout.do', function(result) {
-					if(result.data=='yes'){
-						$(document).trigger('logout.success');
-						$('#userName').text('');
-						$('#userEmail').text('');
-						$('#userInfo').css({ "display": "none" });
-						$('#modal_my').css({ "display": "none" });
-						$('#logOut').css({ "display": "none" });
-						/*$('#modal_join').css('display', '');*/
-						$('#modal_trigger').css({ "display": "" });
-						$('#mypage').css({ "display": "none" });
+					 if(result.face=='yes'){
+						 FB.api("/me/permissions", "DELETE", function (response) {
+								console.log("delete");
+								console.log(response); //gives true on app delete success 
+						});
+						 
+						 FB.logout(function () {
+								document.location.reload();
+							});
 					}
+					 if(result.data=='yes'){
+						 $(document).trigger('logout.success');
+						 $('#userName').text('');
+						 $('#userEmail').text('');
+						 $('#userInfo').css({ "display": "none" });
+						 $('#modal_my').css({ "display": "none" });
+						 $('#logOut').css({ "display": "none" });
+						 /*$('#modal_join').css('display', '');*/
+						 $('#modal_trigger').css({ "display": "" });
+						 $('#mypage').css({ "display": "none" });
+					 }
 				});
 			});
 			 

@@ -1,15 +1,5 @@
 define(['jquery',
-        'app/common',
-        'handlebars',
-        'bootstrap',
-        'init',
-        'hide',
-        'load-image',
-        'jquery.dropotron.min',
-        'jquery.scrollgress.min',
-        'skel',
-        'util',
-        'main'
+        'app/common'
         ], function($){
 
 	return {

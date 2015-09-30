@@ -35,16 +35,16 @@ window.fbAsyncInit = function () {
 		FB.getLoginStatus(function (response) {
 			if (response.status === 'connected') {
 
-				FB.api('/me?fields=name,email,picture,friends', function (response) {
+				FB.api('/me?fields=name,email,picture,friends,birthday', function (response) {
 					console.log(response);
 					if (response) {
 						$.ajax(contextRoot + '/json/user/facebooklogin.do', {
 							method:'POST',
 							dataType:'json',
 							data: {
-								email:response.email,
-								fbID:response.id,
-								name:response.name
+								
+								fbID:response.id
+								
 							},
 							success:function(result){
 							if(result.data == 'yes'){
@@ -117,28 +117,7 @@ window.fbAsyncInit = function () {
 		});
 
 	});
-	$('#logOut').click(function () {
-		console.log("logout clicked!! ");
 
-		FB.api("/me/permissions", "DELETE", function (response) {
-			console.log("delete");
-			console.log(response); //gives true on app delete success 
-		});
-
-		$.getJSON(contextRoot + '/json/user/logout.do', function(result) {
-			if(result.data=='yes'){
-				$(document).trigger('logout.success');
-				$('#userName').text('');
-				$('#userEmail').text('');
-				$('#userInfo').css({ "display": "none" });
-				$('#modal_my').css({ "display": "none" });
-				$('#logOut').css({ "display": "none" });
-				/*$('#modal_join').css('display', '');*/
-				$('#modal_trigger').css({ "display": "" });
-				$('#mypage').css({ "display": "none" });
-			}
-		});
-	});
 };
 
 // Load the SDK asynchronously

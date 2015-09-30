@@ -59,7 +59,7 @@ public class UserController {
     user = userService.checkFacebook(user.getFbID());
     
     if (user != null) {
-      result.put("data", "yes");
+      result.put("datach", "yes");
       result.put("userdata", user);
       session.setAttribute("user", user);
       System.out.println("session ==>> " + user);
@@ -70,14 +70,17 @@ public class UserController {
       }
     } else {
       session.invalidate();
-      result.put("data", "no");
+      result.put("datach", "no");
     }
     return result;
   }
   
   public void createFile(User user) {
-    user = userService.userInfo(user.getEmail());
-    
+    if(user.getFbID()!=null){
+      user= userService.checkFacebook(user.getFbID());
+    }else{
+      user = userService.userInfo(user.getEmail());
+    }
     int folderName =user.getMno();
     String afterFilePath=sc.getRealPath("/userFolder")+"/";
     String path = afterFilePath+folderName;
@@ -142,10 +145,15 @@ public class UserController {
   
 @RequestMapping("/logout")
 public Object logout(HttpSession session) {
-  session.invalidate(); 
-  
   Map<String,Object> result = 
       new HashMap<String,Object>();
+  User user = 
+      (User)session.getAttribute("user");
+  if(user.getFbID() !=null){
+    result.put("face", "yes");
+  }
+  session.invalidate(); 
+  
   result.put("data", "yes");
   
   return result;
