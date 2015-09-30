@@ -30,7 +30,42 @@ window.fbAsyncInit = function () {
 	//    your app or not.
 	//
 	// These three cases are handled in the callback function.
-
+/*
+		 FB.getLoginStatus(handleSessionResponse);
+		  function handleSessionResponse(response) { 
+		   if (!response.session) {
+		    //
+		   } else{
+		    FB.api( 
+		    {
+		      method: 'fql.query', 
+		      query: 'select uid,name,email,pic_square from user where uid  = "' + FB.getSession().uid + '"'
+		     }, 
+		    function(response) {
+		    	 console.log("getUser>>",response);
+		      for(var i=0; i < response.length; i++){
+		       response[i].uid; //유저아이디
+		       response[i].pic_square; // 사진
+		       response[i].name; // 이름
+		       response[i].email; // 이메일주소
+		      }
+		    } 
+		    );
+		   }
+		  }	 
+*/
+	 /*
+	FB.getLoginStatus(handleSessionResponse);
+	 function handleSessionResponse(response) { 
+	  if (!response.session) { 
+	   // Open login dialog box
+	   FB.login(handleSessionResponse);
+	   return; 
+	  } else{
+	   // already logged in
+	  }
+	 }
+	*/
 	FB.getLoginStatus(function (response) {
 		FB.getLoginStatus(function (response) {
 			if (response.status === 'connected') {
@@ -81,8 +116,8 @@ window.fbAsyncInit = function () {
 //						image.src = 'http://graph.facebook.com/' + response.id + '/picture';
 //						var name = document.getElementById('name');
 //						name.innerHTML = response.name
-							/*var url = '../../demo1.html';   
-													 	$(location).attr('href',url);*/
+//							var url = '../../demo1.html';   
+//													 	$(location).attr('href',url);
 
 					}
 				});
@@ -91,9 +126,9 @@ window.fbAsyncInit = function () {
 
 				
 			
-				/* loginBtn.css('display', 'none');
-				$('#userInfo').css('display', 'none');
-				$('#logoutBtn').css('display', ''); */
+//				loginBtn.css('display', 'none');
+//				$('#userInfo').css('display', 'none');
+//				$('#logoutBtn').css('display', ''); 
 
 //				url = "demo1.html";
 //				$(location).attr("href", url);
@@ -103,7 +138,7 @@ window.fbAsyncInit = function () {
 			} else {
 				console.log('logout');
 
-				/* $('#loginBtn').css('display', ''); */
+//				 $('#loginBtn').css('display', ''); 
 
 			}
 		});
