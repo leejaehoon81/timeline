@@ -863,6 +863,7 @@ function BaseProvider() {
     };
 };
 
+
 WellcomeTimelineProvider.prototype = new BaseProvider();
 WellcomeTimelineProvider.prototype.constructor = WellcomeTimelineProvider;
 
@@ -3041,56 +3042,12 @@ function WellcomeTimelineProvider(options) {
             self.topElem.append(self.deleteElem);
             
             self.modifyElem = $('\
-                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">수 정</button>\
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
-                <div class="modal-dialog">\
-                  <div class="modal-content">\
-                    <div class="modal-body">\
-                <div id="formDiv">\
-                <h2>연대기 입력</h2>\
-                <form class="form-horizontal" action="insert.do">\
-                <div class="form-group">\
-                  <label for="fTitle" class="col-sm-2 control-label">제목</label>\
-                  <div class="col-sm-5">\
-                    <input type="text" class="form-control" id="fTitle">\
-                  </div>\
-                </div>\
-                <div class="form-group">\
-                  <label for="fContent" class="col-sm-2 control-label">내용</label>\
-                  <div class="col-sm-5">\
-                    <textarea id="fContent" rows="5" class="form-control"></textarea>\
-                  </div>\
-                </div>\
-                <div class="form-group">\
-                  <label for="fDate" class="col-sm-2 control-label">날짜</label>\
-                  <div class="col-sm-10">\
-                    <input type="text" id="datetimepicker8"/>\
-                  </div>\
-                </div>\
-                <div class="form-group">\
-                  <label class="col-sm-2 control-label">첨부파일</label>\
-                  <div class="col-sm-10">\
-                    <a id="attachFileLink" target="_blank" href="#" class="form-control-static my-view"></a><br>\
-                    <span class="btn btn-success fileinput-button">\
-                      <i class="glyphicon glyphicon-plus"></i>\
-                      <span>파일 찾기</span>\
-                      <input id="fileupload" type="file" name="file" multiple>\
-                      <input id="fAttachFile" type="hidden">\
-                    </span>\
-                    <br><br>\
-                    <div id="progress" class="progress">\
-                        <div class="progress-bar progress-bar-success"></div>\
-                    </div>\
-                    <div id="files" class="files"></div>\
-                  </div>\
-                </div>\
-                <div class="form-group">\
-                  <div class="col-sm-offset-2 col-sm-10">\
-                    <button id="insertBtn" type="button" class="btn btn-default btn-sm my-new">등록</button>\
-                  </div>\
-                </div>\
-                </form>\
-              </div>\
+                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modifyModal">수 정</button>\
+                <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
+                <div class="modal-dialog modify">\
+                  <div class="modal-content modify">\
+                    <div class="modal-body modify">\
+                        <iframe src="modify.html" width="98%" height="700" frameborder="0" allowtransparency="true" id="frameModify"></iframe>\
                     </div>\
                   </div>\
                 </div>\
@@ -3879,8 +3836,8 @@ function WellcomeTimelineProvider(options) {
       detail: function(myIndex) {
         $.getJSON('detail.do?no=' + myIndex, function(result) {
           var data = result.Events;
-          $('#fTitle').val(data.Title);
-          $('#fContent').val(data.Body);
+          $('#frameModify').contents().find('#fTitle').val(data.Title);
+          $('#frameModify').contents().find('#fContent').val(data.Body);
         });
       } 
   };
