@@ -3563,6 +3563,31 @@ function WellcomeTimelineProvider(options) {
             
             self._refresh();
             self.open();
+            
+            self.photoElem = ('<div id="aniimated-thumbnials">\
+                <a href="images/full/001.jpg">\
+                <img src="images/thumb/001.jpg" />\
+                </a>\
+                <a href="images/full/002.jpg">\
+                <img src="images/thumb/002.jpg" />\
+                </a>\
+                <a href="images/full/003.jpg">\
+                <img src="images/thumb/003.jpg" />\
+                </a>\
+                <a href="images/full/004.jpg">\
+                <img src="images/thumb/004.jpg" />\
+                </a>\
+                <a href="images/full/005.jpg">\
+                <img src="images/thumb/005.jpg" />\
+                </a>\
+                </div>\
+                ');
+            
+                $('.wrapper').append(self.photoElem);
+            
+            var lightScript = ('<script type="text/javascript">$("#aniimated-thumbnials").lightGallery({thumbnail:true});</script>');
+            $('#aniimated-thumbnials').append(lightScript);
+            
         },
 
         _refresh: function () {
@@ -3639,7 +3664,7 @@ function WellcomeTimelineProvider(options) {
             var imgElem = $('<img />');
             
          // create by YJ 0924
-            $(imgElem).on('click', function(e){
+            /*$(imgElem).on('click', function(e){
               e.preventDefault();
               console.log(cnt);
               if (cnt%2 == 0) {
@@ -3660,33 +3685,10 @@ function WellcomeTimelineProvider(options) {
                 $('.centerCol').animate({ height: '426' }, 'slow'); //
                 $('.wrapper').animate({ height: '426' }, 'slow'); //
                 
-                self.photoElem = ('<div id="aniimated-thumbnials">\
-                                    <a href="images/full/001.jpg">\
-                                    <img src="images/thumb/001.jpg" />\
-                                    </a>\
-                                    <a href="images/full/002.jpg">\
-                                    <img src="images/thumb/002.jpg" />\
-                                    </a>\
-                                    <a href="images/full/003.jpg">\
-                                    <img src="images/thumb/003.jpg" />\
-                                    </a>\
-                                    <a href="images/full/004.jpg">\
-                                    <img src="images/thumb/004.jpg" />\
-                                    </a>\
-                                    <a href="images/full/005.jpg">\
-                                    <img src="images/thumb/005.jpg" />\
-                                    </a>\
-                                    </div>\
-                    <script type="text/javascript">\
-                    $("#aniimated-thumbnials").lightGallery({\
-                    thumbnail:true\
-                });\
-                    </script>\
-                  ');
-                $('.wrapper').append(self.photoElem);
+                
               }
               cnt++;
-            });
+            });*/
             
             if (evnt.FeatureImagePath) {
                 imgElem.prop('src', evnt.FeatureImagePath);
@@ -3748,6 +3750,28 @@ function WellcomeTimelineProvider(options) {
             self.centerRightColElem = self.nextDetailsElem.find('.centerRightCol');
 
             self._resize();
+            
+            /*self.photoElem = ('<div id="aniimated-thumbnials">\
+                <a href="images/full/001.jpg">\
+                <img src="images/thumb/001.jpg" />\
+                </a>\
+                <a href="images/full/002.jpg">\
+                <img src="images/thumb/002.jpg" />\
+                </a>\
+                <a href="images/full/003.jpg">\
+                <img src="images/thumb/003.jpg" />\
+                </a>\
+                <a href="images/full/004.jpg">\
+                <img src="images/thumb/004.jpg" />\
+                </a>\
+                <a href="images/full/005.jpg">\
+                <img src="images/thumb/005.jpg" />\
+                </a>\
+                </div>\
+                ');
+            
+                $('.wrapper').append(self.photoElem);*/
+                
         },
 
         _scroll: function (direction, pos) {

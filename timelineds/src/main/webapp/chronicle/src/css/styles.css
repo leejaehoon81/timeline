@@ -809,7 +809,7 @@ p {
 #timeline .overlay.detailsView .middle .content .centerCol .wrapper .centerLeftCol img{
 	width: 220px;
 	height: 220px;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
 #timeline .overlay.detailsView .middle .content .centerCol .wrapper .centerRightCol{
@@ -875,8 +875,11 @@ p {
 }
 
 #aniimated-thumbnials {
+  position: absolute;
   float: left;
-  margin: 0 0 18px 18px;
+  margin: 0 0 0 0;
+  top: 208px;
+  left: 52px;
 }
 
 /*#endregion*/

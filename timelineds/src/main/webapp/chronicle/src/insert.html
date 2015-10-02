@@ -28,7 +28,7 @@
 </head>
 <body flow-prevent-drop flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
 <div id='formDiv'>
-	<form class="form-horizontal" action="insert.do">
+	<form class="form-horizontal">
 
 		<div class="form-group">
 			<label for="fTitle" class="col-sm-2 control-label">제목</label>
@@ -103,8 +103,14 @@
 		</div>
 	</form>
 </div>
+<button id="test">버튼</button>
 
 <script>
+
+  $('#test').on('click', function(e) {
+    e.preventDefault();
+    console.log('파일이름테스트중');
+  });
 
 	$('.input-group.date').datepicker({
 	  format: "yyyy/mm/dd",
@@ -126,6 +132,7 @@
             JulianDayStart : myDate($('#myCal').val()),
             StartDisplay : myDisplay($('#myCal').val()),
             StartDisplayYear : myDisplay($('#myCal').val()),
+            /* ThumbnailPath : {{file.name}}, */
             priority : 1
           },
           success : function(result) {
