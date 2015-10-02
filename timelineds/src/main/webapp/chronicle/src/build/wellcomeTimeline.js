@@ -3839,6 +3839,7 @@ function WellcomeTimelineProvider(options) {
           $('#frameModify').contents().find('#fTitle').val(data.Title);
           $('#frameModify').contents().find('#fContent').val(data.Body);
           $('#frameModify').contents().find('#myCal').val(data.StartDisplay);
+          $('#frameModify').contents().find('#myIndex').val(data.EventId);
         });
       } 
   };
