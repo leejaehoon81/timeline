@@ -5,7 +5,18 @@
    Created:Jun 2015
    File Description:Main JS file of the template
 */
+/*-------------------------------------------------*/
+/* =  Full-window section
+/*-------------------------------------------------*/
 
+var windowHeight = $(window).height(),
+topSection = $('.home-fullscreen');
+topSection.css('height', windowHeight);
+
+$(window).resize(function(){
+var windowHeight = $(window).height();
+topSection.css('height', windowHeight);
+});
 /* ==============================================
 Smooth Scroll To Anchor
 =============================================== */
@@ -69,10 +80,6 @@ $(document).ready(function() {
             preload: [0,1] // Will preload 0 - before current, and 1 after the current image
         }
     });
-});
-//sticky header on scroll
-$(window).load(function() {
-    $(".sticky").sticky({topSpacing: 0});
 });
 
 

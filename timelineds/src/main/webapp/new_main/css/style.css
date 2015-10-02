@@ -108,6 +108,24 @@ textarea {
   font-size: 16px;
   margin-bottom: 50px;
 }
+.bg-overlay {
+  background-color: rgba(0,0,0,0.5);
+  height: 100%;
+  width: 100%;
+  background-position: fixed;
+  position: absolute;
+  top: 0px;
+}
+.bg-one {
+  background: url("../images/bg.jpg");
+  background-size: cover;
+  position: relative;
+}
+.bg-two {
+  background: url("../images/bg-2.jpg");
+  background-size: cover;
+  position: relative;
+}
 
 /* PRE LOADER */
 .preloader {
@@ -139,32 +157,9 @@ textarea {
 
 
 /*===== Navbar Custom ======*/
-.navbar-abs {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  z-index: 999;
-}
-.is-sticky .navbar-custom{
-  background-color: #ffffff;
-    -moz-box-shadow: 0 2px 2px rgba(0,0,0,.1);
-  -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.1);
-  box-shadow: 0 2px 2px rgba(0,0,0,.1);
-}
 .navbar-custom {
   padding: 10px 0px;
   margin-bottom: 0px;
-  transition: background-color 1s ease-in-out, border 1s ease-in-out;
-  -moz-transition: background-color 1s ease-in-out, border 1s ease-in-out;
-  -webkit-transition: background-color 1s ease-in-out, border 1s ease-in-out;
-  -o-transition: background-color 1s ease-in-out, border 1s ease-in-out;
-}
-.is-sticky .navbar-custom .navbar-nav li a {
-  color: #333;
-  font-weight: bold;
-}
-.is-sticky .navbar-custom .navbar-nav li a:hover,.is-sticky .navbar-custom .navbar-nav li a:focus,.is-sticky .navbar-custom .navbar-nav li a:active {
-  color: #222;
 }
 .navbar-custom .navbar-nav li a{
   color: #ccc;
@@ -179,9 +174,6 @@ textarea {
   font-size: 22px;
   color: #ffffff !important;
   letter-spacing: 1px;
-}
-.is-sticky .logo {
-  color: #111 !important;
 }
 .navbar-toggle {
   font-size: 30px;
@@ -273,12 +265,24 @@ textarea {
 
 
 /*======= Home =======*/
-.home {
-  margin-top: -78px;
+.navbar-abs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 999;
+}
+.home-fullscreen {
+  height: 100%;
+  min-height: 400px;
 }
 .home-wrapper {
   color: #ffffff;
-  padding: 185px 0px 170px 0px;
+  padding: 208px 0px 170px 0px;
+}
+.home-wrapper-alt{
+  display: table-cell;
+  vertical-align: middle;
 }
 .home-wrapper h4 {
   line-height: 24px;
@@ -296,7 +300,11 @@ textarea {
 .video-btn i {
   margin-right: 7px;
 }
-
+.full-screen {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
 
 /*======= Brand =======*/
 .clients {
@@ -634,8 +642,8 @@ textarea {
     background-color: transparent;
     color: #ffffff;
   }
-  .is-sticky .navbar-toggle {
-    color: #111111;
+  .navbar-custom {
+    background-color: #333b4d; 
   }
 }
 @media (max-width: 768px) {
