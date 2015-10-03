@@ -6,6 +6,9 @@
  * Web script: http://creative-tim.com
  * 
  */
+
+var contextRoot = '/timelineds';
+
 function showRegisterForm(){
     $('.loginBox, .fb_login, .login-footer').fadeOut('fast',function(){
         $('.registerBox').fadeIn('fast');
@@ -42,19 +45,71 @@ function openRegisterModal(){
 }
 
 function loginAjax(){
-    /*   Remove this comments when moving to server
-    $.post( "/login", function( data ) {
-            if(data == 1){
-                window.location.replace("/home");            
-            } else {
-                 shakeModal(); 
-            }
-        });
-    */
-
-/*   Simulate warning message from the server   */
-     shakeModal();
+	$.ajax('/timelineds/json/user/login.do', {
+		method : 'POST',
+		dataType : 'json',
+		data : {
+			email : $('#userEmail').val(),
+			password : $('#userPass').val(),
+		},
+		success : function(result) {
+			if (result.data == 'yes') {
+				window.location.reload();
+				loginInfo();
+				$('#loginPass').val('');
+				$('#loginEmail').val('');
+			} else {
+				shakeModal();
+			}
+		}
+	});
 }
+
+function loginInfo() {
+	$.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
+		if (result.state == 'yes') {
+			$('#emailInfo').text(result.data.email);
+			/*$('#nameInfo').text(result.data.name);*/
+			$('#loginBtn').hide();
+			$('#mypage').show();
+		} else {
+			/*getUserInfo();*/
+		}
+	});
+}
+
+$('#createAcc').click(function() {
+	$.ajax(contextRoot + '/json/user/insert.do', {
+		method : 'POST',
+		dataType : 'json',
+		data : {
+			email : $('#registerEmail').val(),
+			password : $('#registerPass').val(),
+		},
+		success : function(result) {
+			if (result.data == 'success') {
+				/*window.location.reload();*/
+				loginInfo();
+				$('#registerEmail').val('');
+				$('#registerPass').val('');
+				$('#password_confirmation').val('');
+				$('.close').click();
+			} else {
+				console.log('회원가입 실패');
+			}
+		}
+	});
+});
+
+$('#logout').click(function(event) {
+	 event.preventDefault();
+	 console.log('로그아웃버튼 누름');
+	 $.getJSON(contextRoot + '/json/auth/logout.do', function(result) {
+		 /*$(document).trigger('logout.success');*/
+		 window.location.reload();
+		 console.log('로그아웃 성공');
+	 });
+});
 
 function shakeModal(){
     $('#loginModal .modal-dialog').addClass('shake');

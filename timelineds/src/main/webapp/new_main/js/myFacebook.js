@@ -54,7 +54,7 @@ function FBLogin() {
 		if (response.authResponse) {
 			getUserInfo(); // Get User Information.
 			$('#loginBtn').hide();
-			$('#logoutBtn').show();
+			$('.close').click();
 		} else {
 			alert('Authorization failed.');
 		}
@@ -65,20 +65,54 @@ function FBLogin() {
 
 function FBLogout() {
 	FB.logout(function(response) {
-		$('#loginBtn').show();
-		$('#logoutBtn').hide();
+		
 	});
 }
 
-function getUserInfo() {
-	FB.api('/me', function(response) {
-		console.log(response);
 
+
+function getUserInfo() {
+	FB.api('/me?fields=name,email,picture,friends,birthday', function (response) {
+		console.log(response);
+		/*insertUserInfo(response);*/ 
+		$('#emailInfo').text(response.email);
+		$('#loginBtn').hide();
+		$('#mypage').show();
+	});
+}
+
+function insertUserInfo(response) {
+	$.ajax(contextRoot + '/json/user/insert.do',
+		{
+		method: 'POST',
+		dataType: 'json',
+		data: {
+			name: response.name,
+			email: response.email,
+			facebookid: response.id,
+			/*imgUrl: response.picture.data.url*/
+		},
+		success: function(result) {
+			if (result.data == 'yes') {
+				$('#cancelBtn').click();
+				console.log("User Info Input Success..!!");
+			} else {
+				console.log("User Info Input Fail..!!");
+			}
+		}
+	});
+}
+
+
+
+
+/*function getUserInfo() {
+	FB.api('/me', function(response) {
 		$.ajax({
 			type : "POST",
 			dataType : 'json',
 			data : response,
-			/* url: 'check_user.php', */
+			 url: 'check_user.php', 
 			success : function(msg) {
 				console.log(msg);
 				if (msg.error == 1) {
@@ -99,4 +133,4 @@ function getUserInfo() {
 		});
 
 	});
-}
+}*/
