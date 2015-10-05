@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class ChronicleController {
 
   
   @RequestMapping("/delete")
-  public ResponseEntity<String> delete(int no) {
+  public ResponseEntity<String> delete(HttpSession session,  int no) {
     Map<String,Object> result = new HashMap<String,Object>();
     
     int count = chronicleService.deleteWithPic(no);
@@ -43,6 +44,7 @@ public class ChronicleController {
 
     if (count > 0) {
       result.put("Events", "success");
+      session.setAttribute("loding", "loding");
     } else {
       result.put("Events", "failure");
     }
@@ -60,7 +62,7 @@ public class ChronicleController {
   }
 
   @RequestMapping("/insert")
-  public ResponseEntity<String> insert(Chronicle chronicle,
+  public ResponseEntity<String> insert(Chronicle chronicle, HttpSession session, 
       @RequestParam(required=false) MultipartFile file1) throws Exception {
     
       int count = chronicleService.insert(chronicle);
@@ -68,6 +70,7 @@ public class ChronicleController {
       Map<String,Object> result = new HashMap<String,Object>();
       if (count > 0) {
         result.put("Events", "success");
+        session.setAttribute("loding", "loding");
       } else {
         result.put("Events", "failure");
       }
@@ -101,7 +104,7 @@ public class ChronicleController {
   
   @RequestMapping("/update")
   public ResponseEntity<String> boardUpdate (
-      Chronicle chronicle,
+      Chronicle chronicle, HttpSession session, 
       @RequestParam(required=false) MultipartFile file1) throws Exception {
 
     int count = chronicleService.update(chronicle);
@@ -110,6 +113,7 @@ public class ChronicleController {
         new HashMap<String,Object>();
     if (count > 0) {
       result.put("Events", "success");
+      session.setAttribute("loding", "loding");
     } else {
       result.put("Events", "failure");
     }

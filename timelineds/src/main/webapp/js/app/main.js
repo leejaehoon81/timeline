@@ -1,18 +1,4 @@
-define(['jquery',
-        'app/common',
-        'leanmodal',
-        'handlebars',
-        'bootstrap',
-        'flip',
-        'facebooklogin',
-        'init',
-        'hide',
-        'load-image',
-        'jquery.dropotron.min',
-        'jquery.scrollgress.min',
-        'skel',
-        'util',
-        'main'
+define(['jquery'
         ], function($) {
   $('#page-wrapper > header').load('header.html');
   $('#content').load('index1.html');

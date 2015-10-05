@@ -122,6 +122,10 @@
   (function($) {
     $.chronicle = {
       insert : function() {
+    	  
+         // console.log($('#content', parent.parent.document));
+          //$('#content', parent.parent.document.onload);
+       
         $.ajax('insert.do', {
           method : 'POST',
           dataType : 'json',
@@ -137,7 +141,7 @@
           },
           success : function(result) {
             if (result.Events == 'success') {
-              alert('입력성공');
+            	window.parent.parent.location.reload();
             } else {
               alert('입력실패');
             }

@@ -124,7 +124,7 @@ html {
           },
           success : function(result) {
             if (result.Events == 'success') {
-              alert('입력성공');
+            	window.parent.parent.location.reload();
             } else {
               alert('입력실패');
             }

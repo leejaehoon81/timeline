@@ -115,12 +115,13 @@ public class UserController {
 
     User user = 
         (User)session.getAttribute("user");
-    
+    String loding=(String)session.getAttribute("loding");
     if (user == null) {
       result.put("state", "no");
     } else {
       result.put("state", "yes");
       result.put("data", user);
+      result.put("loding", loding);
     }
     
     return result;
