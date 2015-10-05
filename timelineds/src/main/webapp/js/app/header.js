@@ -20,13 +20,17 @@ define(['jquery',
 			$.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
 				//alert(result.state);
 				if (result.state == 'yes') {  
+					console.log('loding',result.loding);
 					$('#userEmail').text(result.data.email);
 					$('#userName').text(result.data.name);
 					//$('#userInfo').show();
 					$('#mypage').show();
 					$('#modal_trigger').css({ "display": "none" });
 					$('#logOut').show();
-					
+					if(result.loding!=null){
+						
+						$('#content').load('chronicle/src/index.html');
+					}
 				} else {
 					$('#userName').text('');
 					$('#userEmail').text('');
