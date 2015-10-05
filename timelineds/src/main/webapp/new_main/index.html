@@ -47,7 +47,7 @@
           <ul class="nav navbar-nav navbar-right">
           
           <!-- <li> 로그인정보
-          	<a id="mypage" href="#" class="button" style="display:none;"> 
+            <a id="mypage" href="#" class="button" style="display:none;"> 
               <span id='emailInfo'></span> 
               (<span id='nameInfo'></span>)님 반갑습니다
             </a>
@@ -61,15 +61,15 @@
               <a href="#" data-toggle="modal" onclick="FBLogout();" style="display:none;" id="FBLogout">Logout</a>
             </li>
             <li class="dropdown">
-	              <a href="#" data-toggle="dropdown" id="mypage" style="display:none;">
-	                 <span id='emailInfo'></span> 
- 	                <span class="caret"></span>
-	              </a>
-	              <ul class="dropdown-menu arrow">
-	                <li><a href="#">내 연대기</a></li>
-	                <li><a href="#">내 정보</a></li>
-	                <li><a href="#" id="logout" onclick="FBLogout();">로그아웃</a></li>
-	              </ul>
+                <a href="#" data-toggle="dropdown" id="mypage" style="display:none;">
+                   <span id='emailInfo'></span> 
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu arrow">
+                  <li><a href="#">내 연대기</a></li>
+                  <li><a href="#" id="myInfo">내 정보</a></li>
+                  <li><a href="#" id="logout" onclick="FBLogout();">로그아웃</a></li>
+                </ul>
             </li>
           </ul>
         </div>
@@ -83,9 +83,9 @@
     
     <!-- start modal -->
     <div class="modal fade login" id="loginModal">
-		      <div class="modal-dialog login animated">
-    		      <div class="modal-content">
-    		         <div class="modal-header">
+          <div class="modal-dialog login animated">
+              <div class="modal-content">
+                 <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Login with</h4>
                     </div>
@@ -103,10 +103,10 @@
                                         <i class="fa fa-facebook fa-fw"></i>
                                     </a> -->
                                     <div class="fb_login" style="cursor:pointer;cursor:hand;" onclick="FBLogin();">
-                                    	페이스북 로그인
+                                      페이스북 로그인
                                     </div>
                                     <div class="fb_register" style="cursor:pointer;cursor:hand;display:none;" onclick="FBLogin();">
-                                    	페이스북 계정으로 회원가입
+                                      페이스북 계정으로 회원가입
                                     </div>
                                 </div>
                                 <div class="division">
@@ -117,9 +117,9 @@
                                 <div class="warning"></div>
                                 <div class="form loginBox">
                                     <form>
-	                                    <input id="userEmail" class="form-control" type="text" placeholder="Email" name="userEmail">
-	                                    <input id="userPass" class="form-control" type="password" placeholder="Password" name="userPass">
-	                                    <input id="loginEmail" class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+                                      <input id="userEmail" class="form-control" type="text" placeholder="Email" name="userEmail">
+                                      <input id="userPass" class="form-control" type="password" placeholder="Password" name="userPass">
+                                      <input id="loginEmail" class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
                                     </form>
                                 </div>
                              </div>
@@ -128,10 +128,10 @@
                             <div class="content registerBox" style="display:none;">
                              <div class="form">
                                 <form>
-	                                <input id="registerEmail" class="form-control" type="text" placeholder="Email" name="registerEmail">
-	                                <input id="registerPass" class="form-control" type="password" placeholder="Password" name="registerPass">
-	                                <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
-	                                <input id="createAcc" class="btn btn-default btn-register" type="button" value="Create account" name="commit">
+                                  <input id="registerEmail" class="form-control" type="text" placeholder="Email" name="registerEmail">
+                                  <input id="registerPass" class="form-control" type="password" placeholder="Password" name="registerPass">
+                                  <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+                                  <input id="createAcc" class="btn btn-default btn-register" type="button" value="Create account" name="commit">
                                 </form>
                                 </div>
                             </div>
@@ -148,10 +148,44 @@
                              <a href="javascript: showLoginForm();">Login</a>
                         </div>
                     </div>        
-    		      </div>
-		      </div>
-		  </div>
-		  <!-- end of modal -->
+              </div>
+          </div>
+      </div>
+      <!-- end of modal -->
+      
+      
+      <!-- info modal -->
+      <div class="modal fade login" id="infoModal">
+          <div class="modal-dialog login animated">
+              <div class="modal-content">
+                 <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">회원정보</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box"> <!-- 회원정보 컨텐츠 -->
+                             <div class="content">
+                                <div id="infoPic"></div>
+                                <div id="infoEmail"></div>
+                                <div id="infoName"></div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"><!-- 확인/취소 버튼만들기 -->
+                        <div class="forgot login-footer">
+                            <span>Looking to 
+                                 <a href="javascript: showRegisterForm();">create an account</a>
+                            ?</span>
+                        </div>
+                        <div class="forgot register-footer" style="display:none">
+                             <span>Already have an account?</span>
+                             <a href="javascript: showLoginForm();">Login</a>
+                        </div>
+                    </div>        
+              </div>
+          </div>
+      </div>
+      
     
     
     
@@ -322,7 +356,11 @@
     <!--common script for all pages-->
     <script src="js/jquery.app.js"></script>
     <script type="text/javascript">
-    	loginInfo(); 
+      loginInfo();
+      $('#myInfo').on('click', function(e) {
+        e.preventDefault();
+        $('#infoModal').modal();
+      });
     </script>
 
   </body>

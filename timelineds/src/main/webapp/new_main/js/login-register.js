@@ -113,7 +113,7 @@ $('#logout').click(function(event) {
 
 function shakeModal(){
     $('#loginModal .modal-dialog').addClass('shake');
-             $('.warning').addClass('alert alert-danger').html("Invalid email/password combination");
+             $('.warning').addClass('alert alert-danger').html("이메일과 비밀번호를 확인해 주세요");
              $('input[type="password"]').val('');
              setTimeout( function(){ 
                 $('#loginModal .modal-dialog').removeClass('shake'); 
