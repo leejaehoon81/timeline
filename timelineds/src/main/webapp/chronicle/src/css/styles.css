@@ -99,10 +99,11 @@ p {
 
 /*#region Header Panel*/
 
-#timeline .headerPanel{
-	clear: both;
-	background: #131313;
-	height: 50px;
+.headerPanel{
+  background-image: url(../img/header_bg.png);
+  background-repeat: repeat-x;
+  position: relative;
+  height: 50px;
 }
 
 #timeline .headerPanel .leftCol{
@@ -135,7 +136,7 @@ p {
 	width: 150px;
 }
 
-#timeline .headerPanel .rightCol .zoomIn{
+/* #timeline .headerPanel .rightCol .zoomIn{
 	float: right;
 	height: 30px;
     width: 30px;
@@ -151,7 +152,7 @@ p {
     margin: 0 24px 0 0;
     background: url(../img/zoom_out.png) no-repeat;
     cursor: pointer;
-}
+} */
 
 #timeline .headerPanel .rightCol .reset{
 	float: right;

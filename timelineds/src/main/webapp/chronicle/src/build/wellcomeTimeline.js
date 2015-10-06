@@ -1702,19 +1702,23 @@ function WellcomeTimelineProvider(options) {
             self.element.append(self.leftColElem);
 
             self.titleElem = $('<div class="title"></div>');
-            self.leftColElem.append(self.titleElem);
+            /*self.leftColElem.append(self.titleElem);*/
+            $(top.document).find('#chronicleTitle').append(self.titleElem);
             
-            self.middleColElem = $('<div class="middleCol"></div>');
-            self.element.append(self.middleColElem);
+            /*self.middleColElem = $('<div class="middleCol"></div>');
+            self.element.append(self.middleColElem);*/
             
             self.rightColElem = $('<div class="rightCol"></div>');
             self.element.append(self.rightColElem);
 
-            self.zoomOutButtonElem = $('<div class="zoomOut"></div>');
-            self.rightColElem.append(self.zoomOutButtonElem);
+            self.zoomOutButtonElem = $('<div class="chronicleZoomOut"></div>');
+            /*self.rightColElem.append(self.zoomOutButtonElem);*/
+            $(top.document).find('#chronicleZoom').append(self.zoomOutButtonElem);
 
-            self.zoomInButtonElem = $('<div class="zoomIn"></div>');
-            self.rightColElem.append(self.zoomInButtonElem);
+            self.zoomInButtonElem = $('<div class="chronicleZoomIn"></div>');
+            /*self.rightColElem.append(self.zoomInButtonElem);*/
+            $(top.document).find('#chronicleZoom').append(self.zoomInButtonElem);
+            
 
             // init ui.
 
@@ -1778,11 +1782,11 @@ function WellcomeTimelineProvider(options) {
         _resize: function () {
             var self = this;
 
-            var availWidth = self.element.width() - self.middleColElem.width() - self.rightColElem.width();
+            /*var availWidth = self.element.width() - self.middleColElem.width() - self.rightColElem.width();
 
             self.leftColElem.width(availWidth);
 
-            self.titleElem.ellipsisFill(self.title);
+            self.titleElem.ellipsisFill(self.title);*/
         },
 
         _refresh: function () {

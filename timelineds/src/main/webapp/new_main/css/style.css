@@ -32,6 +32,28 @@
 	
 }
 
+#chronicleZoom {
+   padding-top: 15px; 	
+}
+
+.chronicleZoomIn {
+  float: right;
+  height: 30px;
+    width: 30px;
+    margin: 0 12px 0 0;
+    background: url(../../chronicle/src/img/zoom_in.png) no-repeat;
+    cursor: pointer;
+}
+
+.chronicleZoomOut {
+  float: right;
+  height: 30px;
+    width: 30px;
+    margin: 0 24px 0 0;
+    background: url(../../chronicle/src/img/zoom_out.png) no-repeat;
+    cursor: pointer;
+}
+
 
 /*======= Reset ======== */
 body {
