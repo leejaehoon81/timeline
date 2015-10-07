@@ -3112,6 +3112,7 @@ function WellcomeTimelineProvider(options) {
             
             self.insertElem.click(function (e) {
               e.preventDefault();
+              myInsert();
             });
             
         },
@@ -3873,3 +3874,20 @@ function WellcomeTimelineProvider(options) {
   };
 })(jQuery);
 
+function myInsert() {
+  var eventTemplateElem = $('\
+      <div class="event">\
+      <div class="wrap">\
+      <div class="leftCol"><img /></div>\
+      <div class="rightCol">\
+      <div class="date"></div>\
+      <div class="title">후후후후</div>\
+      </div>\
+      </div>\
+      <div class="arrow"></div>\
+      <div class="line"></div>\
+  </div>');
+  console.log('호출');
+  $('.content > .events').append(eventTemplateElem);
+  
+}

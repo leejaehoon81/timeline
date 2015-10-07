@@ -5,7 +5,6 @@ requirejs.config({
       'bootstrap' : 'lib/bootstrap.min',
       'jquery-easing' : 'lib/jquery.easing.1.3.min',
       'jquery-magnific' : 'lib/jquery.magnific-popup.min',
-      'jquery-sticky' : 'lib/jquery.sticky',
       'smooth' : 'lib/SmoothScroll',
       'wow' : 'lib/wow.min',
       'main-app' : 'lib/jquery.app',
