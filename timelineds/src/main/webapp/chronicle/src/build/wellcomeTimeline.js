@@ -2727,7 +2727,7 @@ function WellcomeTimelineProvider(options) {
                     // line height hasn't been computed yet.
                     var lineElem = evnt.elem.find('.line');
 
-                    evnt.lineHeight = self.eventsElem.height() - evnt.top - parseInt(evnt.elem.css('margin-top')) - parseInt(evnt.elem.height()) - (evnt.isPresent ? 9 : 7); // -7 is to make small gap above ticks bar
+                    evnt.lineHeight = self.eventsElem.height() - evnt.top - parseInt(evnt.elem.css('margin-top')) - parseInt(evnt.elem.height()) - (evnt.isPresent ? 3 : 7); // -7 is to make small gap above ticks bar
 
                     lineElem.height(evnt.lineHeight);
                 }
