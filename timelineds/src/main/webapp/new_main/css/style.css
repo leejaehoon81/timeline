@@ -32,6 +32,10 @@
 	
 }
 
+#mainTitle {
+	margin-top: 300px;
+}
+
 #chronicleZoom {
    padding-top: 15px; 	
 }
@@ -148,7 +152,7 @@ textarea {
   position: relative;
 }
 .bg-two {
-  background: url("../images/bg-2.jpg");
+  background: url("../images/main_bg.png");
   background-size: cover;
   position: relative;
 }
