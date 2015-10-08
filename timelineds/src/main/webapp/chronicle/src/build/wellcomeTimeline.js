@@ -3874,7 +3874,7 @@ function WellcomeTimelineProvider(options) {
   };
 })(jQuery);
 
-function myInsert() {
+/*function myInsert() {
   var eventTemplateElem = $('\
       <div class="event">\
       <div class="wrap">\
@@ -3890,4 +3890,4 @@ function myInsert() {
   console.log('호출');
   $('.content > .events').append(eventTemplateElem);
   
-}
+}*/

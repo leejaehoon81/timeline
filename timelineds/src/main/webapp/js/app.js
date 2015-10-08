@@ -9,7 +9,8 @@ requirejs.config({
       'wow' : 'lib/wow.min',
       'main-app' : 'lib/jquery.app',
       'login-register' : 'lib/login-register',
-      'facebook' : 'lib/myFacebook'
+      'facebook' : 'lib/myFacebook',
+      'datepicker' : 'lib/bootstrap-datepicker'
     }
 });
 

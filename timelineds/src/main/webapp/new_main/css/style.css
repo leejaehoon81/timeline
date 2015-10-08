@@ -276,21 +276,22 @@ textarea {
 }
 .btn.btn-rnd {
   padding: 11px 40px;
-  border-radius: 30px;
+  border-radius: 0px;
 }
 .btn-custom:focus {
-  background: #fa3b7c;
-  border: 1px solid #fa3b7c;
+  background: #408294;
+  border: 1px solid #408294;
   outline: none;
 }
 .btn-custom:hover {
-  background: #fb6d9d !important;
-  border: 1px solid #fb6d9d;
+  background: #669BA9 !important;
+  border: 1px solid #669BA9;
 }
 .btn-custom {
-  background: #fa4a86 !important;
+  background: #408294 !important;
   color: #fff !important;
-  border: 1px solid #fa4a86;
+  border: 1px solid #408294;
+  letter-spacing: 2px;
 }
 
 

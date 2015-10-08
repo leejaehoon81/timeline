@@ -165,6 +165,43 @@
 	</div>
 </div>
 
+
+<!-- 연대기 생성 모달 -->
+<div class="modal fade login" id="chronicleModal">
+	<div class="modal-dialog login animated">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title">첫 연대기</h4>
+			</div>
+			<div class="modal-body">
+				<div class="box">
+					<div class="input-group date">
+						<input type="text" class="form-control" id="myCal"> <span
+							class="input-group-addon"> <i
+							class="glyphicon glyphicon-th"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<!-- 확인/취소 버튼만들기 -->
+				<div class="forgot login-footer">
+					<span>Looking to <a href="javascript: showRegisterForm();">create
+							an account</a> ?
+					</span>
+				</div>
+				<div class="forgot register-footer" style="display: none">
+					<span>Already have an account?</span> <a
+						href="javascript: showLoginForm();">Login</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script>
   require(['login-register',
            'bootstrap',
@@ -173,8 +210,14 @@
            'smooth',
            'wow',
            'main-app',
-           'facebook'
+           'facebook',
+           'datepicker'
            ], function() {
     loginInfo();
+    /* $('.input-group.date').datepicker({
+      format: "yyyy/mm/dd",
+      minViewMode: 2,
+      autoclose: true
+    }); */
   });
 </script>

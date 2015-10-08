@@ -7,20 +7,19 @@
 				<div class="home-fullscreen">
 					<div class="full-screen">
 						<div class="home-wrapper home-wrapper-alt">
-							<h1 class="animated fadeInDown wow" data-wow-delay=".1s" id="mainTitle">Professional
-								Landing Page Template</h1>
+							<h1 class="animated fadeInDown wow" data-wow-delay=".1s" id="mainTitle">easy and simple</h1>
 							<h4 class="animated fadeInDown wow" data-wow-delay=".2s" id="mainContent">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-								feugiat arcu ut orci porta, eget porttitor felis suscipit.<br />
-								Sed a nisl ullamcorper, tempus augue at, rutrum lacus. Duis et
-								turpis eros.
+								인물이나 회사의 역사를 기록하고 공유해 보세요.<br />
+								MemoryFactory는 인물이나 회사의 연대기를 한눈에 알기쉽게 정리해 드립니다.
 							</h4>
 							<a href="" class="btn btn-custom btn-rnd animated fadeInDown wow"
-								data-wow-delay=".4s" id="chronicle">지금 만들기</a>
+								data-wow-delay=".4s" id="chronicle">새연대기</a>
+							<a href="#features" class="btn btn-custom btn-rnd animated fadeInDown wow"
+								data-wow-delay=".4s" id="example">구경하기</a>
 							<div class="clearfix"></div>
 							<a href="http://vimeo.com/99025203"
 								class="video-btn btn popup-video animated fadeInDown wow"
-								data-wow-delay=".6s"><i class="ion-play"></i>Watch Video</a>
+								data-wow-delay=".6s"><i class="ion-play"></i>사용방법</a>
 						</div>
 					</div>
 				</div>
@@ -179,6 +178,10 @@
     e.preventDefault();
     $('#infoModal').modal();
   });
+  /* $('#chronicle').on('click', function(e) {
+    e.preventDefault();
+    $('#chronicleModal').modal();
+  }); */
   requirejs(['app/content'], function(content) {
     content.init();
   });
