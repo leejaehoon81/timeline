@@ -3857,6 +3857,7 @@ function WellcomeTimelineProvider(options) {
             /*alert('삭제 성공');
             window.parent.location.reload();*/
         	  $('.event.min.selected').remove();
+        	  $('.tickEvent.available.selected').remove();
           } else {
             console.log('삭제실패');
           }
