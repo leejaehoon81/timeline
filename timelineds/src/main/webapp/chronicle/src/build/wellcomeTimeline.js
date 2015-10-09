@@ -854,10 +854,9 @@ function BaseProvider() {
     this.options = {
         dataUriTemplate: '{0}{1}.js'
     };
-
+    
     this.load = function() {
         var self = this;
-
         // any custom data manipulation/parsing goes here.
         self.data = self.options.data;
     };
@@ -1930,7 +1929,7 @@ function WellcomeTimelineProvider(options) {
 
             /*self.backgroundEvents = $.wellcome.timeline.provider.data.BackgroundEvents;*/
             self.events = $.wellcome.timeline.provider.data.Events;
-
+            
             var startDate = $.wellcome.timeline.provider.getTimelineStartDate();
             var endDate = $.wellcome.timeline.provider.getTimelineEndDate();
 
@@ -3112,7 +3111,7 @@ function WellcomeTimelineProvider(options) {
             
             self.insertElem.click(function (e) {
               e.preventDefault();
-              myInsert();
+              /*myInsert();*/
             });
             
         },
@@ -3855,10 +3854,11 @@ function WellcomeTimelineProvider(options) {
       delete: function(myIndex) {
         $.getJSON('delete.do?no=' + myIndex, function(result) {
           if (result.Events == 'success') {
-            alert('삭제 성공');
-            window.parent.location.reload();
+            /*alert('삭제 성공');
+            window.parent.location.reload();*/
+        	  $('.event.min.selected').remove();
           } else {
-            alert('삭제 실패');
+            console.log('삭제실패');
           }
         });
       },
