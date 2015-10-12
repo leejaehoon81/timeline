@@ -9,6 +9,18 @@
 
 
 /*========= Custom Font =========*/
+#myLink {
+	color: #ff5a5f;
+}
+
+.my-message-warning {
+  color: red;
+}
+
+.my-message-success {
+  color: blue;
+}
+
 @font-face {
     font-family: "WeblySleek UI";
     src: url("../fonts/ws-ui.eot");

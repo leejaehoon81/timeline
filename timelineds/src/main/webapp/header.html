@@ -23,7 +23,7 @@
               (<span id='nameInfo'></span>)님 반갑습니다
             </a>
           </li> -->
-        <li id="chronicleTitle"></li>
+				<li id="chronicleTitle"></li>
 				<li id="chronicleZoom"></li>
 				<li><a href="#" data-toggle="modal" onclick="openLoginModal();"
 					id="loginBtn">Login</a> <a href="#" data-toggle="modal"
@@ -101,13 +101,17 @@
 						<div class="form">
 							<form>
 								<input id="registerEmail" class="form-control" type="text"
-									placeholder="Email" name="registerEmail"> <input
-									id="registerPass" class="form-control" type="password"
-									placeholder="Password" name="registerPass"> <input
-									id="password_confirmation" class="form-control" type="password"
-									placeholder="Repeat Password" name="password_confirmation">
-								<input id="createAcc" class="btn btn-default btn-register"
-									type="button" value="Create account" name="commit">
+									placeholder="Email" name="registerEmail"> <span
+									id="message"></span> <input id="registerPass"
+									class="form-control" type="password" placeholder="Password"
+									name="registerPass"> <input id="password_confirmation"
+									class="form-control" type="password"
+									placeholder="Repeat Password" name="password_confirmation"
+									onkeyup="checkPass(); return false;
+									"> <span
+									id="passMsg"></span> <input id="createAcc"
+									class="btn btn-default btn-register" type="button"
+									value="Create account" name="commit">
 							</form>
 						</div>
 					</div>
@@ -115,13 +119,12 @@
 			</div>
 			<div class="modal-footer">
 				<div class="forgot login-footer">
-					<span>Looking to <a href="javascript: showRegisterForm();">create
-							an account</a> ?
+					<span>아직 회원이 아니신가요? <a href="javascript: showRegisterForm();" id="myLink">회원가입하기</a>
 					</span>
 				</div>
 				<div class="forgot register-footer" style="display: none">
-					<span>Already have an account?</span> <a
-						href="javascript: showLoginForm();">Login</a>
+					<span>MemoryFactory 회원이시면</span> <a
+						href="javascript: showLoginForm();" id="myLink">Login</a>
 				</div>
 			</div>
 		</div>
@@ -203,16 +206,8 @@
 
 
 <script>
-  require(['login-register',
-           'bootstrap',
-           'jquery-easing',
-           'jquery-magnific',
-           'smooth',
-           'wow',
-           'main-app',
-           'facebook',
-           'datepicker'
-           ], function() {
+  require([ 'login-register', 'bootstrap', 'jquery-easing', 'jquery-magnific',
+      'smooth', 'wow', 'main-app', 'facebook', 'datepicker' ], function() {
     loginInfo();
     /* $('.input-group.date').datepicker({
       format: "yyyy/mm/dd",
@@ -220,4 +215,39 @@
       autoclose: true
     }); */
   });
+
+  $('#registerEmail').keyup(
+      function(event) {
+        $.getJSON(
+        //contextRoot + '/json/member/existEmail.do',
+        'http://localhost:8888/member/existEmail.do', {
+          email : $(this).val()
+        }, function(result) {
+          if (result.data == 'no') {
+            $('#message').removeClass('my-message-warning').addClass(
+                'my-message-success').html('사용 가능합니다.');
+          } else {
+            $('#message').removeClass('my-message-success').addClass(
+                'my-message-warning').html('이미 등록된 이메일입니다.');
+          }
+        });
+      });
+  
+  function checkPass() {
+    if($('#registerPass').val() == $('#password_confirmation').val()) {
+      $('#passMsg')
+	      .removeClass('my-message-warning')
+	      .addClass('my-message-success')
+	      .html('비밀번호가 일치합니다');
+      $('#createAcc').show();
+    } else {
+      $('#passMsg')
+	      .removeClass('my-message-success')
+	      .addClass('my-message-warning')
+	      .html('비밀번호가 일치하지 않습니다');
+      $('#createAcc').hide();
+    }
+  };
+      
+      
 </script>
