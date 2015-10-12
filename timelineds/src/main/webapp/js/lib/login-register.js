@@ -24,7 +24,7 @@ function showLoginForm(){
         $('.loginBox').fadeIn('fast');
         $('.fb_login').fadeIn('fast');
         $('.login-footer').fadeIn('fast');    
-        $('.modal-title').html('Login with');
+        /*$('.modal-title').html('Login with');*/
     });       
      $('.warning').removeClass('alert alert-danger').html(''); 
 }
@@ -34,8 +34,22 @@ function openLoginModal(){
     setTimeout(function(){
         $('#loginModal').modal('show');    
     }, 230);
-    
 }
+
+function openInfoModal(){
+  showLoginForm();
+  setTimeout(function(){
+      $('#infoModal').modal('show');    
+  }, 230);
+}
+
+function openChronicleModal(){
+  showLoginForm();
+  setTimeout(function(){
+    $('#chronicleModal').modal('show');    
+  }, 230);
+}
+
 function openRegisterModal(){
     showRegisterForm();
     setTimeout(function(){
@@ -84,7 +98,7 @@ $('#createAcc').click(function() {
 		dataType : 'json',
 		data : {
 			email : $('#registerEmail').val(),
-			password : $('#registerPass').val(),
+			password : $('#registerPass').val()
 		},
 		success : function(result) {
 			if (result.data == 'success') {
