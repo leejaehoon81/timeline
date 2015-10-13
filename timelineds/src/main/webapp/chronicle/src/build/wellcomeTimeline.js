@@ -3044,8 +3044,11 @@ function WellcomeTimelineProvider(options) {
             self.topElem = $('<div class="top"></div>');
             self.element.append(self.topElem);
             
+            self.btnZone = $('<div class="btnZone"></div>');
+            self.topElem.append(self.btnZone);
+            
             self.deleteElem = $('<button type="button" class="btn btn-danger btn-sm">삭 제</button>');
-            self.topElem.append(self.deleteElem);
+            self.btnZone.append(self.deleteElem);
             
             self.modifyElem = $('\
                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modifyModal">수 정</button>\
@@ -3053,14 +3056,14 @@ function WellcomeTimelineProvider(options) {
                 <div class="modal-dialog modify">\
                   <div class="modal-content modify">\
                     <div class="modal-body modify">\
-                        <iframe src="modify.html" width="98%" height="700" frameborder="0" allowtransparency="true" id="frameModify"></iframe>\
+                        <iframe src="modify.html" width="98%" height="400px" frameborder="0" allowtransparency="true" id="frameModify"></iframe>\
                     </div>\
                   </div>\
                 </div>\
               </div>\
                 ');
             
-            self.topElem.append(self.modifyElem);
+            self.btnZone.append(self.modifyElem);
             
             self.insertElem = $('\
                 <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#insertModal">입 력</button>\
@@ -3068,13 +3071,13 @@ function WellcomeTimelineProvider(options) {
                 <div class="modal-dialog">\
                   <div class="modal-content">\
                     <div class="modal-body">\
-                        <iframe src="insert.html" width="98%" height="700" frameborder="0" allowtransparency="true"></iframe>\
+                        <iframe src="insert.html" width="98%" height="550" frameborder="0" allowtransparency="true"></iframe>\
                     </div>\
                   </div>\
                 </div>\
               </div>\
                 ');
-            self.topElem.append(self.insertElem);
+            self.btnZone.append(self.insertElem);
             
             /*self.closeButtonElem = $('<div class="close"></div>');
             self.topElem.append(self.closeButtonElem);*/
@@ -3857,8 +3860,6 @@ function WellcomeTimelineProvider(options) {
       delete: function(myIndex) {
         $.getJSON('delete.do?no=' + myIndex, function(result) {
           if (result.Events == 'success') {
-            /*alert('삭제 성공');
-            window.parent.location.reload();*/
         	  $('.event.min.selected').remove();
         	  $('.tickEvent.available.selected').remove();
           } else {
@@ -3877,21 +3878,3 @@ function WellcomeTimelineProvider(options) {
       } 
   };
 })(jQuery);
-
-/*function myInsert() {
-  var eventTemplateElem = $('\
-      <div class="event">\
-      <div class="wrap">\
-      <div class="leftCol"><img /></div>\
-      <div class="rightCol">\
-      <div class="date"></div>\
-      <div class="title">후후후후</div>\
-      </div>\
-      </div>\
-      <div class="arrow"></div>\
-      <div class="line"></div>\
-  </div>');
-  console.log('호출');
-  $('.content > .events').append(eventTemplateElem);
-  
-}*/

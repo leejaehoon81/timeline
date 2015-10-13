@@ -473,23 +473,29 @@ p {
     float: right;
 }
 
+.btnZone {
+	width: 200px;
+  height: 35px;
+  float: right;
+}
+
 #timeline .overlay .top .btn.btn-success.btn-sm{
-    height: 35px;
-    width: 65px;
+    height: 30px;
+    width: 50px;
     float: right;
     margin: 2px;
 }
 
 #timeline .overlay .top .btn.btn-info.btn-sm{
-    height: 35px;
-    width: 65px;
+    height: 30px;
+    width: 50px;
     float: right;
     margin: 2px;
 }
 
 #timeline .overlay .top .btn.btn-danger.btn-sm{
-    height: 35px;
-    width: 65px;
+    height: 30px;
+    width: 50px;
     float: right;
     margin: 2px;
 }

@@ -1,4 +1,4 @@
-<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="app">
+<html>
 <head>
 <meta charset='UTF-8'>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
@@ -12,21 +12,13 @@
 <script type="text/javascript" src="js/libs/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/libs/bootstrap-datepicker.kr.min.js"></script>
 
-<script src="../../fileUpload/js/angular.js"></script>
-<script src="../../fileUpload/js/flow.js"></script>
-<script src="../../fileUpload/js/fusty-flow.js"></script>
-<script src="../../fileUpload/js/fusty-flow-factory.js"></script>
-<script src="../../fileUpload/js/ng-flow.js"></script>
-<script src="../../fileUpload/js/app.js"></script>
-<script src="../../fileUpload/js/scale.fix.js"></script>
-    
 <style>
  html {
 	overflow: hidden;
 }
 </style>
 </head>
-<body flow-prevent-drop flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+<body>
 <div id='formDiv'>
 	<form class="form-horizontal">
 
@@ -54,62 +46,24 @@
 
 
 
-		<div flow-init flow-files-submitted="$flow.upload()"
-			flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
-			<div class="drop" flow-drop ng-class="dropClass">
-				<span class="btn btn-default" flow-btn>Upload Image</span> 
-				<!-- <span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span> -->
-			</div>
-
-			<br/>
-
-			<div>
-				<div ng-repeat="file in $flow.files" class="gallery-box">
-					<span class="title">{{file.name}}</span>
-					<div class="thumbnail" ng-show="$flow.files.length">
-						<img flow-img="file" />
-					</div>
-					<div class="progress progress-striped"
-						ng-class="{active: file.isUploading()}">
-						<div class="progress-bar" role="progressbar"
-							aria-valuenow="{{file.progress() * 100}}" aria-valuemin="0"
-							aria-valuemax="100"
-							ng-style="{width: (file.progress() * 100) + '%'}">
-							<span class="sr-only">{{file.progress()}}% Complete</span>
-						</div>
-					</div>
-					<div class="btn-group">
-						<a class="btn btn-xs btn-danger" ng-click="file.cancel()">
-							Remove </a>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-		</div>
 		<!-- fileupload -->
 
 
 
 
 
-
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button id='insertBtn' type='button'
-					class="btn btn-success btn-sm my-new">등록</button>
+      <div id="btnArea">
+				<button id='insertBtn' type='button' class="btn btn-success btn-sm my-new">등록</button>
 				<button id='cancelBtn' type='reset' class="btn btn-info btn-sm">취소</button>
 			</div>
-		</div>
 	</form>
 </div>
-<button id="test">버튼</button>
 
 <script>
 
   $('#test').on('click', function(e) {
     e.preventDefault();
-    console.log('파일이름테스트중');
+    
   });
 
 	$('.input-group.date').datepicker({

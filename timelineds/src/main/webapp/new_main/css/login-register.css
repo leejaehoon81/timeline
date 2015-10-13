@@ -186,8 +186,8 @@
     width: 100%;
 }
 .login .btn-login, .registerBox .btn-register{
-    background-color: #00BBFF;
-    border-color: #00BBFF;
+    background-color: #408294;
+    border-color: #408294;
     border-width: 0;
     color: #FFFFFF;
     display: block;
@@ -195,9 +195,11 @@
     padding: 15px 50px;
     text-transform: uppercase;
     width: 100%;
+    border-radius: 0px;
+    height: 45px;
 }
 .login .btn-login:hover, .registerBox .btn-register:hover{
-    background-color: #00A4E4;
+    background-color: #669BA9;
     color: #FFFFFF;
 }
 .login .form-control{
@@ -215,7 +217,7 @@
     color: #FFFFFF;
 }
 .login .box .form input[type="text"], .login .box .form input[type="password"] {
-    border-radius: 3px;
+    border-radius: 0px;
     border: none;
     color: #333333;
     font-size: 16px;
