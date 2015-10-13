@@ -43,6 +43,13 @@ function openInfoModal(){
   }, 230);
 }
 
+function openAlert(){
+  showLoginForm();
+  setTimeout(function(){
+    $('#alertModal').modal('show');    
+  }, 230);
+}
+
 function openChronicleModal(){
   showLoginForm();
   setTimeout(function(){
@@ -117,11 +124,9 @@ $('#createAcc').click(function() {
 
 $('#logout').click(function(event) {
 	 event.preventDefault();
-	 console.log('로그아웃버튼 누름');
 	 $.getJSON(contextRoot + '/json/auth/logout.do', function(result) {
 		 /*$(document).trigger('logout.success');*/
 		 window.location.reload();
-		 console.log('로그아웃 성공');
 	 });
 });
 

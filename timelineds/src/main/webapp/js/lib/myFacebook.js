@@ -28,6 +28,7 @@ function statusChangeCallback(response) {
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
     // we need to hide FB login button
+    
     $('#fblogin').hide();
     // fetch data from facebook
     getUserInfo();
@@ -65,7 +66,7 @@ function FBLogin() {
 
 function FBLogout() {
   FB.logout(function(response) {
-    
+    console.log('facebook logout success!!!');
   });
 }
 
@@ -74,7 +75,7 @@ function FBLogout() {
 function getUserInfo() {
   FB.api('/me?fields=name,email,picture,friends,birthday', function (response) {
     console.log(response);
-    /*insertUserInfo(response);*/ 
+    insertUserInfo(response); 
     $('#emailInfo').text(response.email);
     $('#loginBtn').hide();
     $('#mypage').show();
@@ -86,19 +87,19 @@ function getUserInfo() {
 }
 
 function insertUserInfo(response) {
-  $.ajax(contextRoot + '/json/user/insert.do',
+  $.ajax(contextRoot + '/json/user/facebookInsert.do',
     {
     method: 'POST',
     dataType: 'json',
     data: {
       name: response.name,
       email: response.email,
-      facebookid: response.id,
-      /*imgUrl: response.picture.data.url*/
+      fbID: response.id
+      /*mypic: response.picture.data.url*/
     },
     success: function(result) {
       if (result.data == 'yes') {
-        $('#cancelBtn').click();
+        /*$('#cancelBtn').click();*/
         console.log("User Info Input Success..!!");
       } else {
         console.log("User Info Input Fail..!!");
