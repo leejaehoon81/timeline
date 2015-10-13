@@ -1,36 +1,25 @@
 <div class="navbar navbar-custom navbar-abs" role="navigation">
 	<div class="container">
-		<!-- Navbar-header -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse">
 				<i class="ion-navicon"></i>
 			</button>
-			<!-- LOGO -->
 			<a class="navbar-brand logo" href="index.html" id="logo"> <i
 				class="ion-social-buffer"></i> <span>MemoryFactory</span>
+				<span id="chronicleZoom"></span>
 			</a>
 		</div>
-		<!-- end navbar-header -->
 
 		<!-- menu -->
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-
-				<!-- <li> 로그인정보
-            <a id="mypage" href="#" class="button" style="display:none;"> 
-              <span id='emailInfo'></span> 
-              (<span id='nameInfo'></span>)님 반갑습니다
-            </a>
-          </li> -->
-				<li id="chronicleTitle"></li>
-				<li id="chronicleZoom"></li>
 				<li><a href="#" data-toggle="modal" onclick="openLoginModal();" id="loginBtn">Login</a> 
 				    <a href="#" data-toggle="modal" onclick="FBLogout();" style="display: none;" id="FBLogout">Logout</a>
 				</li>
 				<li class="dropdown">
 				  <a href="#" data-toggle="dropdown" id="mypage" style="display: none;">
-					  <span id='emailInfo'></span>
+					  <span id='emailInfo' data-return="false"></span>
 						<span class="caret"></span>
 				  </a>
 					<ul class="dropdown-menu arrow">
@@ -40,12 +29,9 @@
 					</ul></li>
 			</ul>
 		</div>
-		<!--/Menu -->
 	</div>
-	<!-- end container -->
 </div>
-<!-- End navbar -->
-
+<!-- end of nav -->
 
 
 <!-- start modal -->
@@ -184,20 +170,16 @@
 
 
 <script>
+
   require([ 'login-register', 'bootstrap', 'jquery-easing', 'jquery-magnific',
-      'smooth', 'wow', 'main-app', 'facebook', 'datepicker' ], function() {
-    loginInfo();
-    /* $('.input-group.date').datepicker({
-      format: "yyyy/mm/dd",
-      minViewMode: 2,
-      autoclose: true
-    }); */
-  });
+      'smooth', 'wow', 'main-app', 'facebook', 'datepicker' ],
+      function() {
+        loginInfo();
+      });
 
   $('#registerEmail').keyup(
       function(event) {
         $.getJSON(
-        //contextRoot + '/json/member/existEmail.do',
         'http://localhost:8888/member/existEmail.do', {
           email : $(this).val()
         }, function(result) {
@@ -210,22 +192,16 @@
           }
         });
       });
-  
+
   function checkPass() {
-    if($('#registerPass').val() == $('#password_confirmation').val()) {
-      $('#passMsg')
-	      .removeClass('my-message-warning')
-	      .addClass('my-message-success')
-	      .html('비밀번호가 일치합니다');
+    if ($('#registerPass').val() == $('#password_confirmation').val()) {
+      $('#passMsg').removeClass('my-message-warning').addClass(
+          'my-message-success').html('비밀번호가 일치합니다');
       $('#createAcc').show();
     } else {
-      $('#passMsg')
-	      .removeClass('my-message-success')
-	      .addClass('my-message-warning')
-	      .html('비밀번호가 일치하지 않습니다');
+      $('#passMsg').removeClass('my-message-success').addClass(
+          'my-message-warning').html('비밀번호가 일치하지 않습니다');
       $('#createAcc').hide();
     }
   };
-      
-      
 </script>

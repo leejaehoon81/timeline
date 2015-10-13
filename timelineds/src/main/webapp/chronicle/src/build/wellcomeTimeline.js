@@ -1700,9 +1700,8 @@ function WellcomeTimelineProvider(options) {
             self.leftColElem = $('<div class="leftCol"></div>');
             self.element.append(self.leftColElem);
 
-            self.titleElem = $('<div class="title"></div>');
+            /*self.titleElem = $('<div class="title"></div>');*/
             /*self.leftColElem.append(self.titleElem);*/
-            $(top.document).find('#chronicleTitle').append(self.titleElem);
             
             /*self.middleColElem = $('<div class="middleCol"></div>');
             self.element.append(self.middleColElem);*/
@@ -1722,11 +1721,15 @@ function WellcomeTimelineProvider(options) {
             // init ui.
 
             self.title = $.wellcome.timeline.options.provider.data.Title;
+            $(top.document).find('#emailInfo').append(', ' + self.title);
+            var myScript = $('<script>$(top.document).find("#emailInfo").textrotator({animation : "spin",separator : ",",speed : 5000});</script>');
+            $('.headerPanel').append(myScript);
+            
 
             // add start and end dates to title.
             /*self.title += ": <span>" + $.wellcome.timeline.provider.data.StartDateDisplay + " - " + $.wellcome.timeline.provider.data.EndDateDisplay + "</span>";*/
 
-            self.titleElem.ellipsisFill(self.title);
+            /*self.titleElem.ellipsisFill(self.title);*/
 
             self.zoomInButtonElem.prop('title', $.wellcome.timeline.options.config.HeaderPanelView.ZoomIn);
             
@@ -3568,7 +3571,7 @@ function WellcomeTimelineProvider(options) {
             self._refresh();
             self.open();
             
-            self.photoElem = ('<div id="aniimated-thumbnials">\
+            /*self.photoElem = ('<div id="aniimated-thumbnials">\
                 <a href="images/full/001.jpg">\
                 <img src="images/thumb/001.jpg" />\
                 </a>\
@@ -3590,7 +3593,7 @@ function WellcomeTimelineProvider(options) {
                 $('.wrapper').append(self.photoElem);
             
             var lightScript = ('<script type="text/javascript">$("#aniimated-thumbnials").lightGallery({thumbnail:true});</script>');
-            $('#aniimated-thumbnials').append(lightScript);
+            $('#aniimated-thumbnials').append(lightScript);*/
             
         },
 
