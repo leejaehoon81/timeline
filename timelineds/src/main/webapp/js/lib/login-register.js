@@ -71,7 +71,7 @@ function loginAjax(){
 		dataType : 'json',
 		data : {
 			email : $('#userEmail').val(),
-			password : $('#userPass').val(),
+			password : $('#userPass').val()
 		},
 		success : function(result) {
 			if (result.data == 'yes') {
@@ -127,6 +127,7 @@ $('#logout').click(function(event) {
 	 $.getJSON(contextRoot + '/json/auth/logout.do', function(result) {
 		 /*$(document).trigger('logout.success');*/
 		 window.location.reload();
+		 FBlogout();
 	 });
 });
 

@@ -5,10 +5,8 @@
 //-------
 
 
-var cnt = 1; // wrapper div 확장에 필요한 변수
 var myIndex = 0; // 현재 event index 알아낼때 쓰는 변수
-
-// $.wellcome.timeline.provider.data.???로 db 꺼낼수있음
+var eventLength;
 
 function cal_to_jd( era, y, m, d, h, mn, s )
 {
@@ -3056,7 +3054,7 @@ function WellcomeTimelineProvider(options) {
                 <div class="modal-dialog modify">\
                   <div class="modal-content modify">\
                     <div class="modal-body modify">\
-                        <iframe src="modify.html" width="98%" height="400px" frameborder="0" allowtransparency="true" id="frameModify"></iframe>\
+                        <iframe src="modify.html" width="98%" height="550px" frameborder="0" allowtransparency="true" id="frameModify"></iframe>\
                     </div>\
                   </div>\
                 </div>\
@@ -3117,6 +3115,7 @@ function WellcomeTimelineProvider(options) {
             
             self.insertElem.click(function (e) {
               e.preventDefault();
+              console.log('insert');
               /*myInsert();*/
             });
             

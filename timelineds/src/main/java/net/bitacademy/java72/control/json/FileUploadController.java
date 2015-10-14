@@ -35,8 +35,9 @@ public class FileUploadController {
         filename = MultipartUtils.getFilename(
             f.getOriginalFilename());
         newPath = new File(
-            servletContext.getRealPath("/files") 
+            servletContext.getRealPath("/chronicle/src/files") 
             + "/" + filename);
+        System.out.println(newPath);
         f.transferTo(newPath);
         
         files.add(

@@ -8,6 +8,7 @@
   <resultMap type="DialogPhoto" id="DialogPhotoMap">
     <id     column="PIC_NO"      property="photoNo" />
     <result column="CM_NO"       property="mainNo" />
+    <!-- <result column="C_INDEX"     property="EventId" /> -->
     <result column="THUMB_PATH"  property="ThumbnailPath" />
     <result column="DIALOG_PATH" property="FeatureImagePath" />
     <result column="DETAIL_PATH" property="DetailPath" />
@@ -21,10 +22,8 @@
   </select>
   
   <insert id="insert" parameterType="DialogPhoto">
-    INSERT INTO dialog_photo(THUMB_PATH, DIALOG_PATH, DETAIL_PATH,
-                             PROMO, CREDIT, USED)
-    values(#{ThumbnailPath},#{FeatureImagePath},#{detailPath},
-           #{PromoImagePath},#{ImageCredit},#{UsedBy})
+    INSERT INTO dialog_photo(C_INDEX, THUMB_PATH, DIALOG_PATH)
+    values(155, #{ThumbnailPath},#{FeatureImagePath})
   </insert>
   
   <delete id="delete" parameterType="int">
