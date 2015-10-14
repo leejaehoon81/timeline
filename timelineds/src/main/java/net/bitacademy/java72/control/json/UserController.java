@@ -194,7 +194,7 @@ public Object logout(HttpSession session) {
     Map<String,Object> result = 
         new HashMap<String,Object>();
     User getuser = userService.checkFacebook(user.getFbID());
-    if (user != null) {
+    if (getuser != null) {
       result.put("data", "yes");
       result.put("userdata", getuser);
       session.setAttribute("user", getuser);

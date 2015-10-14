@@ -71,7 +71,7 @@
 					<div id="progress" class="progress">
 						<div class="progress-bar progress-bar-success"></div>
 					</div>
-					<div id="files" class="files"></div>
+					<div id="files" class="files" style="height : 100px;"></div>
 				</div>
 			</div>
 			
@@ -82,7 +82,7 @@
 				</div>
 			</div> -->
 
-			<div id="btnArea">
+			<div id="btnArea" style="margin-left: 333px">
 				<button id='insertBtn' type='button' class="btn btn-success btn-sm my-new">등록</button>
 				<button id='cancelBtn' type='reset' class="btn btn-info btn-sm">취소</button>
 			</div>
@@ -114,8 +114,7 @@
             JulianDayStart : myDate($('#myCal').val()),
             StartDisplay : myDisplay($('#myCal').val()),
             StartDisplayYear : myDisplay($('#myCal').val()),
-            /* ThumbnailPath : {{file.name}}, */
-            priority : 1
+            priority : Math.floor((Math.random() * 5) + 1)
           },
           success : function(result) {
             if (result.Events == 'success') {

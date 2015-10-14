@@ -87,7 +87,7 @@ function getUserInfo() {
 }
 
 function insertUserInfo(response) {
-  $.ajax(contextRoot + '/json/user/facebookInsert.do',
+  $.ajax(contextRoot + '/json/user/facebooklogin.do',
     {
     method: 'POST',
     dataType: 'json',
