@@ -3,7 +3,7 @@ package net.bitacademy.java72.domain;
 
 import java.io.Serializable;
 
-public class ChronicleMain extends Chronicle implements Serializable {
+public class ChronicleMain  implements Serializable {
   private static final long serialVersionUID = 1L;
   
   protected int     memberKeyNo;      // 회원 키값

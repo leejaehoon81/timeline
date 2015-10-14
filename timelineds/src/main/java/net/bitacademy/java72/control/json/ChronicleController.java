@@ -78,6 +78,28 @@ public class ChronicleController {
       return ResponseFactory.createResponse(result);
   }
   
+  @RequestMapping("/getIndex")
+  public ResponseEntity<String> getIndex(Chronicle chronicle, HttpSession session) throws Exception {
+    
+    List<Chronicle> getIndex = chronicleService.getIndex();
+    Chronicle c = getIndex.get(0);
+    System.out.println("c_index =>"+c.getEventId());
+    Map<String,Object> result = new HashMap<String,Object>();
+//    if (count > 0) {
+//      result.put("Events", "success");
+//      session.setAttribute("loding", "loding");
+//    } else {
+//      result.put("Events", "failure");
+//    }
+    if(c!=null){
+      result.put("data", "ok");
+      result.put("iNumber", c.getEventId());
+      session.setAttribute("iNumber", c.getEventId());
+      System.out.println("sessioninumber===>"+(int)session.getAttribute("iNumber"));
+    }
+    return ResponseFactory.createResponse(result);
+  }
+  
   @RequestMapping("/list")
   public ResponseEntity<String> list(int no) {
     

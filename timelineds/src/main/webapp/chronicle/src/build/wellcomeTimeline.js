@@ -3069,7 +3069,7 @@ function WellcomeTimelineProvider(options) {
                 <div class="modal-dialog">\
                   <div class="modal-content">\
                     <div class="modal-body">\
-                        <iframe src="insert.html" width="98%" height="550" frameborder="0" allowtransparency="true"></iframe>\
+                        <iframe src="insert.html" width="98%" height="650" frameborder="0" allowtransparency="true"></iframe>\
                     </div>\
                   </div>\
                 </div>\

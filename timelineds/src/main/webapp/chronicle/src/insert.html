@@ -101,7 +101,6 @@
   (function($) {
     $.chronicle = {
       insert : function() {
-    	  
          // console.log($('#content', parent.parent.document));
           //$('#content', parent.parent.document.onload);
        
@@ -120,7 +119,8 @@
           },
           success : function(result) {
             if (result.Events == 'success') {
-            	/* window.parent.parent.location.reload(); */
+            	$.chronicle.getIndex();
+            	 
             } else {
               console.log('입력 실패');
             }
@@ -132,7 +132,7 @@
           method : 'POST',
           dataType : 'json',
           data : {
-            /* EventId : 200, */
+             EventId : this.iNumber, 
             ThumbnailPath : 'files/' + $('#fPhoto').val(),
             FeatureImagePath : 'files/' + $('#fPhoto').val()
           },
@@ -144,6 +144,14 @@
             }
           }
         });
+      },
+      getIndex : function(){
+    	  var moduleObj = this;
+    	  $.getJSON('getIndex.do', function(result){
+    		  if(result.data=='ok'){
+    			  $.chronicle.photoInsert(); 
+    		  }
+    	  });
       }
     };
   })(jQuery);
@@ -151,7 +159,8 @@
   $('#insertBtn').click(function(e) {
     e.preventDefault();
     $.chronicle.insert();
-    $.chronicle.photoInsert();
+    
+   
   });
   
   

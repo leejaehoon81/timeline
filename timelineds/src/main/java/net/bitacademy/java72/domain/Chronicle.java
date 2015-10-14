@@ -7,7 +7,6 @@ public class Chronicle extends DialogPhoto implements Serializable {
   private static final long serialVersionUID = 1L;
   
   protected int     mainNo;           // 연대기 일련번호(자동증가)
-  protected int     EventId;          // 이벤트 인덱스(자동증가)
   protected int     JulianDayStart;   // 시작일
   protected String  Title;            // 이벤트 제목
   protected String  Body;             // 이벤트 내용
@@ -22,18 +21,11 @@ public class Chronicle extends DialogPhoto implements Serializable {
   protected String  Year;
   
   
-  
   public int getMainNo() {
     return mainNo;
   }
   public void setMainNo(int mainNo) {
     this.mainNo = mainNo;
-  }
-  public int getEventId() {
-    return EventId;
-  }
-  public void setEventId(int eventId) {
-    EventId = eventId;
   }
   public int getJulianDayStart() {
     return JulianDayStart;

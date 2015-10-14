@@ -33,7 +33,7 @@ public class PhotoController {
   @RequestMapping("/photoInsert")
   public ResponseEntity<String> insert(DialogPhoto dialogPhoto, HttpSession session, 
       @RequestParam(required=false) MultipartFile file1) throws Exception {
-    
+    dialogPhoto.setEventId((int) session.getAttribute("iNumber"));
       int count = dialogPhotoService.insert(dialogPhoto);
       
       Map<String,Object> result = new HashMap<String,Object>();

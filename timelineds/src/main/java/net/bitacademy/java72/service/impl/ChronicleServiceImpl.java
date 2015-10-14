@@ -48,5 +48,10 @@ public class ChronicleServiceImpl implements ChronicleService {
   public int deleteWithPic(int no) {
     return chronicleDao.deleteWithPic(no);
   }
+
+  @Override
+  public List<Chronicle> getIndex() {
+    return chronicleDao.getIndex();
+  }
   
 }

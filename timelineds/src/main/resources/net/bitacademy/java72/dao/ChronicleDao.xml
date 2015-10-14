@@ -65,6 +65,10 @@
     SELECT * FROM chronicle WHERE C_INDEX=#{EventId}
   </select>
   
+  <select id="getIndex" resultMap="ChronicleMap">
+    SELECT * FROM chronicle order by c_index desc;
+  </select>
+  
   <select id="countAll" resultType="int">
     SELECT count(*) FROM chronicle
   </select>

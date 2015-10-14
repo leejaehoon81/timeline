@@ -13,4 +13,5 @@ public interface ChronicleDao {
   int insert(Chronicle chronicle);
   Chronicle get(int no);
   int countAll();
+  List<Chronicle> getIndex();
 }

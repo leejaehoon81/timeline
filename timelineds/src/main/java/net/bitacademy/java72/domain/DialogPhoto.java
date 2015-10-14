@@ -13,9 +13,15 @@ public class DialogPhoto implements Serializable {
   protected String  PromoImagePath;
   protected String  ImageCredit;
   protected String  UsedBy;
+  protected int EventId;
   
   
-  
+  public int getEventId() {
+    return EventId;
+  }
+  public void setEventId(int eventId) {
+    EventId = eventId;
+  }
   public int getPhotoNo() {
     return photoNo;
   }
