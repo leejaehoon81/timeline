@@ -203,17 +203,19 @@
     color: #FFFFFF;
 }
 .login .form-control{
-    border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.09);
-    box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.09) inset;
-    color: #FFFFFF;
+    border-radius: 0px;
+    
+    /* background-color: rgba(0, 0, 0, 0.09);
+    box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.09) inset; */
+    color: #000000;
 }
 .login .form-control:hover{
-    background-color: rgba(0,0,0,.16);
+    /* background-color: rgba(0,0,0,.16); */
 }
 .login .form-control:focus{
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
-    background-color: rgba(0,0,0,0.23);
+    /* box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
+    background-color: rgba(0,0,0,0.23); */
+    border-color: #66afe9;
     color: #FFFFFF;
 }
 .login .box .form input[type="text"], .login .box .form input[type="password"] {

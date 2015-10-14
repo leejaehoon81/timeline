@@ -50,10 +50,10 @@ function openAlert(){
   }, 230);
 }
 
-function openChronicleModal(){
+function openMyChronicleModal(){
   showLoginForm();
   setTimeout(function(){
-    $('#chronicleModal').modal('show');    
+    $('#myChronicleModal').modal('show');    
   }, 230);
 }
 
@@ -62,7 +62,6 @@ function openRegisterModal(){
     setTimeout(function(){
         $('#loginModal').modal('show');    
     }, 230);
-    
 }
 
 function loginAjax(){

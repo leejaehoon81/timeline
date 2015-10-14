@@ -129,42 +129,75 @@
 </div>
 
 
-<!-- 연대기 생성 모달 -->
-<div class="modal fade login" id="chronicleModal">
+<!-- 내 연대기 모달 -->
+<div class="modal fade login" id="myChronicleModal">
 	<div class="modal-dialog login animated">
 		<div class="modal-content">
+		
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true">&times;</button>
-				<!-- <h4 class="modal-title">첫 연대기</h4> -->
 			</div>
+			
 			<div class="modal-body">
 				<div class="box">
-					<div class="input-group date">
-						<input type="text" class="form-control" id="myCal"> <span
-							class="input-group-addon"> <i
-							class="glyphicon glyphicon-th"></i>
-						</span>
-					</div>
+				
+				  <div class="newBox">
+			      <input id="newChronicleBtn" 
+                   class="btn btn-default btn-login" 
+                   type="button" 
+                   value="새 연대기 만들기">
+ 				  </div>
+ 				  
+ 				  <div class="newChronicleForm" style="display:none;">
+					         제목<input id="title" placeholder="연대기의 제목을 지어주세요" style="width:100%"> 
+					         내용<textarea id="content" placeholder="연대기의 주요 내용을 적어주세요" style="width:100%"></textarea>
+					         
+              <div class="input-daterange input-group" id="datepicker">
+						    <input type="text" class="input-sm form-control" name="start" value="연대기 시작 년도" 
+						           style="cursor: pointer; border-width: 1px;"/>
+						    <span class="input-group-addon"> ~ </span>
+						    <input type="text" class="input-sm form-control" name="end" value="연대기 종료 년도" 
+						           style="cursor: pointer; border-width: 1px;"/>
+              </div>
+	          <div class="confirm">
+	            <input id="submitChronicle" type="button" value="확인">
+	            <input id="cancelChronicle" type="button" value="취소">
+	          </div>
+          </div>
+          
+ 				  
+ 				  <div class="division"></div>
+ 				  
+				  <div class="haveBox">
+				    <div class="chronicleBox">
+					    <input id="chronicle1" 
+					           class="btn btn-default btn-login" 
+					           type="button" 
+					           value="chronicle no.1">
+				     </div>
+				    <div class="chronicleBox">
+					    <input id="chronicle2" 
+					           class="btn btn-default btn-login" 
+					           type="button" 
+					           value="chronicle no.2">
+				    </div>
+				  </div>
+				  
 				</div>
 			</div>
-			<div class="modal-footer">
-				<!-- 확인/취소 버튼만들기 -->
-				<div class="forgot login-footer">
-					<span>Looking to <a href="javascript: showRegisterForm();">create
-							an account</a> ?
-					</span>
-				</div>
-				<div class="forgot register-footer" style="display: none">
-					<span>Already have an account?</span> <a
-						href="javascript: showLoginForm();">Login</a>
-				</div>
-			</div>
+			
+			<!-- <div class="modal-footer">
+			
+			</div> -->
+			
 		</div>
 	</div>
 </div>
 
 
+<script type="text/javascript" src="js/lib/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/lib/bootstrap-datepicker.kr.min.js"></script>
 <script>
 
   require([ 'login-register', 'bootstrap', 'jquery-easing', 'jquery-magnific',
@@ -172,6 +205,20 @@
       function() {
         loginInfo();
       });
+  
+  $('#newChronicleBtn').on('click', function(e) {
+    e.preventDefault();
+    $('.haveBox').toggle('slow');
+    $('.newChronicleForm').toggle('slow');
+  });
+  
+  $('.input-daterange.input-group').datepicker({
+    format: "yyyy/mm/dd",
+    language: "kr",
+    minViewMode: 2,
+    clearBtn: true,
+    autoclose: true
+  });
 
   $('#registerEmail').keyup(
       function(event) {

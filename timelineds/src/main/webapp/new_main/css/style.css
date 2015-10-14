@@ -9,11 +9,32 @@
 
 
 /*========= Custom Font =========*/
-#confirmBox {
+#newChronicleBtn {
+	background-color: #ff5a5f;
+}
+
+#newChronicleBtn:hover {
+	background-color: #ff7e82;
+}
+#newChronicleBtn:FOCUS {
+	background-color: #ff7e82;
+	border-color: #ff7e82;
+}
+
+.chronicleBox {
+	padding-top: 5px;
+}
+
+.confirm {
+	width: 100px;
+  padding-top: 5px;
+}
+
+#submitChronicle {
 	
 }
 
-#calcelBox {
+#cancelChronicle {
 	
 }
 
@@ -620,7 +641,7 @@ textarea {
   height: 38px;
 }
 .form-control:focus,.form-control:hover {
-  border-color: #fa4a86;
+  /* border-color: #fa4a86; */
 }
 .error {
   margin: 8px 0px;
