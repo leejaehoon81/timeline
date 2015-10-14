@@ -220,7 +220,7 @@
 }
 .login .box .form input[type="text"], .login .box .form input[type="password"] {
     border-radius: 0px;
-    border: none;
+    border-width: 1px;
     color: #333333;
     font-size: 16px;
     height: 46px;
