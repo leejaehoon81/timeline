@@ -95,7 +95,6 @@ public class ChronicleController {
       result.put("data", "ok");
       result.put("iNumber", c.getEventId());
       session.setAttribute("iNumber", c.getEventId());
-      System.out.println("sessioninumber===>"+(int)session.getAttribute("iNumber"));
     }
     return ResponseFactory.createResponse(result);
   }

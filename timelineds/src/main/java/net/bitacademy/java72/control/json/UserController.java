@@ -41,7 +41,7 @@ public class UserController {
     return result;
   }
   
-  @RequestMapping("/facebookInsert")
+  
   public Object facebookInsert(User user,  HttpServletResponse response, HttpSession session) throws Exception {
     int count = userService.facebookInsert(user);
     System.out.println("facebookInsert~~!!!");
@@ -59,7 +59,7 @@ public class UserController {
     user = userService.checkFacebook(user.getFbID());
     
     if (user != null) {
-      result.put("datach", "yes");
+      result.put("data", "yes");
       result.put("userdata", user);
       session.setAttribute("user", user);
       System.out.println("session ==>> " + user);
@@ -70,7 +70,7 @@ public class UserController {
       }
     } else {
       session.invalidate();
-      result.put("datach", "no");
+      result.put("data", "no");
     }
     return result;
   }
@@ -187,25 +187,30 @@ public Object logout(HttpSession session) {
   }
   
   @RequestMapping("/facebooklogin")
-  public Object checkFacebook(String fbID,  HttpServletResponse response, HttpSession session) {
+  public Object checkFacebook(User user,  HttpServletResponse response, HttpSession session) {
     System.out.println("checkFaceBook~~!!!");
-    System.out.println("fbID:"+fbID);
+    System.out.println("fbID:"+user.getFbID());
     
     Map<String,Object> result = 
         new HashMap<String,Object>();
-    User user = userService.checkFacebook(fbID);
+    User getuser = userService.checkFacebook(user.getFbID());
     if (user != null) {
       result.put("data", "yes");
-      result.put("userdata", user);
-      session.setAttribute("user", user);
-      System.out.println("session ==>> " + user);
+      result.put("userdata", getuser);
+      session.setAttribute("user", getuser);
+      System.out.println("session ==>> " + getuser);
       String refererUrl=(String)session.getAttribute("refererUrl");
       System.out.println("refererUrl===>"+refererUrl);
       if(refererUrl !=null){
         result.put("refererUrl", refererUrl);
       }
     } else {
-      session.invalidate();
+      try {
+        facebookInsert(user, response, session);
+      } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
       result.put("data", "no");
     }
     return result;
