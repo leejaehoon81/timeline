@@ -106,15 +106,15 @@ public class ChronicleController {
     
     List<ChronicleMain> main = chronicleMainService.list(no);
     
-    result.put("Title", main.get(no).getTitle());
-    result.put("FeatureImagePath", main.get(no).getFeatureImagePath());
-    result.put("Body", main.get(no).getBody());
-    result.put("InitialCaption", main.get(no).getInitialCaption());
-    result.put("IsOpenEnded", main.get(no).getIsOpenEnded());
-    result.put("EarliestJulianDay", main.get(no).getEarliestJulianDay());
-    result.put("StartDateDisplay", main.get(no).getStartDateDisplay());
-    result.put("LastJulianDay", main.get(no).getLastJulianDay());
-    result.put("EndDateDisplay", main.get(no).getEndDateDisplay());
+    result.put("Title", main.get(0).getTitle());
+    result.put("FeatureImagePath", main.get(0).getFeatureImagePath());
+    result.put("Body", main.get(0).getBody());
+    result.put("InitialCaption", main.get(0).getInitialCaption());
+    result.put("IsOpenEnded", main.get(0).getIsOpenEnded());
+    result.put("EarliestJulianDay", main.get(0).getEarliestJulianDay());
+    result.put("StartDateDisplay", main.get(0).getStartDateDisplay());
+    result.put("LastJulianDay", main.get(0).getLastJulianDay());
+    result.put("EndDateDisplay", main.get(0).getEndDateDisplay());
     result.put("BackgroundEvents", "");
     
     result.put("Events", chronicleService.list(no));

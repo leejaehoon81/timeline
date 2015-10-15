@@ -3,6 +3,7 @@ requirejs.config({
     paths: {
       'jquery': 'lib/jquery',
       'bootstrap': 'lib/bootstrap.min',
+      'handlebars': 'lib/handlebars-v3.0.3',
       'jquery-easing': 'lib/jquery.easing.1.3.min',
       'jquery-magnific': 'lib/jquery.magnific-popup.min',
       'smooth': 'lib/SmoothScroll',

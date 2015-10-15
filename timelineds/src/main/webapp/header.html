@@ -130,7 +130,7 @@
 
 
 <!-- 내 연대기 모달 -->
-<div class="modal fade login" id="myChronicleModal">
+<!-- <div class="modal fade login" id="myChronicleModal">
 	<div class="modal-dialog login animated">
 		<div class="modal-content">
 		
@@ -174,14 +174,12 @@
  				  
 				  <div class="haveBox">
 				    <div class="chronicleBox">
-					    <input id="chronicle1" 
-					           class="btn btn-default btn-login" 
+					    <input class="btn btn-default btn-login" 
 					           type="button" 
 					           value="chronicle no.1">
-				     </div>
-				    <div class="chronicleBox">
-					    <input id="chronicle2" 
-					           class="btn btn-default btn-login" 
+					  </div>
+					  <div class="chronicleBox">         
+					    <input class="btn btn-default btn-login" 
 					           type="button" 
 					           value="chronicle no.2">
 				    </div>
@@ -190,13 +188,13 @@
 				</div>
 			</div>
 			
-			<!-- <div class="modal-footer">
+			<div class="modal-footer">
 			
-			</div> -->
+			</div>
 			
 		</div>
 	</div>
-</div>
+</div> -->
 
 
 <script type="text/javascript" src="js/lib/bootstrap-datepicker.js"></script>
@@ -208,6 +206,14 @@
       function() {
         loginInfo();
       });
+  
+  /* require([ 'app/myMain' ], function(handlebars) {
+			    handlebars.init();
+			  }); */
+  
+  
+  
+  
   
   $('#newChronicleBtn').on('click', function(e) {
     e.preventDefault();
@@ -353,4 +359,23 @@
     
     return year + "년" + month + "월" + day + "일";
   }
+  
 </script>
+<!-- 
+<script id="chroTemplate" type="text/x-handlebars-template">
+{{#each Events}}
+<div class="chronicleBox">
+  <a class="btn btn-default btn-login" onclick="modifyNo({{mainNo}})">{{Title}}</a>
+</div>  
+{{/each}}
+</script>
+
+<script>
+ function modifyNo(no) {
+   $('.timeline').attr('data-uri', 'list.do?no='+no);
+   console.log('hi');
+ }
+  
+	
+</script>
+ -->

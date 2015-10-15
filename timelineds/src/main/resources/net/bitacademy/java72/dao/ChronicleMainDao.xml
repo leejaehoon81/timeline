@@ -20,8 +20,8 @@
     <result column="CM_EDP"       property="EndDateDisplay" />
   </resultMap>
   
-  <select id="list" resultMap="ChronicleMainMap">
-    SELECT * FROM chro_main
+  <select id="list" resultMap="ChronicleMainMap" parameterType="int">
+    SELECT * FROM chro_main where m_key=#{value}
   </select>
   
   <insert id="insert" parameterType="ChronicleMain">

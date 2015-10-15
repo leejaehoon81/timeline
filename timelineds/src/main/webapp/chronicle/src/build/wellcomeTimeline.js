@@ -3860,6 +3860,7 @@ function WellcomeTimelineProvider(options) {
         $.getJSON('delete.do?no=' + myIndex, function(result) {
           if (result.Events == 'success') {
         	  $('.event.min.selected').remove();
+        	  $('.event.selected').remove();
         	  $('.tickEvent.available.selected').remove();
           } else {
             console.log('삭제실패');

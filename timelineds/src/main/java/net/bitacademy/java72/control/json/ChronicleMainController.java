@@ -1,6 +1,7 @@
 package net.bitacademy.java72.control.json;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -13,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import net.bitacademy.java72.domain.Chronicle;
 import net.bitacademy.java72.domain.ChronicleMain;
 import net.bitacademy.java72.domain.User;
 import net.bitacademy.java72.service.ChronicleMainService;
-import net.bitacademy.java72.service.ChronicleService;
 import net.bitacademy.java72.util.ResponseFactory;
 
 @Controller("json.ChronicleMainController")
@@ -33,6 +32,7 @@ public class ChronicleMainController {
       
       User user = (User) session.getAttribute("user");
       System.out.println(user.getMno());
+      
       chronicleMain.setMemberKeyNo(user.getMno());
       int count = chronicleMainService.insert(chronicleMain);
       
@@ -45,6 +45,18 @@ public class ChronicleMainController {
       }
       
       return ResponseFactory.createResponse(result);
+  }
+  
+  @RequestMapping("/mainList")
+  public ResponseEntity<String> list(HttpSession session) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    User user = (User) session.getAttribute("user");
+    
+    List<ChronicleMain> main = chronicleMainService.list(user.getMno());
+    
+    result.put("Events", main);
+    
+    return ResponseFactory.createResponse(result);
   }
   
 }

@@ -92,6 +92,9 @@ function loginInfo() {
 			/*$('#nameInfo').text(result.data.name);*/
 			$('#loginBtn').hide();
 			$('#mypage').show();
+			if (result.loding == 'loding') {
+         $('#content').load('chronicle/src/index.html');
+      }
 		} else {
 			/*getUserInfo();*/
 		}
