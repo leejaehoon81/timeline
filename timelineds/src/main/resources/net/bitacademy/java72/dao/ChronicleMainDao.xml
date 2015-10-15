@@ -25,11 +25,9 @@
   </select>
   
   <insert id="insert" parameterType="ChronicleMain">
-    INSERT INTO chro_main(CM_TITLE, CM_INTRO, CM_INTRO_PIC, CM_SHARE, 
-    CM_CAPTION, CM_ISOPEN, CM_EARLIEST, CM_LASTJD, CM_SDP, CM_EDP)
-    values(#{Title},#{Body},#{FeatureImagePath},#{isPublic},
-           #{InitialCaption},#{IsOpenEnded},#{EarliestJulianDay},
-           #{LastJulianDay},#{StartDateDisplay},#{EndDateDisplay})
+    INSERT INTO chro_main(M_KEY, CM_TITLE, CM_INTRO, CM_SHARE, 
+    CM_EARLIEST, CM_LASTJD)
+    values(#{memberKeyNo},#{Title},#{Body},true,#{EarliestJulianDay},#{LastJulianDay})
   </insert>
   
   <delete id="delete" parameterType="int">

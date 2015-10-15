@@ -150,22 +150,25 @@
  				  </div>
  				  
  				  <div class="newChronicleForm" style="display:none;">
-					         제목<input id="title" placeholder="연대기의 제목을 지어주세요" style="width:100%"> 
-					         내용<textarea id="content" placeholder="연대기의 주요 내용을 적어주세요" style="width:100%"></textarea>
-					         
-              <div class="input-daterange input-group" id="datepicker">
-						    <input type="text" class="input-sm form-control" name="start" value="연대기 시작 년도" 
-						           style="cursor: pointer; border-width: 1px;"/>
-						    <span class="input-group-addon"> ~ </span>
-						    <input type="text" class="input-sm form-control" name="end" value="연대기 종료 년도" 
-						           style="cursor: pointer; border-width: 1px;"/>
-              </div>
+ 				   <form>
+				    <b>제목</b>
+				     <input id="myChroTitle" placeholder="연대기의 제목을 지어주세요" style="width:100%"> 
+				    <b>내용</b>
+				     <textarea id="myChroContent" placeholder="연대기의 주요 내용을 적어주세요" style="width:100%"></textarea>
+				         
+             <div class="input-daterange input-group" id="datepicker">
+					    <input type="text" id="startYear" class="input-sm form-control" 
+					           name="start" value="연대기 시작 년도" style="cursor: pointer; border-width: 1px;"/>
+					    <span class="input-group-addon"> ~ </span>
+					    <input type="text" id="endYear" class="input-sm form-control" 
+					           name="end" value="연대기 종료 년도" style="cursor: pointer; border-width: 1px;"/>
+             </div>
 	          <div class="confirm">
-	            <input id="submitChronicle" type="button" value="확인">
-	            <input id="cancelChronicle" type="button" value="취소">
+	            <input id="submitChronicle" class="btn btn-default" type="button" value="생성" onclick="createChronicle()">
+	            <input id="cancelChronicle" class="btn btn-default" type="reset" value="취소">
 	          </div>
+	         </form>
           </div>
-          
  				  
  				  <div class="division"></div>
  				  
@@ -210,6 +213,13 @@
     e.preventDefault();
     $('.haveBox').toggle('slow');
     $('.newChronicleForm').toggle('slow');
+    
+    $('#newChronicleBtn').val('접기');
+    
+    /* if() {
+      $('#newChronicleBtn').val('새 연대기 만들기');
+    }  */
+    
   });
   
   $('.input-daterange.input-group').datepicker({
@@ -247,4 +257,100 @@
       $('#createAcc').hide();
     }
   };
+  
+  function createChronicle() {
+    console.log('연대기 제목: ', $('#myChroTitle').val());
+    console.log('연대기 내용: ', $('#myChroContent').val());
+    console.log('연대기 시작날짜: ', myDate($('#startYear').val()));
+    console.log('연대기 종료날짜: ', myDate($('#endYear').val()));
+    
+    $.chronicle.insert();
+    
+    $('#myChroTitle').val('');
+    $('#myChroContent').val('');
+    $('#startYear').val('연대기 시작 년도');
+    $('#endYear').val('연대기 종료 년도');
+    $('.close').click();
+    
+    $('#content').load('chronicle/src/index.html');
+  }
+  
+  
+  
+  (function($) {
+    $.chronicle = {
+      insert : function() {
+        $.ajax('mainInsert.do', {
+          method : 'POST',
+          dataType : 'json',
+          data : {
+            memberKeyNo : 1,
+            Title : $('#myChroTitle').val(),
+            Body : $('#myChroContent').val(),
+            EarliestJulianDay : myDate($('#startYear').val()),
+            LastJulianDay : myDate($('#endYear').val()),
+            StartDateDisplay : '',
+            BackgroundEvents : '',
+            IsOpenEnded : '',
+            EndDateDisplay : '',
+            InitialCaption : ''
+          },
+          success : function(result) {
+            if (result.Events == 'success') {
+              console.log('입력 성공');
+            } else {
+              console.log('입력 실패');
+            }
+          }
+        });
+      }
+    };
+  })(jQuery);
+  
+  
+  var myDate = function(calendar) {
+    
+    var julianday;
+    
+    if(calendar == ""){
+      alert('날짜를 올바르게 입력하세요');
+      julianday = '문자';
+      return julianday;
+    } else {
+      var year = calendar.substring(0,4);
+      var month = calendar.substring(5,7);
+      var day = calendar.substring(8,10);
+      
+      year = Number(year);
+      month = Number(month);
+      day = Number(day);
+      
+      if (month < 3) {
+        year--;
+        month += 12;
+      }
+
+      if (true) {
+        var A = Math.floor(year / 100);
+        var B = Math.floor(A / 4);
+        var C = 2 - A + B;
+      } else 
+        C = 0;
+      
+      var E = Math.floor(365.25 * (year + 4716));
+      var F = Math.floor(30.6001 * (month + 1));
+      
+      julianday = C + day + E + F - 1524; // 1524.5
+      
+      return julianday;
+    }
+  }
+  
+  var myDisplay = function(calendar) {
+    var year = calendar.substring(0,4);
+    var month = calendar.substring(5,7);
+    var day = calendar.substring(8,10);
+    
+    return year + "년" + month + "월" + day + "일";
+  }
 </script>
