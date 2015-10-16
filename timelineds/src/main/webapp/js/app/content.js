@@ -8,11 +8,12 @@ define([ 'jquery' ], function($) {
         $.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
           if (result.state == 'yes') {
             //$('#content').load('chronicle/src/index.html');
+        	  openMyChronicleModal();
           } else {
             openLoginModal();
           }
         });
-        openMyChronicleModal();
+        
       });
     } // end of init
   

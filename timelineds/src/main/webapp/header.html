@@ -23,7 +23,7 @@
 						<span class="caret"></span>
 				  </a>
 					<ul class="dropdown-menu arrow">
-						<li><a href="#">내 연대기</a></li>
+						<li><a href="#" id='mychro'>내 연대기</a></li>
 						<li><a href="#" id="myInfo" onclick="openInfoModal()">내 정보</a></li>
 						<li><a href="#" id="logout" onclick="FBLogout();">로그아웃</a></li>
 					</ul></li>
@@ -219,6 +219,11 @@
     clearBtn: true,
     autoclose: true
   });
+  
+$('#mychro').on('click', function(e) {
+	e.preventDefault();
+	openMyChronicleModal();
+});
 
   $('#registerEmail').keyup(
       function(event) {
