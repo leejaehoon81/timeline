@@ -40,8 +40,9 @@ public class ChronicleMainController {
       if (count > 0) {
         result.put("Events", "success");
        
-        session.setAttribute("main", newMain(user.getMno()));
-        System.out.println("main session => "+session.getAttribute("main"));
+        //session.setAttribute("main", newMain(user.getMno()));
+        session.setAttribute("mainNo", newMain(user.getMno()).getMainNo());
+        System.out.println("mainNo session => "+session.getAttribute("mainNo"));
       } else {
         result.put("Events", "failure");
       }
