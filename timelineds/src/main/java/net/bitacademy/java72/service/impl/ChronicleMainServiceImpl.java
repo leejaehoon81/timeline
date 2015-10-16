@@ -1,6 +1,7 @@
 // create by YJ 0916
 package net.bitacademy.java72.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,19 @@ public class ChronicleMainServiceImpl implements ChronicleMainService {
   @Override
   public int countAll() {
     return chronicleMainDao.countAll();
+  }
+
+  @Override
+  public List<ChronicleMain> newMain(int no) {
+    return chronicleMainDao.newMain(no);
+  }
+
+  @Override
+  public ChronicleMain getMain(int mainNo, int mno) {
+    HashMap<String,Integer> map = new HashMap<String,Integer>();
+    map.put("mainNo", mainNo);
+    map.put("mno", mno);
+    return chronicleMainDao.getMain(map);
   }
   
 }

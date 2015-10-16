@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import net.bitacademy.java72.domain.Chronicle;
 import net.bitacademy.java72.domain.ChronicleMain;
+import net.bitacademy.java72.domain.User;
 import net.bitacademy.java72.service.ChronicleMainService;
 import net.bitacademy.java72.service.ChronicleService;
 import net.bitacademy.java72.util.ResponseFactory;
@@ -28,6 +29,31 @@ public class ChronicleController {
   @Autowired ServletContext servletContext;
 
   
+  @RequestMapping("/getMain")
+  public ResponseEntity<String> getNo(HttpSession session) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    session.setAttribute("loding", "");
+    User user = (User)session.getAttribute("user");
+    int no = (int)session.getAttribute("mainNo");
+    System.out.println("no==>"+no);
+    ChronicleMain chronicleMain = chronicleMainService.getMain(no,user.getMno());
+    System.out.println("chronicleMain.getTitle()"+ chronicleMain.getTitle());
+    result.put("Title",chronicleMain.getTitle());
+    result.put("FeatureImagePath", chronicleMain.getFeatureImagePath());
+    result.put("Body", chronicleMain.getBody());
+    result.put("InitialCaption", chronicleMain.getInitialCaption());
+    result.put("IsOpenEnded", chronicleMain.getIsOpenEnded());
+    result.put("EarliestJulianDay", chronicleMain.getEarliestJulianDay());
+    result.put("StartDateDisplay", chronicleMain.getStartDateDisplay());
+    result.put("LastJulianDay", chronicleMain.getLastJulianDay());
+    result.put("EndDateDisplay", chronicleMain.getEndDateDisplay());
+    result.put("BackgroundEvents", "");
+    
+    result.put("Events", chronicleService.list(no));
+    
+    
+    return ResponseFactory.createResponse(result);
+  }
   @RequestMapping("/delete")
   public ResponseEntity<String> delete(HttpSession session,  int no) {
     Map<String,Object> result = new HashMap<String,Object>();
@@ -41,7 +67,7 @@ public class ChronicleController {
     }
     
     count = chronicleService.delete(no);
-
+    
     if (count > 0) {
       result.put("Events", "success");
       session.setAttribute("loding", "loding");
@@ -96,29 +122,6 @@ public class ChronicleController {
       result.put("iNumber", c.getEventId());
       session.setAttribute("iNumber", c.getEventId());
     }
-    return ResponseFactory.createResponse(result);
-  }
-  
-  @RequestMapping("/list")
-  public ResponseEntity<String> list(int no) {
-    
-    Map<String,Object> result = new HashMap<String,Object>();
-    
-    List<ChronicleMain> main = chronicleMainService.list(no);
-    
-    result.put("Title", main.get(0).getTitle());
-    result.put("FeatureImagePath", main.get(0).getFeatureImagePath());
-    result.put("Body", main.get(0).getBody());
-    result.put("InitialCaption", main.get(0).getInitialCaption());
-    result.put("IsOpenEnded", main.get(0).getIsOpenEnded());
-    result.put("EarliestJulianDay", main.get(0).getEarliestJulianDay());
-    result.put("StartDateDisplay", main.get(0).getStartDateDisplay());
-    result.put("LastJulianDay", main.get(0).getLastJulianDay());
-    result.put("EndDateDisplay", main.get(0).getEndDateDisplay());
-    result.put("BackgroundEvents", "");
-    
-    result.put("Events", chronicleService.list(no));
-    
     return ResponseFactory.createResponse(result);
   }
   

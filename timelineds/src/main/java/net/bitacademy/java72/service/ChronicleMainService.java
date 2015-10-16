@@ -12,4 +12,6 @@ public interface ChronicleMainService {
   int insert(ChronicleMain chronicleMain);
   ChronicleMain get(int no);
   int countAll();
+  List<ChronicleMain> newMain(int no);
+  ChronicleMain getMain(int mainNo, int mno);
 }

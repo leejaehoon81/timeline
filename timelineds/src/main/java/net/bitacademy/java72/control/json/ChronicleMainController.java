@@ -39,12 +39,33 @@ public class ChronicleMainController {
       Map<String,Object> result = new HashMap<String,Object>();
       if (count > 0) {
         result.put("Events", "success");
-        session.setAttribute("loding", "loding");
+       
+        session.setAttribute("main", newMain(user.getMno()));
+        System.out.println("main session => "+session.getAttribute("main"));
       } else {
         result.put("Events", "failure");
       }
       
       return ResponseFactory.createResponse(result);
+  }
+  
+  public ChronicleMain newMain(int no){
+  
+    List<ChronicleMain> main = chronicleMainService.newMain(no);
+    ChronicleMain newMain = main.get(0);
+    return newMain;
+  }
+  
+  @RequestMapping("/getNo")
+  public  ResponseEntity<String> getMain(ChronicleMain chronicleMain, HttpSession session) throws Exception {
+    //User user = (User) session.getAttribute("user");
+    System.out.println("mainno = >"+chronicleMain.getMainNo());
+    session.setAttribute("mainNo", chronicleMain.getMainNo());
+    
+    Map<String,Object> result = new HashMap<String,Object>();
+    //chronicleMain = chronicleMainService.getMain(chronicleMain.getMainNo(),user.getMno());
+    result.put("success", "ok");
+    return ResponseFactory.createResponse(result);
   }
   
   @RequestMapping("/mainList")
