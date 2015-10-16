@@ -262,10 +262,14 @@
     $('#endYear').val('연대기 종료 년도');
     $('.close').click();
     
-    $('#content').load('chronicle/src/index.html');
   }
   
-  
+  function modifyNo(no) {
+	   console.log(no);
+	   //preventDefault();
+	   $.chronicle.getMain(no);
+	   $('.close').click();
+	 }
   
   (function($) {
     $.chronicle = {
@@ -288,11 +292,27 @@
           success : function(result) {
             if (result.Events == 'success') {
               console.log('입력 성공');
+              $('#content').load('chronicle/src/index.html');
             } else {
               console.log('입력 실패');
             }
           }
         });
+      },
+      getMain: function(no){
+    	  $.ajax('getNo.do', {
+              method : 'POST',
+              dataType : 'json',
+              data : {
+            	  mainNo : no
+              },
+              success : function(result) {
+                if (result.success == 'ok') {
+                  console.log('입력 성공');
+                  $('#content').load('chronicle/src/index.html');
+                } 
+              }
+            });
       }
     };
   })(jQuery);
@@ -353,11 +373,3 @@
 {{/each}}
 </script>
 
-<script>
- function modifyNo(no) {
-   $('.timeline').attr('data-uri', 'list.do?no='+no);
-   console.log('modifyNo')
- }
-  
-	
-</script>

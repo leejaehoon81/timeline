@@ -7,7 +7,7 @@ define([ 'jquery' ], function($) {
         e.preventDefault();
         $.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
           if (result.state == 'yes') {
-            $('#content').load('chronicle/src/index.html');
+            //$('#content').load('chronicle/src/index.html');
           } else {
             openLoginModal();
           }
