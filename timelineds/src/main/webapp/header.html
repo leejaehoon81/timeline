@@ -130,7 +130,7 @@
 
 
 <!-- 내 연대기 모달 -->
-<!-- <div class="modal fade login" id="myChronicleModal">
+<div class="modal fade login" id="myChronicleModal">
 	<div class="modal-dialog login animated">
 		<div class="modal-content">
 		
@@ -171,30 +171,18 @@
           </div>
  				  
  				  <div class="division"></div>
- 				  
-				  <div class="haveBox">
-				    <div class="chronicleBox">
-					    <input class="btn btn-default btn-login" 
-					           type="button" 
-					           value="chronicle no.1">
-					  </div>
-					  <div class="chronicleBox">         
-					    <input class="btn btn-default btn-login" 
-					           type="button" 
-					           value="chronicle no.2">
-				    </div>
-				  </div>
+				  <div class="haveBox"></div>
 				  
 				</div>
 			</div>
 			
-			<div class="modal-footer">
+			<!-- <div class="modal-footer">
 			
-			</div>
+			</div> -->
 			
 		</div>
 	</div>
-</div> -->
+</div>
 
 
 <script type="text/javascript" src="js/lib/bootstrap-datepicker.js"></script>
@@ -207,13 +195,9 @@
         loginInfo();
       });
   
-  /* require([ 'app/myMain' ], function(handlebars) {
+  require([ 'app/myMain' ], function(handlebars) {
 			    handlebars.init();
-			  }); */
-  
-  
-  
-  
+			  });
   
   $('#newChronicleBtn').on('click', function(e) {
     e.preventDefault();
@@ -361,7 +345,6 @@
   }
   
 </script>
-<!-- 
 <script id="chroTemplate" type="text/x-handlebars-template">
 {{#each Events}}
 <div class="chronicleBox">
@@ -373,9 +356,8 @@
 <script>
  function modifyNo(no) {
    $('.timeline').attr('data-uri', 'list.do?no='+no);
-   console.log('hi');
+   console.log('modifyNo')
  }
   
 	
 </script>
- -->
