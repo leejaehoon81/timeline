@@ -51,4 +51,12 @@
     SELECT count(*) FROM chro_main
   </select>
   
+  <select id="newMain" resultMap="ChronicleMainMap" parameterType="int">
+    select * from chro_main where m_key=#{no}  order by cm_no desc
+  </select>
+  
+  <select id="getMain" resultMap="ChronicleMainMap" parameterType="map">
+    select * from chro_main where m_key=#{mno} and cm_no=#{mainNo}
+  </select>
+  
 </mapper>
