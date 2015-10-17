@@ -90,7 +90,9 @@ public class ChronicleController {
   @RequestMapping("/insert")
   public ResponseEntity<String> insert(Chronicle chronicle, HttpSession session, 
       @RequestParam(required=false) MultipartFile file1) throws Exception {
-    
+      
+      int mainNo = (int) session.getAttribute("mainNo");
+      chronicle.setMainNo(mainNo);
       int count = chronicleService.insert(chronicle);
       
       Map<String,Object> result = new HashMap<String,Object>();

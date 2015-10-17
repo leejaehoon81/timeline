@@ -36,11 +36,8 @@
   </select>
   
   <insert id="insert" parameterType="Chronicle">
-    INSERT INTO chronicle(CM_NO, C_TITLE, C_CONTENT, C_PRIORITY, C_START, C_END, 
-                          C_SDP, C_SDPY, C_EDP, C_EDPY, C_LINK, C_TARGET, YEAR)
-    values(#{mainNo},#{Title},#{Body},#{Priority},#{JulianDayStart},
-           #{JulianDayEnd},#{StartDisplay},#{StartDisplayYear},#{EndDisplay},
-           #{EndDisplayYear},#{LinkText},#{LinkTarget},#{Year})
+    INSERT INTO chronicle(CM_NO, C_TITLE, C_CONTENT, C_PRIORITY, C_START, C_SDP, C_SDPY)
+    values(#{mainNo},#{Title},#{Body},#{Priority},#{JulianDayStart},#{StartDisplay},#{StartDisplayYear})
   </insert>
   
   <delete id="deleteWithPic" parameterType="int">
