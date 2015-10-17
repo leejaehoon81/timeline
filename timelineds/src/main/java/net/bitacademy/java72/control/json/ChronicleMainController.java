@@ -29,7 +29,7 @@ public class ChronicleMainController {
   @RequestMapping("/mainInsert")
   public ResponseEntity<String> insert(ChronicleMain chronicleMain, HttpSession session, 
       @RequestParam(required=false) MultipartFile file1) throws Exception {
-      
+    session.setAttribute("loding","loding");
       User user = (User) session.getAttribute("user");
       System.out.println(user.getMno());
       
@@ -60,6 +60,7 @@ public class ChronicleMainController {
   @RequestMapping("/getNo")
   public  ResponseEntity<String> getMain(ChronicleMain chronicleMain, HttpSession session) throws Exception {
     //User user = (User) session.getAttribute("user");
+    session.setAttribute("loding","loding");
     System.out.println("mainno = >"+chronicleMain.getMainNo());
     session.setAttribute("mainNo", chronicleMain.getMainNo());
     

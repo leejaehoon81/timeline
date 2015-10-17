@@ -297,7 +297,8 @@ $('#mychro').on('click', function(e) {
           success : function(result) {
             if (result.Events == 'success') {
               console.log('입력 성공');
-              $('#content').load('chronicle/src/index.html');
+             // $('#content').load('chronicle/src/index.html');
+              window.location.reload();
             } else {
               console.log('입력 실패');
             }
@@ -314,7 +315,8 @@ $('#mychro').on('click', function(e) {
               success : function(result) {
                 if (result.success == 'ok') {
                   console.log('입력 성공');
-                  $('#content').load('chronicle/src/index.html');
+                  //$('#content').load('chronicle/src/index.html');
+                  window.location.reload();
                 } 
               }
             });
