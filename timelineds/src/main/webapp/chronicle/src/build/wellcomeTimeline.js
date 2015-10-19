@@ -3870,10 +3870,14 @@ function WellcomeTimelineProvider(options) {
       detail: function(myIndex) {
         $.getJSON('detail.do?no=' + myIndex, function(result) {
           var data = result.Events;
+          var photo = result.Photos;
+          console.log(photo);
           $('#frameModify').contents().find('#fTitle').val(data.Title);
           $('#frameModify').contents().find('#fContent').val(data.Body);
           $('#frameModify').contents().find('#myCal').val(data.StartDisplay);
           $('#frameModify').contents().find('#myIndex').val(data.EventId);
+          $('#frameModify').contents().find('#files').append('<img src="' + photo.FeatureImagePath + '" style="height:100px">');
+          $('#frameModify').contents().find('#files').append('<span>' + photo.FeatureImagePath + '</span>');
         });
       } 
   };

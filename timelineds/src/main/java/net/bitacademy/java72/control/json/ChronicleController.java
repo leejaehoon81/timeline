@@ -19,6 +19,7 @@ import net.bitacademy.java72.domain.ChronicleMain;
 import net.bitacademy.java72.domain.User;
 import net.bitacademy.java72.service.ChronicleMainService;
 import net.bitacademy.java72.service.ChronicleService;
+import net.bitacademy.java72.service.DialogPhotoService;
 import net.bitacademy.java72.util.ResponseFactory;
 
 @Controller("json.ChronicleController")
@@ -27,6 +28,7 @@ public class ChronicleController {
   @Autowired ChronicleService chronicleService;
   @Autowired ChronicleMainService chronicleMainService;
   @Autowired ServletContext servletContext;
+  @Autowired DialogPhotoService dialogPhotoService;
 
   
   @RequestMapping("/getMain")
@@ -83,6 +85,7 @@ public class ChronicleController {
   public ResponseEntity<String> detail(int no) {
     Map<String,Object> result = new HashMap<String,Object>();
     result.put("Events", chronicleService.get(no));
+    result.put("Photos", dialogPhotoService.get(no));
     
     return ResponseFactory.createResponse(result);
   }

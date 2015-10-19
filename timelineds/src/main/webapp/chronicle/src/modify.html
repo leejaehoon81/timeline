@@ -3,14 +3,23 @@
 <meta charset='UTF-8'>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css" />
-
-<link rel="stylesheet" href="../../fileUpload/css/styles.css">
-<link rel="stylesheet" href="../../fileUpload/css/main.css">
+<link rel="stylesheet" href="../../css/jquery.fileupload.css">
 
 <script type="text/javascript" src="js/libs/jquery.min.js"></script>
 <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/libs/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/libs/bootstrap-datepicker.kr.min.js"></script>
+
+<script type="text/javascript" src="../../js/lib/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../../js/lib/canvas-to-blob.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.fileupload-image.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.fileupload-audio.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.fileupload-validate.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.fileupload-video.js"></script>
+<script type="text/javascript" src="../../js/lib/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../../js/lib/load-image.js"></script>
 
 
 <style>
@@ -47,9 +56,25 @@ html {
 
 
     <!-- fileupload -->
+    
+    <div class="form-group my-new">
+        <label class="col-sm-2 control-label">사진</label>
+        <div class="col-sm-10">
+          <span class="btn btn-success fileinput-button"> 
+             <i class="glyphicon glyphicon-plus"></i> <span>파일 찾기</span> 
+             <input id="fileupload" type="file" name="file" multiple> 
+             <!-- 업로드한 후에 서버에서 보내준 파일명을 저장.회원 정보를 등록할 때 함께 보냄.--> 
+             <input id='fPhoto' type='hidden'>
+          </span> <br><br>
+          
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+          </div>
+          <div id="files" class="files"></div>
+        </div>
+      </div>
 
-		
-		<!-- <div class="form-group">
+			<!-- <div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10"> -->
 			<div id='btnArea'>
 				<button id='updateBtn' type='button' class="btn btn-success btn-sm my-new">변경</button>
@@ -82,14 +107,41 @@ html {
             JulianDayStart : myDate($('#myCal').val()),
             StartDisplay : myDisplay($('#myCal').val()),
             StartDisplayYear : myDisplay($('#myCal').val()),
-            priority : 1
+            priority : Math.floor((Math.random() * 5) + 1)
           },
           success : function(result) {
             if (result.Events == 'success') {
-            	window.parent.parent.location.reload();
+            	/* window.parent.parent.location.reload(); */
+              $.chronicle.getIndex();
             } else {
               alert('입력실패');
             }
+          }
+        });
+      },
+      photoUpdate : function() {
+        $.ajax('photoUpdate.do', {
+          method : 'POST',
+          dataType : 'json',
+          data : {
+            EventId : this.iNumber, 
+            ThumbnailPath : 'files/' + $('#fPhoto').val(),
+            FeatureImagePath : 'files/' + $('#fPhoto').val()
+          },
+          success : function(result) {
+            if (result.Events == 'success') {
+              window.parent.parent.location.reload();
+            } else {
+              console.log('db에 파일명 넣기 실패');
+            }
+          }
+        });
+      },
+      getIndex : function(){
+        var moduleObj = this;
+        $.getJSON('getIndex.do', function(result){
+          if(result.data=='ok'){
+            $.chronicle.photoUpdate(); 
           }
         });
       }
@@ -143,6 +195,47 @@ html {
     
     return year + "년" + month + "월" + day + "일";
   }
+  
+  $(function() {
+    $('#fileupload').fileupload({
+      url: '/timelineds/json/file/upload.do',
+      dataType: 'json',
+      maxFileSize: 10000000,
+      disableImageResize: /Android(?!.*Chrome)|Opera/
+        .test(window.navigator.userAgent),
+      previewMaxWidth: 100,
+      previewMaxHeight: 100,
+      previewCrop: true
+    }).on('fileuploadsubmit', function(e, data) {
+      // 서버에 일반 폼 데이터도 보내고 싶으면, submit 하기 전에
+      // 다음과 같이 formData 프로퍼티에 값을 설정하라!
+      /*
+      data.formData = {
+        data1: 'okok',
+        data2: 'nono'
+      };
+      */
+    }).on('fileuploaddone', function(e, data) {
+      console.log(data.result);
+      $('#files').html('');
+      $.each(data.result.data, function (index, file) {
+        console.log(file);
+          $('<img>')
+            .attr('src', 'files/' + file.name)
+            .css('width', '100px')
+            .appendTo('#files');
+          $('<span/>')
+          .text(file.name 
+              + '(' + file.originName + ')'
+              + ', ' + file.size)
+              .appendTo('#files');
+          $('#fPhoto').val(file.name);
+      });
+    }).on('fileuploadprogressall', function (e, data) {
+      var progress = parseInt(data.loaded / data.total * 100, 10);
+      $('#progress .progress-bar').css('width', progress + '%');
+    });
+  });
   
   
 </script>

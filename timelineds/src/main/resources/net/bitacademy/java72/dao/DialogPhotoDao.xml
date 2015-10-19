@@ -32,14 +32,12 @@
 
   <update id="update" parameterType="DialogPhoto">
     UPDATE dialog_photo SET 
-      THUMB_PATH=#{ThumbnailPath}, DIALOG_PATH=#{FeatureImagePath}, 
-      DETAIL_PATH=#{detailPath}, PROMO=#{PromoImagePath}, 
-      CREDIT=#{ImageCredit}, USED=#{UsedBy}
-    WHERE PIC_NO=#{photoNo}      
+      THUMB_PATH=#{ThumbnailPath}, DIALOG_PATH=#{FeatureImagePath}
+    WHERE C_INDEX=#{EventId}      
   </update>
   
   <select id="get" parameterType="int" resultMap="DialogPhotoMap">
-    SELECT * FROM dialog_photo WHERE CM_NO=#{mainNo}
+    SELECT * FROM dialog_photo WHERE C_INDEX=#{index}
   </select>
   
   <select id="countAll" resultType="int">

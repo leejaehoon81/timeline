@@ -48,4 +48,22 @@ public class PhotoController {
       return ResponseFactory.createResponse(result);
   }
   
+  @RequestMapping("/photoUpdate")
+  public ResponseEntity<String> udpate(DialogPhoto dialogPhoto, HttpSession session, 
+      @RequestParam(required=false) MultipartFile file1) throws Exception {
+    dialogPhoto.setEventId((int) session.getAttribute("iNumber"));
+    int count = dialogPhotoService.update(dialogPhoto);
+    
+    Map<String,Object> result = new HashMap<String,Object>();
+    
+    if (count > 0) {
+      result.put("Events", "success");
+      session.setAttribute("loding", "loding");
+    } else {
+      result.put("Events", "failure");
+    }
+    
+    return ResponseFactory.createResponse(result);
+  }
+  
 }
