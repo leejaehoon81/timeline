@@ -89,6 +89,8 @@ function loginInfo() {
 	$.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
 		if (result.state == 'yes') {
 			$('#emailInfo').text(result.data.email);
+			$('.infoEmail').text(result.data.email);
+			$('.infoName').text(result.data.name);
 			/*$('#nameInfo').text(result.data.name);*/
 			$('#loginBtn').hide();
 			$('#mypage').show();
@@ -141,5 +143,26 @@ function shakeModal(){
                 $('#loginModal .modal-dialog').removeClass('shake'); 
     }, 1000 ); 
 }
+
+
+$('#sample1').on('click', function(e) {
+  e.preventDefault();
+  $.ajax(contextRoot + '/json/user/login.do', {
+    method : 'POST',
+    dataType : 'json',
+    data : {
+      email : 'steven',
+      password : 1111
+    },
+    success : function(result) {
+      if (result.data == 'yes') {        
+        console.log('main open');
+        $.chronicle.getMain(16);
+      } else {
+        console.log('샘플 실패');
+      }
+    }
+  });
+});
 
    

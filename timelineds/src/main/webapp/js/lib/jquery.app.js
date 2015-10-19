@@ -22,7 +22,7 @@ Smooth Scroll To Anchor
 =============================================== */
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
-    $('#example').bind('click', function(event) {
+    $('#example, #goHome').bind('click', function(event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top - 0

@@ -80,9 +80,11 @@ function getUserInfo() {
     $('#loginBtn').hide();
     $('#mypage').show();
     
-    $('#infoPic').html("<img src='" + response.picture.data.url + "'/>");
-    $('#infoEmail').text(response.email);
-    $('#infoName').text(response.name);
+    /*$('#infoPic').html("<img src='" + response.picture.data.url + "'/>");*/
+    $('#myPic').attr('src', response.picture.data.url);
+    $('#picInfo').attr('src', response.picture.data.url);
+    $('.infoEmail').text(response.email);
+    $('.infoName').text(response.name);
   });
 }
 
