@@ -82,4 +82,17 @@ public class ChronicleMainController {
     return ResponseFactory.createResponse(result);
   }
   
+  @RequestMapping("/delMain")
+  public ResponseEntity<String> delete(int no) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    int count = chronicleMainService.delete(no);
+    if (count > 0) {
+      result.put("Events", "success");
+    } else {
+      result.put("Events", "failure");
+    }
+    
+    return ResponseFactory.createResponse(result);
+  }
+  
 }

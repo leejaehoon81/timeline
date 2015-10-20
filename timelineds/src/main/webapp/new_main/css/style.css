@@ -20,7 +20,7 @@
   margin-left: 109px;
 }
 
-.title {
+.myTitle {
   width: 100px;
   text-align: center;
   background-color: #faf6ef;
@@ -40,6 +40,7 @@
 
 #sample1, #sample2 {
 	cursor: pointer;
+	box-shadow: 10px 10px 5px #615E5E;
 }
 
 #newChronicleBtn {
@@ -222,7 +223,7 @@ textarea {
   top: 0px;
 }
 .bg-one {
-  background: url("../images/bg.jpg");
+  background: url("../images/bottom.jpg");
   background-size: cover;
   position: relative;
 }

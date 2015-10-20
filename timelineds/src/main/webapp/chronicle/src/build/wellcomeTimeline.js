@@ -1254,6 +1254,7 @@ function WellcomeTimelineProvider(options) {
         _create: function () {
             var self = this;
 
+            
             // load config.
             $.getJSON(self.options.configUri, function (config) {
 
@@ -2232,6 +2233,7 @@ function WellcomeTimelineProvider(options) {
         _setEventsZIndex: function (stackLevel) {
             var self = this;
 
+       
             // set zIndex, top stack is furthest back.
             for (var i = 0, l = self.events.length; i < l; i++) {
                 var evnt = self.events[i];
