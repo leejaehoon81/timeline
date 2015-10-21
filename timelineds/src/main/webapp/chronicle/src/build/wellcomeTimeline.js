@@ -2303,7 +2303,6 @@ function WellcomeTimelineProvider(options) {
             // event visibility.
             for (i = 0, l = self.eventStack.length; i < l; i++) {
                 var stackLevel = self.eventStack[i];
-
                 self._updateStackLevelVisibleEvents(stackLevel);
             }
         },
@@ -2316,10 +2315,9 @@ function WellcomeTimelineProvider(options) {
 
                 if (currentEvent.isVisible) {
                     var overlap = currentEvent.leftPos + currentEvent.width + 10; // add 10px margin
-
+                    
                     for (var j = i + 1, ll = stackLevel.length; j < ll; j++) {
                         var nextEvent = stackLevel[j];
-
                         // if the next event's left position overlaps
                         // the current event.
                         if (nextEvent.isVisible) {
@@ -3884,3 +3882,6 @@ function WellcomeTimelineProvider(options) {
       } 
   };
 })(jQuery);
+
+
+sessionStorage.setItem("myNo", 10);

@@ -165,4 +165,24 @@ $('#sample1').on('click', function(e) {
   });
 });
 
+$('#sample2').on('click', function(e) {
+  e.preventDefault();
+  $.ajax(contextRoot + '/json/user/login.do', {
+    method : 'POST',
+    dataType : 'json',
+    data : {
+      email : 'steven',
+      password : 1111
+    },
+    success : function(result) {
+      if (result.data == 'yes') {        
+        console.log('main open');
+        $.chronicle.getMain(21);
+      } else {
+        console.log('샘플 실패');
+      }
+    }
+  });
+});
+
    
