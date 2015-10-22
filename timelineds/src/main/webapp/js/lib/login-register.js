@@ -104,6 +104,8 @@ function loginInfo() {
 }
 
 $('#createAcc').click(function() {
+	sessionStorage.setItem('email', $('#registerEmail').val());
+	sessionStorage.setItem('password', $('#registerPass').val());
 	$.ajax(contextRoot + '/json/user/insert.do', {
 		method : 'POST',
 		dataType : 'json',
@@ -112,9 +114,27 @@ $('#createAcc').click(function() {
 			password : $('#registerPass').val()
 		},
 		success : function(result) {
+			
 			if (result.data == 'success') {
-				/*window.location.reload();*/
-				loginInfo();
+				$.ajax(contextRoot + '/json/user/login.do', {
+					method : 'POST',
+					dataType : 'json',
+					data : {
+						email : sessionStorage.getItem('email'),
+						password : sessionStorage.getItem('password') 
+					},
+					success: function(result) {
+						if (result.data == 'yes') {
+							window.location.reload();
+							loginInfo();
+							$('#loginPass').val('');
+							$('#loginEmail').val('');
+						} else {
+							shakeModal();
+						}
+					}
+				});
+				
 				$('#registerEmail').val('');
 				$('#registerPass').val('');
 				$('#password_confirmation').val('');
