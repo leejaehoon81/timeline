@@ -181,7 +181,7 @@
 				    <b>제목</b>
 				     <input id="myChroTitle" placeholder="연대기의 제목을 지어주세요" style="width:100%"> 
 				    <b>내용</b>
-				     <textarea id="myChroContent" placeholder="연대기의 주요 내용을 적어주세요" style="width:100%"></textarea>
+				     <textarea id="myChroContent" rows="8" cols="50" placeholder="연대기의 주요 내용을 적어주세요" style="width:100%"></textarea>
 				         
              <div class="input-daterange input-group" id="datepicker">
 					    <input type="text" id="startYear" class="input-sm form-control" 
@@ -230,7 +230,7 @@
     $('.haveBox').toggle('slow');
     $('.newChronicleForm').toggle('slow');
     
-    $('#newChronicleBtn').val('접기');
+    /* $('#newChronicleBtn').val('접기'); */
     
     /* if() {
       $('#newChronicleBtn').val('새 연대기 만들기');
@@ -410,7 +410,7 @@ $('#mychro').on('click', function(e) {
 <script id="chroTemplate" type="text/x-handlebars-template">
 {{#each Events}}
 <div class="chronicleBox">
-  <a class="btn btn-default btn-login" onclick="modifyNo({{mainNo}})">{{Title}}</a>
+  <div id="chroList" class="btn btn-default btn-login" onclick="modifyNo({{mainNo}})">{{Title}}</div>
 </div>  
 {{/each}}
 </script>

@@ -9,6 +9,15 @@
 
 
 /*========= Custom Font =========*/
+#chroList {
+	background-color: #6A3C94;
+	width:100%; overflow:hidden; white-space:nowrap;?text-overflow:ellipsis;??
+}
+
+#chroList:hover {
+	background-color: #8863A9;
+}
+
 #picInfo {
 	width: 25px;
 }
