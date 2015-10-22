@@ -3874,7 +3874,7 @@ function WellcomeTimelineProvider(options) {
           console.log(photo);
           $('#frameModify').contents().find('#fTitle').val(data.Title);
           $('#frameModify').contents().find('#fContent').val(data.Body);
-          $('#frameModify').contents().find('#myCal').val(data.StartDisplay);
+          $('#frameModify').contents().find('#myCal').val(myDisplay(data.StartDisplay));
           $('#frameModify').contents().find('#myIndex').val(data.EventId);
           $('#frameModify').contents().find('#files').append('<img src="' + photo.FeatureImagePath + '" style="height:100px">');
           $('#frameModify').contents().find('#files').append('<span>' + photo.FeatureImagePath + '</span>');
@@ -3884,4 +3884,10 @@ function WellcomeTimelineProvider(options) {
 })(jQuery);
 
 
-sessionStorage.setItem("myNo", 10);
+var myDisplay = function(calendar) {
+  var year = calendar.substring(0,4);
+  var month = calendar.substring(5,7);
+  var day = calendar.substring(8,10);
+  
+  return year + "/" + month + "/" + day;
+}

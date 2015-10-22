@@ -57,5 +57,15 @@ public class ChronicleMainServiceImpl implements ChronicleMainService {
     map.put("mno", mno);
     return chronicleMainDao.getMain(map);
   }
+
+  @Override
+  public int delMainWithPic(int no) {
+    return chronicleMainDao.delMainWithPic(no);
+  }
+
+  @Override
+  public int delWithNo(int no) {
+    return chronicleMainDao.delWithNo(no);
+  }
   
 }

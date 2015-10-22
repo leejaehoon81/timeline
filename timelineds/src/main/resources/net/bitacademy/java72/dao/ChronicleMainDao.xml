@@ -33,6 +33,15 @@
   <delete id="delete" parameterType="int">
     DELETE FROM chro_main WHERE CM_NO=#{mainNo}
   </delete>
+  
+  <delete id="delMainWithPic" parameterType="int">
+    delete t2 from chronicle t1 inner join dialog_photo t2
+    where t1.cm_no=#{mainNo} and t1.c_index=t2.c_index
+  </delete>
+  
+  <delete id="delWithNo" parameterType="int">
+    delete from chronicle where cm_no=#{mainNo}
+  </delete>
 
   <update id="update" parameterType="ChronicleMain">
     UPDATE chro_main SET 

@@ -85,6 +85,8 @@ public class ChronicleMainController {
   @RequestMapping("/delMain")
   public ResponseEntity<String> delete(int no) {
     Map<String,Object> result = new HashMap<String,Object>();
+    chronicleMainService.delMainWithPic(no);
+    chronicleMainService.delWithNo(no);
     int count = chronicleMainService.delete(no);
     if (count > 0) {
       result.put("Events", "success");

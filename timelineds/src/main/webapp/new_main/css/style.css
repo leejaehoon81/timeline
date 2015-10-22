@@ -13,7 +13,32 @@
 	width: 25px;
 }
 
-#infoPic {
+.delBtn {
+	width: 80%;
+}
+
+.field {
+	text-align: center;
+}
+
+.myTitle {
+	width: 30%;
+	text-align: center;
+	font-weight: bold;
+	background-color: #fcf8e3;
+}
+
+#leaveBtn {
+	margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+#leaveView {
+	color: red;
+	font-weight: bold;
+}
+
+/* #infoPic {
 	width: 100px;
 	height: 100px;
 	margin-bottom: 20px;
@@ -36,7 +61,7 @@
   width: 280px;
   border: 1px solid #dcd9d3;
   text-align: center;
-}
+} */
 
 #sample1, #sample2 {
 	cursor: pointer;

@@ -57,7 +57,7 @@ function FBLogin() {
       $('#loginBtn').hide();
       $('.close').click();
     } else {
-      alert('Authorization failed.');
+      console.log('페이스북 로그인 실패');
     }
   }, {
     scope : 'public_profile,email'
