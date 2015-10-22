@@ -148,6 +148,7 @@ $('#createAcc').click(function() {
 
 $('#logout').click(function(event) {
 	 event.preventDefault();
+	 FBLogout();
 	 $.getJSON(contextRoot + '/json/auth/logout.do', function(result) {
 		 /*$(document).trigger('logout.success');*/
 		 window.location.reload();
