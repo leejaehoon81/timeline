@@ -38,15 +38,13 @@
     DELETE FROM member WHERE mno=#{value}
   </delete> -->
 
-  <!-- <update id="update" parameterType="Member">
-    UPDATE member SET 
-      mname=#{name},
+  <update id="update" parameterType="Member">
+    UPDATE member_info SET 
       email=#{email},
-      tel=#{tel},
-      pwd=#{password},
-      photo=#{photo}
-    WHERE mno=#{no}      
-  </update> -->
+      name=#{name},
+      pwd=#{password}
+    WHERE m_key=#{mno}      
+  </update>
   
   <select id="get" parameterType="int" resultMap="UserMap">
     SELECT m_key, name, email, pwd, year, m_pic

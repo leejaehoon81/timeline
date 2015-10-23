@@ -6,6 +6,7 @@ public interface UserService {
 //  List<Member> list(int pageNo, int pageSize);
 //  int delete(int no);
 //  int update(Member member);
+  int update(User user);
   int insert(User user);
   User userInfo(String email);
 //  User get(int no);

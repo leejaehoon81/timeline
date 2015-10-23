@@ -94,6 +94,8 @@ function loginInfo() {
 			/*$('#nameInfo').text(result.data.name);*/
 			$('#loginBtn').hide();
 			$('#mypage').show();
+			
+			sessionStorage.setItem('mkey', result.data.mno);
 			if (result.loding == 'loding') {
          $('#content').load('chronicle/src/index.html');
       }

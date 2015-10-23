@@ -128,10 +128,9 @@ public class UserController {
   }
   
 
- /* 
   @RequestMapping("/update")
-  public Object update(Member member) throws Exception {
-    int count = userService.update(member);
+  public Object update(User user) throws Exception {
+    int count = userService.update(user);
     
     Map<String,Object> result = 
         new HashMap<String,Object>();
@@ -142,7 +141,6 @@ public class UserController {
     }
     return result;
   }
-*/ 
   
 @RequestMapping("/logout")
 public Object logout(HttpSession session) {

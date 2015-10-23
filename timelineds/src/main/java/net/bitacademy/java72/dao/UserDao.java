@@ -9,6 +9,7 @@ public interface UserDao {
 //  int delete(int no);
 //  int update(Member member);
   int insert(User user);
+  int update(User user);
 //  User get(int no);
 //  User exist(Map<String,String> map);
 //  int countAll();

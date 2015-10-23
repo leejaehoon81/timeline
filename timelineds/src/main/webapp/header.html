@@ -102,7 +102,7 @@
 
 <!-- info modal -->
 <div class="modal fade login" id="infoModal">
-	<div class="modal-dialog login animated">
+	<div class="modal-dialog login animated" id="infoWidth">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -117,7 +117,7 @@
 						</div> -->
 						<!-- <div id="infoEmail"></div>
 						<div id="infoName"></div> -->
-						<table class="table table-hover table-condensed">
+						<table class="table table-hover table-condensed" id="infoTable">
 						  <!-- <tr class="myPic">
 						    <td class="title">내사진</td>
 						    <td class="field"></td>
@@ -138,6 +138,15 @@
 						    <td></td><td></td>
 						  </tr>
 						</table>
+						<div class="modifyTable" style="display: none;">
+						  <div class="myLeftCol">이메일</div><input class="modifyCol infoEmail" type="email"><br>
+						  <span id="errorEmail"></span>
+						  <div class="myLeftCol">이름</div><input class="modifyCol infoName" type="text"><br>
+						  <span id="errorName"></span>
+						  <div class="myLeftCol">비밀번호</div><input class="modifyCol infoPass" type="password">
+						  <div class="myLeftCol">비밀번호확인</div><input class="modifyCol infoPassConfirm" type="password" onkeyup="modifyPass(); return false;"><br>
+						  <span id="errorPass"></span>
+						</div>
 					</div>
 					<div class="delBox"></div>
 				</div>
@@ -145,7 +154,8 @@
 			<div class="modal-footer">
 				<!-- 확인/취소 버튼만들기 -->
 				<div class="forgot login-footer">
-					 <button class="btn btn-default submit" type="submit">수정</button>
+					 <button class="btn btn-success submit" type="submit" id="confirmBtn" style="display: none;">저장</button>
+					 <button class="btn btn-default submit" type="submit" id="modifyBtn">편집</button>
 					 <button class="btn btn-default cancel" type="reset">닫기</button>
 				</div>
 				<div id="leaveView" style="display: none;">정말 탈퇴하시겠습니까?<button class="btn btn-default btn-danger" id="leaveBtn">탈퇴</button></div>
@@ -258,23 +268,31 @@ $('#mychro').on('click', function(e) {
           email : $(this).val()
         }, function(result) {
           if (result.data == 'no') {
-            $('#message').removeClass('my-message-warning').addClass(
-                'my-message-success').html('사용 가능합니다.');
+            $('#message')
+            .removeClass('my-message-warning')
+            .addClass('my-message-success')
+            .html('사용 가능합니다.');
           } else {
-            $('#message').removeClass('my-message-success').addClass(
-                'my-message-warning').html('이미 등록된 이메일입니다.');
+            $('#message')
+            .removeClass('my-message-success')
+            .addClass('my-message-warning')
+            .html('이미 등록된 이메일입니다.');
           }
         });
       });
 
   function checkPass() {
     if ($('#registerPass').val() == $('#password_confirmation').val()) {
-      $('#passMsg').removeClass('my-message-warning').addClass(
-          'my-message-success').html('비밀번호가 일치합니다');
+      $('#passMsg')
+      .removeClass('my-message-warning')
+      .addClass('my-message-success')
+      .html('비밀번호가 일치합니다');
       $('#createAcc').show();
     } else {
-      $('#passMsg').removeClass('my-message-success').addClass(
-          'my-message-warning').html('비밀번호가 일치하지 않습니다');
+      $('#passMsg')
+      .removeClass('my-message-success')
+      .addClass('my-message-warning')
+      .html('비밀번호가 일치하지 않습니다');
       $('#createAcc').hide();
     }
   };
@@ -446,4 +464,106 @@ $('#leaveBtn').on('click', function(e) {
     console.log(result);
   });
 });
+
+$('#modifyBtn').on('click', function(e) {
+  e.preventDefault();
+  $.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
+      $('.infoEmail').val(result.data.email);
+      $('.infoName').val(result.data.name);
+      $('.infoPass').val(result.data.password);
+    });
+
+	  $('#infoTable').toggle();
+	  $('.modifyTable').toggle();
+	  $('.delBox').toggle();
+	  $('#confirmBtn').toggle();
+	  
+	  $('.modifyCol.infoEmail').focusout(
+        function(event) {
+          $.getJSON(
+          'http://192.168.1.37:8888/member/existEmail.do', {
+            email : $(this).val()
+          }, function(result) {
+            if (result.data == 'no') {
+              $('#errorEmail')
+              .removeClass('my-message-warning')
+              .addClass('my-message-success')
+              .html('사용 가능한 이메일 입니다.');
+            } else {
+              $('#errorEmail')
+              .removeClass('my-message-success')
+              .addClass('my-message-warning')
+              .html('이미 등록된 이메일입니다.');
+            }
+          });
+        });
+	  $('.modifyCol.infoName').focusout(
+        function(event) {
+          $.getJSON(
+          'http://192.168.1.37:8888/member/existName.do', {
+            name : $(this).val()
+          }, function(result) {
+            if (result.data == 'no') {
+              $('#errorName')
+              .removeClass('my-message-warning')
+              .addClass('my-message-success')
+              .html('사용 가능한 이름입니다.');
+            } else {
+              $('#errorName')
+              .removeClass('my-message-success')
+              .addClass('my-message-warning')
+              .html('이미 등록된 이름입니다.');
+            }
+          });
+        });
+  });
+  
+  
+$('#confirmBtn').on('click', function(e) {
+  e.preventDefault();
+  var myEmail = $('.modifyCol.infoEmail').val();
+  var myPass = $('.modifyCol.infoPass').val();
+  $.ajax(contextRoot + '/json/user/update.do', {
+    method : 'POST',
+    dataType : 'json',
+    data : {
+      mno : sessionStorage.getItem('mkey'), 
+      email : $('.modifyCol.infoEmail').val(),
+      name : $('.modifyCol.infoName').val(),
+      password : $('.modifyCol.infoPass').val()
+    },
+    success : function(result) {
+      if (result.data == 'success') {
+        $.ajax(contextRoot + '/json/user/login.do', {
+          method : 'POST',
+          dataType : 'json',
+          data : {
+            email : myEmail,
+            password : myPass
+          }
+        });
+        window.location.reload();
+      } else {
+        console.log('회원정보 수정 실패');
+      }
+    }
+  });
+});  
+
+  
+  
+  
+function modifyPass() {
+  if ($('.modifyCol.infoPass').val() == $('.modifyCol.infoPassConfirm').val()) {
+    $('#errorPass')
+    .removeClass('my-message-warning')
+    .addClass('my-message-success')
+    .html('비밀번호가 일치합니다');
+  } else {
+    $('#errorPass')
+    .removeClass('my-message-success')
+    .addClass('my-message-warning')
+    .html('비밀번호가 일치하지 않습니다');
+  }
+};
 </script>

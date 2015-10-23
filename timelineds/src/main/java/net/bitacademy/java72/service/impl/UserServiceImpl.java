@@ -98,5 +98,10 @@ public class UserServiceImpl implements UserService {
     return userDao.checkFacebook(fbID);
   }
 
+  @Override
+  public int update(User user) {
+    return userDao.update(user);
+  }
+
 }
 
