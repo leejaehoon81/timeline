@@ -41,6 +41,18 @@ public class UserController {
     return result;
   }
   
+  @RequestMapping("/delete")
+  public Object delte(int no) throws Exception {
+    int count = userService.delete(no);
+    Map<String,Object> result = new HashMap<String,Object>();
+    if (count > 0) {
+      result.put("data", "success");
+    } else {
+      result.put("data", "failure");
+    }
+    return result;
+  }
+  
   
   public Object facebookInsert(User user,  HttpServletResponse response, HttpSession session) throws Exception {
     int count = userService.facebookInsert(user);

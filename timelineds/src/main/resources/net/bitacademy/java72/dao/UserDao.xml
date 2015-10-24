@@ -34,9 +34,10 @@
   <select id="userInfo" parameterType="string" resultMap="UserMap">
     SELECT * FROM member_info where email=#{email}
   </select>
-  <!-- <delete id="delete" parameterType="int">
-    DELETE FROM member WHERE mno=#{value}
-  </delete> -->
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM member_info WHERE m_key=#{mno}
+  </delete>
 
   <update id="update" parameterType="Member">
     UPDATE member_info SET 

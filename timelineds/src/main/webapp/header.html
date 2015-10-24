@@ -459,9 +459,17 @@ $('#leave').on('click', function(e) {
 
 $('#leaveBtn').on('click', function(e) {
   e.preventDefault();
-  $.getJSON(contextRoot + '/json/user/loginInfo.do', function(result) {
-    console.log(result.data.mno);
-    console.log(result);
+  var mno = parseInt(sessionStorage.getItem('mkey'));
+  $.getJSON(contextRoot + '/json/user/delete.do?no=' + mno, function(result) {
+	  if(result.data == 'success') {
+		  console.log('회원탈퇴 성공');
+		  $.getJSON(contextRoot + '/json/auth/logout.do', function(result) {
+				 window.location.reload();
+				 FBlogout();
+			 });
+	  } else {
+		  console.log('회원탈퇴 실패');
+	  }
   });
 });
 

@@ -6,7 +6,7 @@ import net.bitacademy.java72.domain.User;
 
 public interface UserDao {
 //  List<Member> list(Map<String,Object> paramMap);
-//  int delete(int no);
+  int delete(int no);
 //  int update(Member member);
   int insert(User user);
   int update(User user);
