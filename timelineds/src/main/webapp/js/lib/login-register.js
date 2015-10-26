@@ -7,7 +7,7 @@
  * 
  */
 
-var contextRoot = '/timelineds1';
+var contextRoot = '/timelineds';
 
 function showRegisterForm(){
     $('.loginBox, .fb_login, .login-footer').fadeOut('fast',function(){
