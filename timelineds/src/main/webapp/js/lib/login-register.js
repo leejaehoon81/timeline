@@ -100,7 +100,7 @@ function loginInfo() {
 				console.log(result.copy);
 	              var u = encodeURIComponent(result.copy);
 	              console.log(u);
-	              var url = 'http://localhost:9999/timelineds1/index2.html?'+u;
+	              var url = 'http://localhost:9999/timelineds/index2.html?'+u;
 	              console.log('url',url);
 	              $('#foo').css('display', '');
 	              $('#foo').val(url);
