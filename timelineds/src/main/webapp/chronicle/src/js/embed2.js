@@ -150,7 +150,7 @@
 
         function createSocket() {
 
-            var uri = "http://" + domain + port + "/timelineds1/chronicle/src/timeline2.html?" +
+            var uri = "http://" + domain + port + "/timelineds/chronicle/src/timeline2.html?" +
                 "isHomeDomain=" + isHomeDomain +
                 "&isOnlyInstance=" + isOnlyInstance +
                 "&dataUri=" + dataUri +
