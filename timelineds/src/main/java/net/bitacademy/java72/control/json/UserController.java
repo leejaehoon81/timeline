@@ -128,17 +128,45 @@ public class UserController {
     User user = 
         (User)session.getAttribute("user");
     String loding=(String)session.getAttribute("loding");
+    String url = (String)session.getAttribute("copy");
     if (user == null) {
       result.put("state", "no");
     } else {
       result.put("state", "yes");
       result.put("data", user);
       result.put("loding", loding);
+      result.put("copy", url);
     }
     
     return result;
   }
   
+  @RequestMapping("/getChro")
+  public Object getChro(String mno, String mainNo, HttpSession session)  {
+    Map<String,Object> result = 
+        new HashMap<String,Object>();
+   try{
+     
+     System.out.println("mom=>"+mno);
+     System.out.println("mainNo=>"+mainNo);
+     int no = Integer.parseInt(mno);
+     System.out.println("mno======>"+mno);
+     int mmo = Integer.parseInt(mainNo);
+     System.out.println("mainNo======>"+mainNo);
+     if(no>0 && mmo>0){
+      
+       session.setAttribute("no", no);
+       session.setAttribute("mainNo", mmo);
+       result.put("data", "yes");
+     }else{
+       result.put("data", "no");
+     }
+   }catch(Exception e){
+     session.invalidate();
+     result.put("data", "no");
+   }
+   return result;
+  }
 
   @RequestMapping("/update")
   public Object update(User user) throws Exception {

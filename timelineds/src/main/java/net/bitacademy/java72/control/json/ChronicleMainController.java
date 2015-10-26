@@ -59,14 +59,17 @@ public class ChronicleMainController {
   
   @RequestMapping("/getNo")
   public  ResponseEntity<String> getMain(ChronicleMain chronicleMain, HttpSession session) throws Exception {
-    //User user = (User) session.getAttribute("user");
+    User user = (User) session.getAttribute("user");
     session.setAttribute("loding","loding");
     System.out.println("mainno = >"+chronicleMain.getMainNo());
     session.setAttribute("mainNo", chronicleMain.getMainNo());
-    
+    String str = "no="+user.getMno()+"&mainNo="+chronicleMain.getMainNo();
+    session.setAttribute("copy", str);
+    System.out.println("copy=>"+str);
     Map<String,Object> result = new HashMap<String,Object>();
     //chronicleMain = chronicleMainService.getMain(chronicleMain.getMainNo(),user.getMno());
     result.put("success", "ok");
+    result.put("copy", str);
     return ResponseFactory.createResponse(result);
   }
   

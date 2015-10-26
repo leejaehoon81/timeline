@@ -7,7 +7,7 @@
  * 
  */
 
-var contextRoot = '/timelineds';
+var contextRoot = '/timelineds1';
 
 function showRegisterForm(){
     $('.loginBox, .fb_login, .login-footer').fadeOut('fast',function(){
@@ -97,10 +97,19 @@ function loginInfo() {
 			
 			sessionStorage.setItem('mkey', result.data.mno);
 			if (result.loding == 'loding') {
+				console.log(result.copy);
+	              var u = encodeURIComponent(result.copy);
+	              console.log(u);
+	              var url = 'http://localhost:9999/timelineds1/index2.html?'+u;
+	              console.log('url',url);
+	              $('#foo').css('display', '');
+	              $('#foo').val(url);
+	              $('#clipBtn').css('display', '');
          $('#content').load('chronicle/src/index.html');
       }
 		} else {
 			/*getUserInfo();*/
+			
 		}
 	});
 }

@@ -37,8 +37,17 @@ public class ChronicleController {
     session.setAttribute("loding", "");
     User user = (User)session.getAttribute("user");
     int no = (int)session.getAttribute("mainNo");
+    int userNo;
+    ChronicleMain chronicleMain=null;
+    if(user ==null){
+      userNo = (int)session.getAttribute("no");
+      chronicleMain = chronicleMainService.getMain(no,userNo);
+    }else{
+      
+      chronicleMain = chronicleMainService.getMain(no,user.getMno());
+    }
     System.out.println("no==>"+no);
-    ChronicleMain chronicleMain = chronicleMainService.getMain(no,user.getMno());
+   
     System.out.println("chronicleMain.getTitle()"+ chronicleMain.getTitle());
     result.put("Title",chronicleMain.getTitle());
     result.put("FeatureImagePath", chronicleMain.getFeatureImagePath());
