@@ -20,7 +20,22 @@ height:auto;
 z-index:-1;
 } */
 
+#share {
+	float: left;
+  padding-top: 8px;
+}
 
+#clipBtn {
+	padding-left: 0px;
+  padding-top: 0px;
+  background-color: rgba( 255, 255, 255, 0);
+  outline: none;
+}
+
+.clippy {
+	width: 35px;
+	background-color: rgba( 255, 255, 255, 0);
+}
 
 .modifyCol {
 	width:70%;

@@ -46,8 +46,8 @@
     var domain = a.hostname;
     var port = (a.port == 80 ? '' : ':' + a.port);
 
-    $.when($.getScript('//' + domain + port + '/timelineds1/chronicle/src/js/libs/easyXDM.min.js'),
-        $.getScript('//' + domain + port + '/timelineds1/chronicle/src/js/libs/json2.min.js')).done(function () {
+    $.when($.getScript('//' + domain + port + '/timelineds/chronicle/src/js/libs/easyXDM.min.js'),
+        $.getScript('//' + domain + port + '/timelineds/chronicle/src/js/libs/json2.min.js')).done(function () {
 
             var timelines = $('.timeline');
 

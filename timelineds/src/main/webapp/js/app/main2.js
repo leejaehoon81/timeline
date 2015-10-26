@@ -1,5 +1,5 @@
 define([ 'jquery','app/common' ], function($) {
-	
+  $('header').load('header.html');
 	    	var QueryString = function () {
 	  		  // This function is anonymous, is executed immediately and 
 	  		  // the return value is assigned to QueryString!
